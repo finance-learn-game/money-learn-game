@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
+using SmbcApp.LearnGame.ConnectionManagement;
 using SmbcApp.LearnGame.UnityService.Infrastructure;
 using SmbcApp.LearnGame.UnityService.Infrastructure.Messages;
 using SmbcApp.LearnGame.Utils;
@@ -16,8 +17,6 @@ namespace SmbcApp.LearnGame.UnityService.Session
     /// </summary>
     public sealed class SessionServiceFacade
     {
-        private const int MaxPlayers = 10;
-
         private readonly IPublisher<UnityServiceErrorMessage> _errMsgPublisher;
         private readonly ProfileManager _profileManager;
         private readonly RateLimitCooldown _rateLimitJoin;
@@ -49,7 +48,7 @@ namespace SmbcApp.LearnGame.UnityService.Session
             {
                 CurrentSession = await MultiplayerService.Instance.CreateSessionAsync(new SessionOptions
                 {
-                    MaxPlayers = MaxPlayers,
+                    MaxPlayers = ConnectionManager.MaxConnectionPlayers,
                     IsPrivate = true
                 });
                 return true;
@@ -97,6 +96,21 @@ namespace SmbcApp.LearnGame.UnityService.Session
             {
                 await CurrentSession.LeaveAsync();
                 CurrentSession = null;
+            }
+            catch (Exception e)
+            {
+                PublishException(e);
+            }
+        }
+
+        public async UniTask RemovePlayerFromSession(string uasId)
+        {
+            if (CurrentSession == null) return;
+            if (!CurrentSession.IsHost) return;
+
+            try
+            {
+                await CurrentSession.AsHost().RemovePlayerAsync(uasId);
             }
             catch (Exception e)
             {
