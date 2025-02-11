@@ -20,7 +20,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
 
         public override UniTask Enter()
         {
-            // TODO: AvatarSelectSceneをロードする
+            SceneLoader.LoadScene(AppScenes.AvatarSelect, true);
             return UniTask.CompletedTask;
         }
 
@@ -107,7 +107,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
         {
             var connectionData = request.Payload;
             var clientId = request.ClientNetworkId;
-            
+
             // ペイロードが大きすぎる場合は接続を拒否する (不正な接続)
             if (connectionData.Length > MaxConnectPayload)
             {

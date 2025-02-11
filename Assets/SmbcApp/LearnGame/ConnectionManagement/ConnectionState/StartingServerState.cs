@@ -1,16 +1,12 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using SmbcApp.LearnGame.UnityService.Session;
 using Unity.Netcode;
-using VContainer;
 
 namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
 {
     internal sealed class StartingServerState : OnlineState
     {
         private ConnectionMethodBase _connectionMethod;
-
-        [Inject] internal SessionServiceFacade SessionServiceFacade;
 
         public StartingServerState Configure(ConnectionMethodBase connectionMethod)
         {

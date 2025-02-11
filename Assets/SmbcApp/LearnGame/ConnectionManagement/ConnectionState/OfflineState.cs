@@ -13,7 +13,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
         public override UniTask Enter()
         {
             ConnectionManager.NetworkManager.Shutdown();
-            // TODO: MainMenuシーンをロードする
+            SceneLoader.LoadScene(AppScenes.MainMenu, false);
             return UniTask.CompletedTask;
         }
 

@@ -1,15 +1,11 @@
 ﻿using Cysharp.Threading.Tasks;
-using SmbcApp.LearnGame.UnityService.Session;
 using UnityEngine;
-using VContainer;
 using WebSocketSharp;
 
 namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
 {
     internal class ClientConnectedState : OnlineState
     {
-        [Inject] internal SessionServiceFacade SessionServiceFacade;
-
         public override UniTask Enter()
         {
             return UniTask.CompletedTask;
