@@ -1,8 +1,17 @@
 {
   "dependencies": {
+    "com.cysharp.messagepipe": "1.8.1",
+    "com.cysharp.messagepipe.vcontainer": "1.8.1",
+    "com.cysharp.r3": "https://github.com/Cysharp/R3.git?path=src/R3.Unity/Assets/R3.Unity",
+    "com.cysharp.unitask": "2.5.10",
+    "com.github-glitchenzo.nugetforunity": "4.2.0",
+    "com.harumak.addler": "https://github.com/Haruma-K/Addler.git?path=/Assets/Addler",
+    "com.harumak.unityscreennavigator": "https://github.com/Haruma-K/UnityScreenNavigator.git?path=/Assets/UnityScreenNavigator",
+    "com.harumak.upalette": "https://github.com/Haruma-K/uPalette.git?path=/Assets/uPalette",
     "com.unity.addressables": "2.2.2",
     "com.unity.ide.rider": "3.0.34",
     "com.unity.inputsystem": "1.11.2",
+    "com.unity.logging": "1.3.5",
     "com.unity.multiplayer.center": "1.0.0",
     "com.unity.multiplayer.playmode": "1.3.3",
     "com.unity.multiplayer.tools": "2.2.3",
@@ -14,6 +23,8 @@
     "com.unity.test-framework": "1.4.6",
     "com.unity.timeline": "1.8.8",
     "com.unity.ugui": "2.0.0",
+    "jp.co.cyberagent.smartaddresser": "1.0.9",
+    "jp.hadashikick.vcontainer": "1.16.8",
     "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
@@ -46,5 +57,19 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.cysharp.messagepipe",
+        "com.cysharp.messagepipe.vcontainer",
+        "com.cysharp.unitask",
+        "com.github-glitchenzo.nugetforunity",
+        "jp.co.cyberagent.smartaddresser",
+        "jp.hadashikick.vcontainer"
+      ]
+    }
+  ]
 }

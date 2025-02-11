@@ -1,0 +1,98 @@
+﻿using System;
+using Cysharp.Threading.Tasks;
+using Sirenix.OdinInspector;
+using SmbcApp.LearnGame.UnityService.Auth;
+using SmbcApp.LearnGame.UnityService.Session;
+using SmbcApp.LearnGame.Utils;
+using Unity.Logging;
+using Unity.Services.Authentication;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityScreenNavigator.Runtime.Core.Modal;
+using UnityScreenNavigator.Runtime.Core.Page;
+using VContainer;
+
+namespace SmbcApp.LearnGame.Gameplay.UI.MainMenu
+{
+    internal sealed class MainMenuUIMediator : MonoBehaviour
+    {
+        [SerializeField] [Required] private Image loadingBackdrop;
+
+        [Inject] internal AuthenticationServiceFacade AuthServiceFacade;
+        [Inject] internal ModalContainer ModalContainer;
+        [Inject] internal PageContainer PageContainer;
+        [Inject] internal ProfileManager ProfileManager;
+        [Inject] internal IObjectResolver Resolver;
+        [Inject] internal SessionServiceFacade SessionServiceFacade;
+
+        private async UniTask Signin(string profile = null)
+        {
+            await UniTask.WaitUntil(() => AuthServiceFacade.IsInitialized);
+
+            try
+            {
+                await AuthServiceFacade.SignIn(profile);
+
+                var auth = AuthenticationService.Instance;
+                Log.Info("Signed in as {0}, Unity Player ID {1}", auth.Profile ?? "null", auth.PlayerId ?? "null");
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, "Failed to sign in");
+                throw;
+            }
+        }
+
+        public async UniTask<bool> JoinSessionWithCode(string sessionCode)
+        {
+            BlockUIWhileLoadingIsInProgress();
+
+            await Signin("Server");
+            var res = await SessionServiceFacade.TryJoinSession(sessionCode);
+
+            UnblockUIAfterLoadingIsComplete();
+
+            if (res)
+                Log.Info("Joined session with code {0}", sessionCode);
+            else
+                Log.Error("Failed to join session with code {0}", sessionCode);
+
+            return res;
+        }
+
+        public async UniTask CreateSessionRequest()
+        {
+            BlockUIWhileLoadingIsInProgress();
+
+            await Signin();
+            var sessionCreationAttempt = await SessionServiceFacade.TryCreateSession();
+            if (sessionCreationAttempt)
+            {
+                var session = SessionServiceFacade.CurrentSession;
+                Log.Info("Created session with ID {0} and code {1}", session.Id, session.Code);
+            }
+            else
+            {
+                Log.Error("Failed to create session");
+            }
+
+            UnblockUIAfterLoadingIsComplete();
+        }
+
+        private void BlockUIWhileLoadingIsInProgress()
+        {
+            loadingBackdrop.gameObject.SetActive(true);
+        }
+
+        private void UnblockUIAfterLoadingIsComplete()
+        {
+            loadingBackdrop.gameObject.SetActive(false);
+        }
+
+        // private void OnConnectStatus(ConnectStatus status)
+        // {
+        //     if (status is ConnectStatus.GenericDisconnect or ConnectStatus.StartClientFailed)
+        //         UnblockUIAfterLoadingIsComplete();
+        // }
+    }
+}
