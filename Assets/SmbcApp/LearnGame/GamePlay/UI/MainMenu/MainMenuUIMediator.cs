@@ -1,6 +1,9 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using MessagePipe;
+using R3;
 using Sirenix.OdinInspector;
+using SmbcApp.LearnGame.ConnectionManagement;
 using SmbcApp.LearnGame.UnityService.Auth;
 using SmbcApp.LearnGame.UnityService.Session;
 using SmbcApp.LearnGame.Utils;
@@ -19,11 +22,17 @@ namespace SmbcApp.LearnGame.Gameplay.UI.MainMenu
         [SerializeField] [Required] private Image loadingBackdrop;
 
         [Inject] internal AuthenticationServiceFacade AuthServiceFacade;
+        [Inject] internal ISubscriber<ConnectStatus> ConnectStatusSubscriber;
         [Inject] internal ModalContainer ModalContainer;
         [Inject] internal PageContainer PageContainer;
         [Inject] internal ProfileManager ProfileManager;
         [Inject] internal IObjectResolver Resolver;
         [Inject] internal SessionServiceFacade SessionServiceFacade;
+
+        private void Start()
+        {
+            ConnectStatusSubscriber.Subscribe(OnConnectStatus).AddTo(gameObject);
+        }
 
         private async UniTask Signin(string profile = null)
         {
@@ -89,10 +98,10 @@ namespace SmbcApp.LearnGame.Gameplay.UI.MainMenu
             loadingBackdrop.gameObject.SetActive(false);
         }
 
-        // private void OnConnectStatus(ConnectStatus status)
-        // {
-        //     if (status is ConnectStatus.GenericDisconnect or ConnectStatus.StartClientFailed)
-        //         UnblockUIAfterLoadingIsComplete();
-        // }
+        private void OnConnectStatus(ConnectStatus status)
+        {
+            if (status is ConnectStatus.GenericDisconnect or ConnectStatus.StartClientFailed)
+                UnblockUIAfterLoadingIsComplete();
+        }
     }
 }

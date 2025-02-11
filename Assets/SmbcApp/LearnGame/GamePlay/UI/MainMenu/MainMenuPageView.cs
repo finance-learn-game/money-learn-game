@@ -21,8 +21,6 @@ namespace SmbcApp.LearnGame.GamePlay.UI.MainMenu
 
         private void Start()
         {
-            ModalContainer = ModalContainer.Find("Main");
-
             joinSessionButton.OnClick
                 .Subscribe(_ => ModalContainer.Push(profileModal.AssetGUID, true))
                 .AddTo(gameObject);
