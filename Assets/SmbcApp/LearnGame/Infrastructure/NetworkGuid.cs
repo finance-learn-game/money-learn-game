@@ -26,6 +26,11 @@ namespace SmbcApp.LearnGame.Infrastructure
             return networkId;
         }
 
+        public static NetworkGuid ToNetworkGuid(this string value)
+        {
+            return Guid.Parse(value).ToNetworkGuid();
+        }
+
         public static Guid ToGuid(this NetworkGuid value)
         {
             var bytes = new byte[16];

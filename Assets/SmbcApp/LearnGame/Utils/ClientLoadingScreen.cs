@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using R3;
+using SmbcApp.LearnGame.UIWidgets.Slider;
 using TMPro;
+using Unity.Mathematics;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Assertions;
 using UnityEngine.UI;
+using Enumerable = System.Linq.Enumerable;
 
 namespace SmbcApp.LearnGame.Utils
 {
@@ -18,8 +19,7 @@ namespace SmbcApp.LearnGame.Utils
         [SerializeField] private float fadeOutDuration = 0.1f;
         [SerializeField] private Slider progressBar;
         [SerializeField] private TMP_Text sceneNameText;
-        [SerializeField] private List<TMP_Text> otherPlayerNamesTexts;
-        [SerializeField] private List<Slider> otherPlayersProgressBars;
+        [SerializeField] private UINoInteractSlider[] otherPlayersProgressBars;
         [SerializeField] protected LoadingProgressManager loadingProgressManager;
 
         protected readonly Dictionary<ulong, LoadingProgressBar> LoadingProgressBars = new();
@@ -30,8 +30,6 @@ namespace SmbcApp.LearnGame.Utils
         private void Awake()
         {
             DontDestroyOnLoad(this);
-            Assert.AreEqual(otherPlayersProgressBars.Count, otherPlayerNamesTexts.Count,
-                "There should be the same number of progress bars and name labels");
         }
 
         private void Start()
@@ -50,8 +48,8 @@ namespace SmbcApp.LearnGame.Utils
         private void OnProgressTrackersUpdated(Unit _)
         {
             // 追跡されていないクライアントのプログレスバーを非アクティブにする
-            var clientIdsToRemove = LoadingProgressBars.Keys
-                .Where(clientId => !loadingProgressManager.ProgressTrackers.ContainsKey(clientId)).ToList();
+            var clientIdsToRemove = Enumerable.ToList(Enumerable.Where(LoadingProgressBars.Keys,
+                clientId => !loadingProgressManager.ProgressTrackers.ContainsKey(clientId)));
             foreach (var clientId in clientIdsToRemove) RemoveOtherPlayerProgressBar(clientId);
 
             // トラッキングされていないクライアントのプログレスバーを追加する
@@ -79,21 +77,16 @@ namespace SmbcApp.LearnGame.Utils
         private void ReinitializeProgressBars()
         {
             // 追跡されていないクライアントのプログレスバーを非アクティブにする
-            var clientIdsToRemove = LoadingProgressBars.Keys
-                .Where(clientId => !loadingProgressManager.ProgressTrackers.ContainsKey(clientId)).ToList();
+            var clientIdsToRemove = Enumerable.ToList(Enumerable.Where(LoadingProgressBars.Keys,
+                clientId => !loadingProgressManager.ProgressTrackers.ContainsKey(clientId)));
             foreach (var clientId in clientIdsToRemove) RemoveOtherPlayerProgressBar(clientId);
-
-            for (var i = 0; i < otherPlayersProgressBars.Count; i++)
-            {
-                otherPlayersProgressBars[i].gameObject.SetActive(false);
-                otherPlayerNamesTexts[i].gameObject.SetActive(false);
-            }
+            foreach (var slider in otherPlayersProgressBars) slider.gameObject.SetActive(false);
 
             foreach (
-                var (clientId, idx) in loadingProgressManager.ProgressTrackers
-                    .Select(progressTracker => progressTracker.Key)
-                    .Where(clientId => clientId != NetworkManager.Singleton.LocalClientId)
-                    .Select((clientId, idx) => (clientId, idx))
+                var (clientId, idx) in Enumerable.Select(
+                    Enumerable.Where(loadingProgressManager.ProgressTrackers.Keys,
+                        clientId => clientId != NetworkManager.Singleton.LocalClientId),
+                    (clientId, idx) => (clientId, idx))
             )
                 UpdateOtherPlayerProgressBar(clientId, idx);
         }
@@ -102,8 +95,6 @@ namespace SmbcApp.LearnGame.Utils
         {
             LoadingProgressBars[clientId].ProgressBar = otherPlayersProgressBars[progressBarIndex];
             LoadingProgressBars[clientId].ProgressBar.gameObject.SetActive(true);
-            LoadingProgressBars[clientId].NameText = otherPlayerNamesTexts[progressBarIndex];
-            LoadingProgressBars[clientId].NameText.gameObject.SetActive(true);
         }
 
         protected virtual void AddOtherPlayerProgressBar(
@@ -111,17 +102,14 @@ namespace SmbcApp.LearnGame.Utils
             NetworkedLoadingProgressTracker progressTracker
         )
         {
-            if (LoadingProgressBars.Count < otherPlayersProgressBars.Count &&
-                LoadingProgressBars.Count < otherPlayerNamesTexts.Count)
+            if (LoadingProgressBars.Count < otherPlayersProgressBars.Length)
             {
                 var index = LoadingProgressBars.Count;
-                LoadingProgressBars[clientId] =
-                    new LoadingProgressBar(otherPlayersProgressBars[index], otherPlayerNamesTexts[index]);
+                LoadingProgressBars[clientId] = new LoadingProgressBar(otherPlayersProgressBars[index]);
                 progressTracker.Progress.OnValueChanged += LoadingProgressBars[clientId].UpdateProgress;
-                LoadingProgressBars[clientId].ProgressBar.value = progressTracker.Progress.Value;
+                LoadingProgressBars[clientId].Value = progressTracker.Progress.Value;
+                LoadingProgressBars[clientId].NameText = $"Client {clientId}";
                 LoadingProgressBars[clientId].ProgressBar.gameObject.SetActive(true);
-                LoadingProgressBars[clientId].NameText.gameObject.SetActive(true);
-                LoadingProgressBars[clientId].NameText.text = $"Client {clientId}";
             }
             else
             {
@@ -137,7 +125,6 @@ namespace SmbcApp.LearnGame.Utils
             if (progressTracker != null)
                 progressTracker.Progress.OnValueChanged -= LoadingProgressBars[clientId].UpdateProgress;
             LoadingProgressBars[clientId].ProgressBar.gameObject.SetActive(false);
-            LoadingProgressBars[clientId].NameText.gameObject.SetActive(false);
             LoadingProgressBars.Remove(clientId);
         }
 
@@ -163,7 +150,7 @@ namespace SmbcApp.LearnGame.Utils
             float currentTime = 0;
             while (currentTime < fadeOutDuration)
             {
-                canvasGroup.alpha = Mathf.Lerp(1, 0, currentTime / fadeOutDuration);
+                canvasGroup.alpha = math.lerp(1, 0, currentTime / fadeOutDuration);
                 yield return null;
                 currentTime += Time.deltaTime;
             }
@@ -173,19 +160,28 @@ namespace SmbcApp.LearnGame.Utils
 
         protected class LoadingProgressBar
         {
-            public LoadingProgressBar(Slider otherPlayerProgressBar, TMP_Text otherPlayerNameText)
+            public LoadingProgressBar(UINoInteractSlider progressBar)
             {
-                ProgressBar = otherPlayerProgressBar;
-                NameText = otherPlayerNameText;
+                ProgressBar = progressBar;
             }
 
-            public Slider ProgressBar { get; set; }
+            public UINoInteractSlider ProgressBar { get; set; }
 
-            public TMP_Text NameText { get; set; }
+            public string NameText
+            {
+                get => ProgressBar.Label;
+                set => ProgressBar.Label = value;
+            }
+
+            public float Value
+            {
+                get => ProgressBar.Value;
+                set => ProgressBar.Value = value;
+            }
 
             public void UpdateProgress(float value, float newValue)
             {
-                ProgressBar.value = newValue;
+                ProgressBar.Value = newValue;
             }
         }
     }

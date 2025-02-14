@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using Unity.Logging;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -77,7 +78,7 @@ namespace SmbcApp.LearnGame.Utils
 
         public void LoadScene(
             string sceneName,
-            bool useNetworkSceneManager,
+            bool useNetworkSceneManager = false,
             LoadSceneMode loadSceneMode = LoadSceneMode.Single
         )
         {
@@ -89,10 +90,18 @@ namespace SmbcApp.LearnGame.Utils
                     && !NetworkManager.ShutdownInProgress
                     && NetworkManager.IsServer
                 )
+                {
+                    Log.Info("Loading scene: {0} (Network)", sceneName);
                     NetworkManager.SceneManager.LoadScene(sceneName, loadSceneMode);
+                }
+                else
+                {
+                    Log.Warning("Not loading scene: {0} (Network)", sceneName);
+                }
             }
             else
             {
+                Log.Info("Loading scene: {0} (Local)", sceneName);
                 var loadOperation = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
                 if (loadSceneMode != LoadSceneMode.Single) return;
                 clientLoadingScreen.StartLoadingScreen(sceneName);

@@ -15,13 +15,13 @@ namespace SmbcApp.LearnGame.Utils
     {
         private readonly ObservableList<string> _availableProfiles = new();
         private readonly ReactiveProperty<string> _currentProfile = new();
-        private readonly SaveDataService _saveDataService;
+        private readonly SaveDataManager _saveDataManager;
         private DisposableBag _disposableBag;
 
         [Inject]
-        public ProfileManager(SaveDataService saveDataService)
+        public ProfileManager(SaveDataManager saveDataManager)
         {
-            _saveDataService = saveDataService;
+            _saveDataManager = saveDataManager;
             _disposableBag = new DisposableBag();
         }
 
@@ -32,14 +32,14 @@ namespace SmbcApp.LearnGame.Utils
 
         public async UniTask StartAsync(CancellationToken cancellation = new())
         {
-            await UniTask.WaitUntil(() => _saveDataService.Initialized, cancellationToken: cancellation);
+            await UniTask.WaitUntil(() => _saveDataManager.Initialized, cancellationToken: cancellation);
 
-            _availableProfiles.AddRange(_saveDataService.SaveData.CurrentValue.Profiles);
+            _availableProfiles.AddRange(_saveDataManager.SaveData.CurrentValue.Profiles);
             IsInitialized = true;
 
-            _currentProfile.Value = _saveDataService.SaveData.CurrentValue.CurrentProfile;
+            _currentProfile.Value = _saveDataManager.SaveData.CurrentValue.CurrentProfile;
             CurrentProfile
-                .Subscribe(profile => _saveDataService.ChangeSaveData(data => data with { CurrentProfile = profile }))
+                .Subscribe(profile => _saveDataManager.ChangeSaveData(data => data with { CurrentProfile = profile }))
                 .AddTo(ref _disposableBag);
         }
 
@@ -71,7 +71,7 @@ namespace SmbcApp.LearnGame.Utils
 
         private void ApplyProfilesToSaveData()
         {
-            _saveDataService.ChangeSaveData(data => data with { Profiles = _availableProfiles.ToList() });
+            _saveDataManager.ChangeSaveData(data => data with { Profiles = _availableProfiles.ToList() });
         }
     }
 }

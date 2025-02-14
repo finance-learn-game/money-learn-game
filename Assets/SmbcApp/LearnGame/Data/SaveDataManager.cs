@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using MessagePack;
 using R3;
@@ -10,16 +11,29 @@ using VContainer.Unity;
 
 namespace SmbcApp.LearnGame.Data
 {
-    public class SaveDataService : IAsyncStartable, IDisposable
+    /// <summary>
+    ///     セーブデータの管理を行うクラス
+    /// </summary>
+    public sealed class SaveDataManager : IAsyncStartable, IAsyncDisposable
     {
         private const string SaveDataFileName = "SaveData.bin";
 
         private readonly ReactiveProperty<GameSaveData> _saveData = new();
         private readonly string _saveDataPath = Path.Combine(Application.persistentDataPath, SaveDataFileName);
-        private bool _isDirty;
+        public bool IsDirty { get; private set; }
 
         public ReadOnlyReactiveProperty<GameSaveData> SaveData => _saveData;
         public bool Initialized { get; private set; }
+
+        /// <summary>
+        ///     ゲーム終了時にセーブデータを保存する用途で使用する
+        /// </summary>
+        /// <remarks>ApplicationLifecycleから呼ばれる</remarks>
+        public async ValueTask DisposeAsync()
+        {
+            await Save();
+            _saveData.Dispose();
+        }
 
         public async UniTask StartAsync(CancellationToken cancellation = new())
         {
@@ -27,20 +41,10 @@ namespace SmbcApp.LearnGame.Data
             Initialized = true;
         }
 
-        public void Dispose()
-        {
-            _saveData?.Dispose();
-        }
-
         public void ChangeSaveData(Func<GameSaveData, GameSaveData> change)
         {
             _saveData.Value = change(_saveData.Value);
-            _isDirty = true;
-        }
-
-        public async UniTask AsyncDispose(CancellationToken cancellation = new())
-        {
-            await Save(cancellation);
+            IsDirty = true;
         }
 
         private async UniTask Load(CancellationToken cancellation = new())
@@ -48,7 +52,7 @@ namespace SmbcApp.LearnGame.Data
             if (!File.Exists(_saveDataPath))
             {
                 _saveData.Value = GameSaveData.Default;
-                _isDirty = true;
+                IsDirty = true;
                 await Save(cancellation);
                 Log.Info("Save data initialized");
                 return;
@@ -80,7 +84,7 @@ namespace SmbcApp.LearnGame.Data
 
         private async UniTask Save(CancellationToken cancellation = new())
         {
-            if (!_isDirty)
+            if (!IsDirty)
             {
                 Log.Info("Save data is not dirty, skipping save");
                 return;
@@ -89,7 +93,7 @@ namespace SmbcApp.LearnGame.Data
             await using var fileStream = new FileStream(_saveDataPath, FileMode.Create);
             await MessagePackSerializer.Typeless.SerializeAsync(fileStream, _saveData.Value,
                 cancellationToken: cancellation);
-            _isDirty = false;
+            IsDirty = false;
             Log.Info("Save data saved to {0}", _saveDataPath);
         }
     }
