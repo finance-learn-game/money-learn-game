@@ -54,6 +54,7 @@ namespace SmbcApp.LearnGame.UnityService.Auth
 
                 auth.SwitchProfile(profile);
                 await auth.SignInAnonymouslyAsync();
+                Log.Info("Signed in as {0}, Unity Player ID {1}", auth.Profile ?? "null", auth.PlayerId ?? "null");
             }
             catch (Exception e)
             {

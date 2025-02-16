@@ -1,24 +1,15 @@
-﻿using System;
-using SmbcApp.LearnGame.Utils;
+﻿using SmbcApp.LearnGame.Infrastructure;
 using UnityEngine;
 
 namespace SmbcApp.LearnGame.GamePlay.Configuration
 {
     [CreateAssetMenu(fileName = "Avatar", menuName = "Configuration/Avatar")]
-    internal sealed class Avatar : ScriptableObject
+    internal sealed class Avatar : GuidScriptableObject
     {
-        [SerializeField] private JobClass.Ref jobClass;
-        [SerializeField] private SpriteReference avatarImage;
+        [SerializeField] private JobClass jobClass;
+        [SerializeField] private Sprite avatarImage;
 
-        public JobClass.Ref JobClass => jobClass;
-        public SpriteReference AvatarImage => avatarImage;
-
-        [Serializable]
-        public class Ref : ComponentReference<Avatar>
-        {
-            public Ref(string guid) : base(guid)
-            {
-            }
-        }
+        public JobClass JobClass => jobClass;
+        public Sprite AvatarImage => avatarImage;
     }
 }

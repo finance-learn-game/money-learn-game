@@ -48,6 +48,11 @@ namespace SmbcApp.LearnGame.ConnectionManagement
         [Inject] internal NetworkManager NetworkManager;
         [Inject] internal IObjectResolver Resolver;
 
+        private void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+
         private void Start()
         {
             var states = new ConnectionState.ConnectionState[]

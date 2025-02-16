@@ -9,6 +9,7 @@ using SmbcApp.LearnGame.UnityService.Auth;
 using SmbcApp.LearnGame.UnityService.Infrastructure.Messages;
 using SmbcApp.LearnGame.UnityService.Session;
 using SmbcApp.LearnGame.Utils;
+using Unity.Logging;
 using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
@@ -75,6 +76,10 @@ namespace SmbcApp.LearnGame.ApplicationLifecycle
             {
                 GlobalMessagePipe.SetProvider(c.AsServiceProvider());
                 _saveDataManager = c.Resolve<SaveDataManager>();
+
+                c.Resolve<ISubscriber<UnityServiceErrorMessage>>()
+                    .Subscribe(msg => Log.Error(msg.Message))
+                    .AddTo(gameObject);
             });
 
             builder.RegisterMessageBroker<UnityServiceErrorMessage>(option);

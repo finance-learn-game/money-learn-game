@@ -182,13 +182,13 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 416945875}
-    PlayerPrefab: {fileID: 0}
+    PlayerPrefab: {fileID: 2483656595537399850, guid: 75888887d8135854a8bc876e1eb11e81, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: 1d5cbfc92ed38cc45818fd652eae12b8, type: 2}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
-    ConnectionApproval: 0
+    ConnectionApproval: 1
     ConnectionData: 
     EnableTimeResync: 0
     TimeResyncInterval: 30
@@ -430,10 +430,6 @@ PrefabInstance:
     - target: {fileID: 5053400725443805564, guid: d27b1a40eb31d78468ed5f20a842b5ea, type: 3}
       propertyPath: m_Name
       value: Loading Screen
-      objectReference: {fileID: 0}
-    - target: {fileID: 6603544173705008379, guid: d27b1a40eb31d78468ed5f20a842b5ea, type: 3}
-      propertyPath: m_Alpha
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7442209481134296946, guid: d27b1a40eb31d78468ed5f20a842b5ea, type: 3}
       propertyPath: m_Pivot.x

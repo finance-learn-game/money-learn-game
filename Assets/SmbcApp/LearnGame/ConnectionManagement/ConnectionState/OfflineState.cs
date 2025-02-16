@@ -13,7 +13,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
         public override UniTask Enter()
         {
             ConnectionManager.NetworkManager.Shutdown();
-            SceneLoader.LoadScene(AppScenes.MainMenu, false);
+            SceneLoader.LoadScene(AppScenes.MainMenu);
             return UniTask.CompletedTask;
         }
 
@@ -24,7 +24,9 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
 
         public override void StartClientSession(string playerName)
         {
-            ConnectionManager.ChangeState(ConnectionManager.ClientConnecting);
+            var connectionMethod =
+                new ConnectionMethodMultiPlaySDK(SessionServiceFacade, ConnectionManager, playerName);
+            ConnectionManager.ChangeState(ConnectionManager.ClientConnecting.Configure(connectionMethod));
         }
 
         public override void StartServerSession(string playerName)

@@ -20,6 +20,7 @@ namespace SmbcApp.LearnGame.Gameplay.UI.MainMenu
         [SerializeField] [Required] private Image loadingBackdrop;
 
         [Inject] internal AuthenticationServiceFacade AuthServiceFacade;
+        [Inject] internal ConnectionManager ConnectionManager;
         [Inject] internal ISubscriber<ConnectStatus> ConnectStatusSubscriber;
         [Inject] internal ProfileManager ProfileManager;
         [Inject] internal IObjectResolver Resolver;
@@ -52,15 +53,20 @@ namespace SmbcApp.LearnGame.Gameplay.UI.MainMenu
         {
             BlockUIWhileLoadingIsInProgress();
 
-            await Signin("Server");
+            await Signin();
             var res = await SessionServiceFacade.TryJoinSession(sessionCode);
 
             UnblockUIAfterLoadingIsComplete();
 
             if (res)
+            {
                 Log.Info("Joined session with code {0}", sessionCode);
+                ConnectionManager.StartClientSession(ProfileManager.CurrentProfile.CurrentValue);
+            }
             else
+            {
                 Log.Error("Failed to join session with code {0}", sessionCode);
+            }
 
             return res;
         }
@@ -69,12 +75,13 @@ namespace SmbcApp.LearnGame.Gameplay.UI.MainMenu
         {
             BlockUIWhileLoadingIsInProgress();
 
-            await Signin();
+            await Signin("Server");
             var sessionCreationAttempt = await SessionServiceFacade.TryCreateSession();
             if (sessionCreationAttempt)
             {
                 var session = SessionServiceFacade.CurrentSession;
                 Log.Info("Created session with ID {0} and code {1}", session.Id, session.Code);
+                ConnectionManager.StartServerSession("Server");
             }
             else
             {

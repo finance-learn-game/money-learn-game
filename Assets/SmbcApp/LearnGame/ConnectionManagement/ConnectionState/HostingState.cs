@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
 using SmbcApp.LearnGame.Infrastructure;
@@ -32,11 +33,8 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
 
         public override void OnClientConnected(ulong clientId)
         {
-            if (ConnectionManager.NetworkManager.IsServer)
-            {
-                Log.Info("Server connected to client {0}", clientId);
-                return;
-            }
+            Log.Info("Client connected: {0}", clientId);
+            if (clientId == ConnectionManager.NetworkManager.LocalClientId) return;
 
             // ApprovalCheckで設定したデータを取得
             var playerData = SessionManager<SessionPlayerData>.Instance.GetPlayerData(clientId);
@@ -58,12 +56,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
 
         public override void OnClientDisconnect(ulong clientId)
         {
-            if (ConnectionManager.NetworkManager.IsServer)
-            {
-                Log.Info("Server disconnected from client {0}", clientId);
-                return;
-            }
-
+            Log.Info("Client disconnected: {0}", clientId);
             if (clientId == ConnectionManager.NetworkManager.LocalClientId) return;
 
             var sessionManager = SessionManager<SessionPlayerData>.Instance;
@@ -105,39 +98,65 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
             NetworkManager.ConnectionApprovalResponse response
         )
         {
-            var connectionData = request.Payload;
-            var clientId = request.ClientNetworkId;
-
-            // ペイロードが大きすぎる場合は接続を拒否する (不正な接続)
-            if (connectionData.Length > MaxConnectPayload)
+            try
             {
+                var connectionData = request.Payload;
+                var clientId = request.ClientNetworkId;
+
+                // ペイロードが大きすぎる場合は接続を拒否する (不正な接続)
+                if (connectionData.Length > MaxConnectPayload)
+                {
+                    response.Approved = false;
+                    Log.Error("Connection refused for client {0} with MaxConnectPayload", clientId);
+                    return;
+                }
+
+                var payload = Encoding.UTF8.GetString(connectionData);
+                if (string.IsNullOrEmpty(payload))
+                {
+                    response.Approved = false;
+                    Log.Error("Connection refused for client {0} with empty payload", clientId);
+                    return;
+                }
+
+                var connectionPayload = JsonUtility.FromJson<ConnectionPayload>(payload);
+                if (connectionPayload == null)
+                {
+                    response.Approved = false;
+                    Log.Error("Connection refused for client {0} with invalid payload", clientId);
+                    return;
+                }
+
+                var gameReturnStatus = GetConnectStatus(connectionPayload);
+
+                if (gameReturnStatus == ConnectStatus.Success)
+                {
+                    SessionManager<SessionPlayerData>.Instance.SetupConnectingPlayerSessionData(
+                        clientId,
+                        connectionPayload.playerId,
+                        new SessionPlayerData(clientId, connectionPayload.playerName, new NetworkGuid(), 0, true)
+                    );
+
+                    Log.Info("Connection approved for client {0}", clientId);
+                    response.Approved = true;
+                    response.CreatePlayerObject = true;
+                    response.Position = Vector3.zero;
+                    response.Rotation = Quaternion.identity;
+                    return;
+                }
+
                 response.Approved = false;
-                return;
+                response.Reason = JsonUtility.ToJson(gameReturnStatus);
+                Log.Info("Connection refused for client {0} with reason {1}", clientId, gameReturnStatus);
+                if (SessionServiceFacade.CurrentSession != null)
+                    await SessionServiceFacade.RemovePlayerFromSession(connectionPayload.playerId);
             }
-
-            var payload = Encoding.UTF8.GetString(connectionData);
-            var connectionPayload = JsonUtility.FromJson<ConnectionPayload>(payload);
-            var gameReturnStatus = GetConnectStatus(connectionPayload);
-
-            if (gameReturnStatus == ConnectStatus.Success)
+            catch (Exception e)
             {
-                SessionManager<SessionPlayerData>.Instance.SetupConnectingPlayerSessionData(
-                    clientId,
-                    connectionPayload.playerId,
-                    new SessionPlayerData(clientId, connectionPayload.playerName, new NetworkGuid(), 0, true)
-                );
-
-                response.Approved = true;
-                response.CreatePlayerObject = true;
-                response.Position = Vector3.zero;
-                response.Rotation = Quaternion.identity;
-                return;
+                Log.Error(e, "Error in ApprovalCheck, see following exception");
+                response.Approved = false;
+                response.Reason = JsonUtility.ToJson(ConnectStatus.GenericDisconnect);
             }
-
-            response.Approved = false;
-            response.Reason = JsonUtility.ToJson(gameReturnStatus);
-            if (SessionServiceFacade.CurrentSession != null)
-                await SessionServiceFacade.RemovePlayerFromSession(connectionPayload.playerId);
         }
 
         private ConnectStatus GetConnectStatus(ConnectionPayload payload)

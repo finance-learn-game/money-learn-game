@@ -1,8 +1,8 @@
-﻿using Sirenix.OdinInspector;
-using SmbcApp.LearnGame.ConnectionManagement;
+﻿using SmbcApp.LearnGame.ConnectionManagement;
 using SmbcApp.LearnGame.GamePlay.GamePlayObjects.Avatar;
 using SmbcApp.LearnGame.GamePlay.GamePlayObjects.RuntimeDataContainers;
 using SmbcApp.LearnGame.Utils;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects
     {
         [SerializeField] private PersistantPlayerRuntimeCollection runtimeCollection;
         [SerializeField] private NetworkAvatarGuidState networkAvatarGuidState;
-        [ReadOnly] public NetworkVariable<string> Name { get; } = new();
+        [Sirenix.OdinInspector.ReadOnly] public NetworkVariable<FixedPlayerName> Name { get; } = new();
 
         public override void OnDestroy()
         {
@@ -65,6 +65,31 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects
             playerData.PlayerName = Name.Value;
             playerData.AvatarNetworkGuid = networkAvatarGuidState.avatarGuid.Value;
             SessionManager<SessionPlayerData>.Instance.SetPlayerData(OwnerClientId, playerData);
+        }
+    }
+
+    public struct FixedPlayerName : INetworkSerializable
+    {
+        private FixedString32Bytes _name;
+
+        public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+        {
+            serializer.SerializeValue(ref _name);
+        }
+
+        public override string ToString()
+        {
+            return _name.Value;
+        }
+
+        public static implicit operator string(FixedPlayerName name)
+        {
+            return name.ToString();
+        }
+
+        public static implicit operator FixedPlayerName(string name)
+        {
+            return new FixedPlayerName { _name = new FixedString32Bytes(name) };
         }
     }
 }
