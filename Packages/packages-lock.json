@@ -58,6 +58,15 @@
       "dependencies": {},
       "hash": "cc1cedcc0d800de06296d0992d3e3af5e7cdae62"
     },
+    "com.singularitygroup.hotreload": {
+      "version": "file:com.singularitygroup.hotreload",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0"
+      }
+    },
     "com.unity.addressables": {
       "version": "2.2.2",
       "depth": 0,
