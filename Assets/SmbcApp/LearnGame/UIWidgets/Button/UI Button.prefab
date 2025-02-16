@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 0e7812fd1f8db194eb7e9edc960e52e8, type: 2}
-  m_Color: {r: 0.29803923, g: 0.4, b: 0.16862746, a: 1}
+  m_Color: {r: 0.23529412, g: 0.40784314, b: 0.22352941, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entryId:
-    _value: f7c1bbbc-a86c-474a-9412-48565e3db2fc
+    _value: d1f1d4ab-ce28-4aed-ac85-9d3dc4dbfcb8
   _component: {fileID: 4444024832339438682}
 --- !u!114 &-5635197235124791906
 MonoBehaviour:
@@ -301,5 +301,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entryId:
-    _value: 55d416ef-4974-490c-a31d-ea643c428356
+    _value: 551cc79e-8a89-4ecd-9dd9-2af9a74bc70f
   _component: {fileID: 6356780459406322873}

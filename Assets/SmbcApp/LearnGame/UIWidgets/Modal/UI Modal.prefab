@@ -75,8 +75,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279639066
-  m_fontColor: {r: 0.101960786, g: 0.10980392, b: 0.08627451, a: 1}
+    rgba: 4279704857
+  m_fontColor: {r: 0.09803922, g: 0.11372549, b: 0.09019608, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entryId:
-    _value: 7e978399-d029-4754-9317-836d9ae1131b
+    _value: 8dc34384-cf61-4d47-87cb-d3c37d826acc
   _component: {fileID: 2060931632633989187}
 --- !u!1 &1267888903686608161
 GameObject:
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: ca942e0d25e33b14b868079fa8a9330b, type: 2}
-  m_Color: {r: 0.93333334, g: 0.9372549, b: 0.8901961, a: 1}
+  m_Color: {r: 0.9254902, g: 0.9372549, b: 0.9019608, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entryId:
-    _value: daa3a8c2-80af-4ce8-908b-1978a0ce9de2
+    _value: 17446685-4cca-4e5d-a681-26b5389afaa9
   _component: {fileID: 6409479645095584251}
 --- !u!1 &1838698550688898100
 GameObject:
@@ -330,8 +330,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0ecc30b91047fa82cb3e6e10d65d7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _usePrefabNameAsIdentifier: 1
+  _identifier: 
+  _animationContainer:
+    _enterAnimations: []
+    _exitAnimations: []
   closeButton: {fileID: 3944423118475136765}
-  modalContainer: {fileID: 0}
 --- !u!1 &7871501458239131578
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,7 +397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.101960786, g: 0.10980392, b: 0.08627451, a: 1}
+  m_Color: {r: 0.09803922, g: 0.11372549, b: 0.09019608, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -423,7 +427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entryId:
-    _value: 7e978399-d029-4754-9317-836d9ae1131b
+    _value: 8dc34384-cf61-4d47-87cb-d3c37d826acc
   _component: {fileID: 5573482042054727861}
 --- !u!114 &1498148304218600986
 MonoBehaviour:

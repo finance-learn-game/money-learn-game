@@ -9,7 +9,6 @@ using SmbcApp.LearnGame.UnityService.Auth;
 using SmbcApp.LearnGame.UnityService.Infrastructure.Messages;
 using SmbcApp.LearnGame.UnityService.Session;
 using SmbcApp.LearnGame.Utils;
-using Unity.Logging;
 using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
@@ -28,7 +27,6 @@ namespace SmbcApp.LearnGame.ApplicationLifecycle
 
         private void Start()
         {
-            Log.Info("ApplicationController Start");
             Container
                 .Resolve<ISubscriber<QuitApplicationMessage>>()
                 .Subscribe(QuitGame)
@@ -72,9 +70,6 @@ namespace SmbcApp.LearnGame.ApplicationLifecycle
             builder.RegisterComponent(connectionManager);
             builder.RegisterComponent(sceneLoader);
 
-            builder.Register<SaveDataManager>(Lifetime.Singleton);
-            builder.Register<ProfileManager>(Lifetime.Singleton);
-
             var option = builder.RegisterMessagePipe();
             builder.RegisterBuildCallback(c =>
             {
@@ -89,7 +84,8 @@ namespace SmbcApp.LearnGame.ApplicationLifecycle
             builder.Register<SessionServiceFacade>(Lifetime.Singleton);
             builder.UseEntryPoints(c =>
             {
-                // StartAsyncでUnityServiceの初期化を行う
+                c.Add<ProfileManager>().AsSelf();
+                c.Add<SaveDataManager>().AsSelf();
                 c.Add<AuthenticationServiceFacade>().AsSelf();
             });
         }

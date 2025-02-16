@@ -1,0 +1,1108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0edd4d6dec9974f11ba4b078ca3a0e1e, type: 3}
+  m_Name: PaletteStore
+  m_EditorClassIdentifier: 
+  _colorPalette:
+    _entries:
+      _keys:
+      - d1f1d4ab-ce28-4aed-ac85-9d3dc4dbfcb8
+      - 07d201cf-5385-4ed1-b8df-33ef5e3a3892
+      - 551cc79e-8a89-4ecd-9dd9-2af9a74bc70f
+      - abaf3e32-ede9-4d68-bb25-81651eda1979
+      - 061d46b1-05fa-4988-a860-1504225c4cbb
+      - a86a6678-9513-4c60-b6cc-3f63c4a4ac2a
+      - faaa3edf-ddfc-4061-9883-c7e662830376
+      - 9fea1664-c050-47bd-ab77-a9e6a9382370
+      - 3fd3c2c7-37c3-4f1b-93b0-08c9c5df475e
+      - bca668d1-5431-443d-aabb-3e75c42e4748
+      - d7b3b966-5875-4bea-8f57-e130667f78c9
+      - 741888ac-ffa5-44c4-94b4-976ae9c4f390
+      - e9695f03-2bd0-4009-a251-931ed45ed434
+      - 9c78ba17-b4c7-44bb-b175-67069f58e0a2
+      - dccf497a-61c9-4134-b5ea-6ec68639a084
+      - c5dcc159-8dc8-4a58-adcd-f79880d807e4
+      - 48574586-1a0d-45bd-a354-52097e39cf0d
+      - b44ab376-3c26-458a-9fa9-b89e0c6f4ebe
+      - c7300456-2c96-467d-864d-070c3267c3c3
+      - a1b48c57-aae7-4786-a597-eefbdf4f326f
+      - 8dc34384-cf61-4d47-87cb-d3c37d826acc
+      - 42639afd-186d-4e6a-b92e-2c8f39b35b6b
+      - 4e67beed-869f-4dcf-bd90-7d31821e63ed
+      - 839d6eba-b986-46f2-916b-f85e84b0cd42
+      - c1c3178f-b84f-4fa7-bcfc-dab6dd1df0e5
+      - 1b45c552-f4fa-4ea8-908f-719fdc1e86ab
+      - b100567e-8768-4ccc-90ba-8c7429fd7cc5
+      - 63ece8f8-3904-485b-9db9-b6478e2c41c7
+      - 7a212256-04d6-4740-b0ee-923bcd723556
+      - bc4d5fa4-70c9-4930-ab7f-2762f0c93a7b
+      - ae252d34-5b9b-4421-9c34-51909370131d
+      - a08cbfa1-92b0-4167-b787-d100fa7b430c
+      - a3636ff8-d5cf-4b97-b26a-09f9e393619c
+      - d1d00cde-f39b-48a3-8934-766cba94b9ff
+      - 58abcc9a-10ef-4685-9b67-b7a68733c392
+      - bc639dea-493a-4bac-b2a7-952853715aea
+      - 23352913-4dca-495f-adc4-a952aacf0154
+      - f1377c88-2b4a-41a2-8465-7f32210f8814
+      - 4e36f864-9305-4174-b605-0f60b88c2d55
+      - 4e5d63c2-8b4c-43fa-b7ad-5e5e9cea13a9
+      - 45983d85-7eaa-4db5-ade8-1671f3b2cdb8
+      - 0a6fca91-fd0c-4981-a2ea-044fd5ced380
+      - ec507ebb-bd85-4cc2-8d25-36ed48ace9d4
+      - 93c39538-4e11-4d98-b983-9a79451c728d
+      - 6e5e42a1-8b0c-4308-aec7-533a8fca3fe9
+      - fd657434-21b5-4a4d-a580-b35bdb64a410
+      - 17446685-4cca-4e5d-a681-26b5389afaa9
+      - a7574792-2532-4d0b-976e-cc045ea4260e
+      - c3410dc1-b188-4b79-9277-b4c196fb7dc9
+      - 838d9eff-aeeb-4bd9-a438-3eff6c9ce2ec
+      _values:
+      - _id: d1f1d4ab-ce28-4aed-ac85-9d3dc4dbfcb8
+        _name:
+          _value: MaterialTheme/primary
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.23529412, g: 0.40784314, b: 0.22352941, a: 1}
+          - _value: {r: 0.07450981, g: 0.24705882, b: 0.078431375, a: 1}
+          - _value: {r: 0.023529412, g: 0.20392157, b: 0.039215688, a: 1}
+          - _value: {r: 0.63529414, g: 0.827451, b: 0.6, a: 1}
+          - _value: {r: 0.7176471, g: 0.91764706, b: 0.6784314, a: 1}
+          - _value: {r: 0.7921569, g: 0.99607843, b: 0.7529412, a: 1}
+      - _id: 07d201cf-5385-4ed1-b8df-33ef5e3a3892
+        _name:
+          _value: MaterialTheme/surfaceTint
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.23529412, g: 0.40784314, b: 0.22352941, a: 1}
+          - _value: {r: 0.23529412, g: 0.40784314, b: 0.22352941, a: 1}
+          - _value: {r: 0.23529412, g: 0.40784314, b: 0.22352941, a: 1}
+          - _value: {r: 0.63529414, g: 0.827451, b: 0.6, a: 1}
+          - _value: {r: 0.63529414, g: 0.827451, b: 0.6, a: 1}
+          - _value: {r: 0.63529414, g: 0.827451, b: 0.6, a: 1}
+      - _id: 551cc79e-8a89-4ecd-9dd9-2af9a74bc70f
+        _name:
+          _value: MaterialTheme/onPrimary
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0.047058824, g: 0.22352941, b: 0.05490196, a: 1}
+          - _value: {r: 0, g: 0.1764706, b: 0.019607844, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+      - _id: abaf3e32-ede9-4d68-bb25-81651eda1979
+        _name:
+          _value: MaterialTheme/primaryContainer
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.7411765, g: 0.9411765, b: 0.7019608, a: 1}
+          - _value: {r: 0.29411766, g: 0.47058824, b: 0.27450982, a: 1}
+          - _value: {r: 0.15294118, g: 0.32156864, b: 0.14509805, a: 1}
+          - _value: {r: 0.14509805, g: 0.3137255, b: 0.13725491, a: 1}
+          - _value: {r: 0.42745098, g: 0.6117647, b: 0.40392157, a: 1}
+          - _value: {r: 0.61960787, g: 0.8117647, b: 0.58431375, a: 1}
+      - _id: 061d46b1-05fa-4988-a860-1504225c4cbb
+        _name:
+          _value: MaterialTheme/onPrimaryContainer
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.14509805, g: 0.3137255, b: 0.13725491, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0.7411765, g: 0.9411765, b: 0.7019608, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0, g: 0.05882353, b: 0.003921569, a: 1}
+      - _id: a86a6678-9513-4c60-b6cc-3f63c4a4ac2a
+        _name:
+          _value: MaterialTheme/secondary
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.3254902, g: 0.3882353, b: 0.30980393, a: 1}
+          - _value: {r: 0.16862746, g: 0.22745098, b: 0.15686275, a: 1}
+          - _value: {r: 0.12941177, g: 0.1882353, b: 0.12156863, a: 1}
+          - _value: {r: 0.7294118, g: 0.8, b: 0.7019608, a: 1}
+          - _value: {r: 0.8156863, g: 0.8862745, b: 0.78431374, a: 1}
+          - _value: {r: 0.8901961, g: 0.9607843, b: 0.85882354, a: 1}
+      - _id: faaa3edf-ddfc-4061-9883-c7e662830376
+        _name:
+          _value: MaterialTheme/onSecondary
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0.14509805, g: 0.20392157, b: 0.13725491, a: 1}
+          - _value: {r: 0.105882354, g: 0.16078432, b: 0.09803922, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+      - _id: 9fea1664-c050-47bd-ab77-a9e6a9382370
+        _name:
+          _value: MaterialTheme/secondaryContainer
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.8392157, g: 0.9098039, b: 0.80784315, a: 1}
+          - _value: {r: 0.38039216, g: 0.44705883, b: 0.3647059, a: 1}
+          - _value: {r: 0.24313726, g: 0.3019608, b: 0.22745098, a: 1}
+          - _value: {r: 0.23137255, g: 0.29411766, b: 0.21960784, a: 1}
+          - _value: {r: 0.5176471, g: 0.58431375, b: 0.49803922, a: 1}
+          - _value: {r: 0.7137255, g: 0.78431374, b: 0.6862745, a: 1}
+      - _id: 3fd3c2c7-37c3-4f1b-93b0-08c9c5df475e
+        _name:
+          _value: MaterialTheme/onSecondaryContainer
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.23137255, g: 0.29411766, b: 0.21960784, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0.8392157, g: 0.9098039, b: 0.80784315, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0.011764706, g: 0.05490196, b: 0.011764706, a: 1}
+      - _id: bca668d1-5431-443d-aabb-3e75c42e4748
+        _name:
+          _value: MaterialTheme/tertiary
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.21960784, g: 0.39607844, b: 0.41568628, a: 1}
+          - _value: {r: 0.02745098, g: 0.23529412, b: 0.25490198, a: 1}
+          - _value: {r: 0, g: 0.19607843, b: 0.21176471, a: 1}
+          - _value: {r: 0.627451, g: 0.8117647, b: 0.83137256, a: 1}
+          - _value: {r: 0.7137255, g: 0.8980392, b: 0.91764706, a: 1}
+          - _value: {r: 0.7882353, g: 0.972549, b: 0.99607843, a: 1}
+      - _id: d7b3b966-5875-4bea-8f57-e130667f78c9
+        _name:
+          _value: MaterialTheme/onTertiary
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0, g: 0.21176471, b: 0.23137255, a: 1}
+          - _value: {r: 0, g: 0.16862746, b: 0.18039216, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+      - _id: 741888ac-ffa5-44c4-94b4-976ae9c4f390
+        _name:
+          _value: MaterialTheme/tertiaryContainer
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.7372549, g: 0.92156863, b: 0.9411765, a: 1}
+          - _value: {r: 0.2784314, g: 0.45490196, b: 0.4745098, a: 1}
+          - _value: {r: 0.12941177, g: 0.3137255, b: 0.32941177, a: 1}
+          - _value: {r: 0.11764706, g: 0.3019608, b: 0.32156864, a: 1}
+          - _value: {r: 0.41960785, g: 0.59607846, b: 0.6156863, a: 1}
+          - _value: {r: 0.6156863, g: 0.79607844, b: 0.8156863, a: 1}
+      - _id: e9695f03-2bd0-4009-a251-931ed45ed434
+        _name:
+          _value: MaterialTheme/onTertiaryContainer
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.11764706, g: 0.3019608, b: 0.32156864, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0.7372549, g: 0.92156863, b: 0.9411765, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0, g: 0.05490196, b: 0.05882353, a: 1}
+      - _id: 9c78ba17-b4c7-44bb-b175-67069f58e0a2
+        _name:
+          _value: MaterialTheme/error
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.7294118, g: 0.101960786, b: 0.101960786, a: 1}
+          - _value: {r: 0.45490196, g: 0, b: 0.023529412, a: 1}
+          - _value: {r: 0.3764706, g: 0, b: 0.015686275, a: 1}
+          - _value: {r: 1, g: 0.7058824, b: 0.67058825, a: 1}
+          - _value: {r: 1, g: 0.8235294, b: 0.8, a: 1}
+          - _value: {r: 1, g: 0.9254902, b: 0.9137255, a: 1}
+      - _id: dccf497a-61c9-4134-b5ea-6ec68639a084
+        _name:
+          _value: MaterialTheme/onError
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0.4117647, g: 0, b: 0.019607844, a: 1}
+          - _value: {r: 0.32941177, g: 0, b: 0.011764706, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+      - _id: c5dcc159-8dc8-4a58-adcd-f79880d807e4
+        _name:
+          _value: MaterialTheme/errorContainer
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 1, g: 0.85490197, b: 0.8392157, a: 1}
+          - _value: {r: 0.8117647, g: 0.17254902, b: 0.15294118, a: 1}
+          - _value: {r: 0.59607846, g: 0, b: 0.039215688, a: 1}
+          - _value: {r: 0.5764706, g: 0, b: 0.039215688, a: 1}
+          - _value: {r: 1, g: 0.32941177, b: 0.28627452, a: 1}
+          - _value: {r: 1, g: 0.68235296, b: 0.6431373, a: 1}
+      - _id: 48574586-1a0d-45bd-a354-52097e39cf0d
+        _name:
+          _value: MaterialTheme/onErrorContainer
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.5764706, g: 0, b: 0.039215688, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 0.85490197, b: 0.8392157, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0.13333334, g: 0, b: 0.003921569, a: 1}
+      - _id: b44ab376-3c26-458a-9fa9-b89e0c6f4ebe
+        _name:
+          _value: MaterialTheme/background
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.96862745, g: 0.9843137, b: 0.94509804, a: 1}
+          - _value: {r: 0.96862745, g: 0.9843137, b: 0.94509804, a: 1}
+          - _value: {r: 0.96862745, g: 0.9843137, b: 0.94509804, a: 1}
+          - _value: {r: 0.0627451, g: 0.078431375, b: 0.05882353, a: 1}
+          - _value: {r: 0.0627451, g: 0.078431375, b: 0.05882353, a: 1}
+          - _value: {r: 0.0627451, g: 0.078431375, b: 0.05882353, a: 1}
+      - _id: c7300456-2c96-467d-864d-070c3267c3c3
+        _name:
+          _value: MaterialTheme/onBackground
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.09803922, g: 0.11372549, b: 0.09019608, a: 1}
+          - _value: {r: 0.09803922, g: 0.11372549, b: 0.09019608, a: 1}
+          - _value: {r: 0.09803922, g: 0.11372549, b: 0.09019608, a: 1}
+          - _value: {r: 0.8784314, g: 0.89411765, b: 0.85490197, a: 1}
+          - _value: {r: 0.8784314, g: 0.89411765, b: 0.85490197, a: 1}
+          - _value: {r: 0.8784314, g: 0.89411765, b: 0.85490197, a: 1}
+      - _id: a1b48c57-aae7-4786-a597-eefbdf4f326f
+        _name:
+          _value: MaterialTheme/surface
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.96862745, g: 0.9843137, b: 0.94509804, a: 1}
+          - _value: {r: 0.96862745, g: 0.9843137, b: 0.94509804, a: 1}
+          - _value: {r: 0.96862745, g: 0.9843137, b: 0.94509804, a: 1}
+          - _value: {r: 0.0627451, g: 0.078431375, b: 0.05882353, a: 1}
+          - _value: {r: 0.0627451, g: 0.078431375, b: 0.05882353, a: 1}
+          - _value: {r: 0.0627451, g: 0.078431375, b: 0.05882353, a: 1}
+      - _id: 8dc34384-cf61-4d47-87cb-d3c37d826acc
+        _name:
+          _value: MaterialTheme/onSurface
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.09803922, g: 0.11372549, b: 0.09019608, a: 1}
+          - _value: {r: 0.05490196, g: 0.07058824, b: 0.050980393, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0.8784314, g: 0.89411765, b: 0.85490197, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+      - _id: 42639afd-186d-4e6a-b92e-2c8f39b35b6b
+        _name:
+          _value: MaterialTheme/surfaceVariant
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.87058824, g: 0.8980392, b: 0.84705883, a: 1}
+          - _value: {r: 0.87058824, g: 0.8980392, b: 0.84705883, a: 1}
+          - _value: {r: 0.87058824, g: 0.8980392, b: 0.84705883, a: 1}
+          - _value: {r: 0.25882354, g: 0.28627452, b: 0.2509804, a: 1}
+          - _value: {r: 0.25882354, g: 0.28627452, b: 0.2509804, a: 1}
+          - _value: {r: 0.25882354, g: 0.28627452, b: 0.2509804, a: 1}
+      - _id: 4e67beed-869f-4dcf-bd90-7d31821e63ed
+        _name:
+          _value: MaterialTheme/onSurfaceVariant
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.25882354, g: 0.28627452, b: 0.2509804, a: 1}
+          - _value: {r: 0.19607843, g: 0.21960784, b: 0.18431373, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0.7607843, g: 0.78431374, b: 0.7411765, a: 1}
+          - _value: {r: 0.84705883, g: 0.87058824, b: 0.8235294, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+      - _id: 839d6eba-b986-46f2-916b-f85e84b0cd42
+        _name:
+          _value: MaterialTheme/outline
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.4509804, g: 0.4745098, b: 0.43529412, a: 1}
+          - _value: {r: 0.30588236, g: 0.32941177, b: 0.29411766, a: 1}
+          - _value: {r: 0.15686275, g: 0.18039216, b: 0.14901961, a: 1}
+          - _value: {r: 0.54901963, g: 0.5764706, b: 0.53333336, a: 1}
+          - _value: {r: 0.6784314, g: 0.7058824, b: 0.65882355, a: 1}
+          - _value: {r: 0.9254902, g: 0.9490196, b: 0.8980392, a: 1}
+      - _id: c1c3178f-b84f-4fa7-bcfc-dab6dd1df0e5
+        _name:
+          _value: MaterialTheme/outlineVariant
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.7607843, g: 0.78431374, b: 0.7411765, a: 1}
+          - _value: {r: 0.40784314, g: 0.43529412, b: 0.39607844, a: 1}
+          - _value: {r: 0.27058825, g: 0.29411766, b: 0.25882354, a: 1}
+          - _value: {r: 0.25882354, g: 0.28627452, b: 0.2509804, a: 1}
+          - _value: {r: 0.54901963, g: 0.57254905, b: 0.5294118, a: 1}
+          - _value: {r: 0.74509805, g: 0.77254903, b: 0.7254902, a: 1}
+      - _id: 1b45c552-f4fa-4ea8-908f-719fdc1e86ab
+        _name:
+          _value: MaterialTheme/shadow
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+      - _id: b100567e-8768-4ccc-90ba-8c7429fd7cc5
+        _name:
+          _value: MaterialTheme/scrim
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+      - _id: 63ece8f8-3904-485b-9db9-b6478e2c41c7
+        _name:
+          _value: MaterialTheme/inverseSurface
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.1764706, g: 0.19607843, b: 0.16862746, a: 1}
+          - _value: {r: 0.1764706, g: 0.19607843, b: 0.16862746, a: 1}
+          - _value: {r: 0.1764706, g: 0.19607843, b: 0.16862746, a: 1}
+          - _value: {r: 0.8784314, g: 0.89411765, b: 0.85490197, a: 1}
+          - _value: {r: 0.8784314, g: 0.89411765, b: 0.85490197, a: 1}
+          - _value: {r: 0.8784314, g: 0.89411765, b: 0.85490197, a: 1}
+      - _id: 7a212256-04d6-4740-b0ee-923bcd723556
+        _name:
+          _value: MaterialTheme/inverseOnSurface
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.9372549, g: 0.9490196, b: 0.9137255, a: 1}
+          - _value: {r: 0.9372549, g: 0.9490196, b: 0.9137255, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0.1764706, g: 0.19607843, b: 0.16862746, a: 1}
+          - _value: {r: 0.15294118, g: 0.16862746, b: 0.14509805, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+      - _id: bc4d5fa4-70c9-4930-ab7f-2762f0c93a7b
+        _name:
+          _value: MaterialTheme/inversePrimary
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.63529414, g: 0.827451, b: 0.6, a: 1}
+          - _value: {r: 0.63529414, g: 0.827451, b: 0.6, a: 1}
+          - _value: {r: 0.63529414, g: 0.827451, b: 0.6, a: 1}
+          - _value: {r: 0.23529412, g: 0.40784314, b: 0.22352941, a: 1}
+          - _value: {r: 0.14901961, g: 0.31764707, b: 0.14117648, a: 1}
+          - _value: {r: 0.14901961, g: 0.31764707, b: 0.14117648, a: 1}
+      - _id: ae252d34-5b9b-4421-9c34-51909370131d
+        _name:
+          _value: MaterialTheme/primaryFixed
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.7411765, g: 0.9411765, b: 0.7019608, a: 1}
+          - _value: {r: 0.29411766, g: 0.47058824, b: 0.27450982, a: 1}
+          - _value: {r: 0.15294118, g: 0.32156864, b: 0.14509805, a: 1}
+          - _value: {r: 0.7411765, g: 0.9411765, b: 0.7019608, a: 1}
+          - _value: {r: 0.7411765, g: 0.9411765, b: 0.7019608, a: 1}
+          - _value: {r: 0.7411765, g: 0.9411765, b: 0.7019608, a: 1}
+      - _id: a08cbfa1-92b0-4167-b787-d100fa7b430c
+        _name:
+          _value: MaterialTheme/onPrimaryFixed
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0, g: 0.13333334, b: 0.011764706, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0, g: 0.13333334, b: 0.011764706, a: 1}
+          - _value: {r: 0, g: 0.08627451, b: 0.003921569, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+      - _id: a3636ff8-d5cf-4b97-b26a-09f9e393619c
+        _name:
+          _value: MaterialTheme/primaryFixedDim
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.63529414, g: 0.827451, b: 0.6, a: 1}
+          - _value: {r: 0.2, g: 0.37254903, b: 0.1882353, a: 1}
+          - _value: {r: 0.05882353, g: 0.23137255, b: 0.0627451, a: 1}
+          - _value: {r: 0.63529414, g: 0.827451, b: 0.6, a: 1}
+          - _value: {r: 0.63529414, g: 0.827451, b: 0.6, a: 1}
+          - _value: {r: 0.63529414, g: 0.827451, b: 0.6, a: 1}
+      - _id: d1d00cde-f39b-48a3-8934-766cba94b9ff
+        _name:
+          _value: MaterialTheme/onPrimaryFixedVariant
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.14509805, g: 0.3137255, b: 0.13725491, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0.14509805, g: 0.3137255, b: 0.13725491, a: 1}
+          - _value: {r: 0.07450981, g: 0.24705882, b: 0.078431375, a: 1}
+          - _value: {r: 0, g: 0.08627451, b: 0.003921569, a: 1}
+      - _id: 58abcc9a-10ef-4685-9b67-b7a68733c392
+        _name:
+          _value: MaterialTheme/secondaryFixed
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.8392157, g: 0.9098039, b: 0.80784315, a: 1}
+          - _value: {r: 0.38039216, g: 0.44705883, b: 0.3647059, a: 1}
+          - _value: {r: 0.24313726, g: 0.3019608, b: 0.22745098, a: 1}
+          - _value: {r: 0.8392157, g: 0.9098039, b: 0.80784315, a: 1}
+          - _value: {r: 0.8392157, g: 0.9098039, b: 0.80784315, a: 1}
+          - _value: {r: 0.8392157, g: 0.9098039, b: 0.80784315, a: 1}
+      - _id: bc639dea-493a-4bac-b2a7-952853715aea
+        _name:
+          _value: MaterialTheme/onSecondaryFixed
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.06666667, g: 0.12156863, b: 0.05882353, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0.06666667, g: 0.12156863, b: 0.05882353, a: 1}
+          - _value: {r: 0.02745098, g: 0.078431375, b: 0.023529412, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+      - _id: 23352913-4dca-495f-adc4-a952aacf0154
+        _name:
+          _value: MaterialTheme/secondaryFixedDim
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.7294118, g: 0.8, b: 0.7019608, a: 1}
+          - _value: {r: 0.28627452, g: 0.34901962, b: 0.27058825, a: 1}
+          - _value: {r: 0.15686275, g: 0.21176471, b: 0.14509805, a: 1}
+          - _value: {r: 0.7294118, g: 0.8, b: 0.7019608, a: 1}
+          - _value: {r: 0.7294118, g: 0.8, b: 0.7019608, a: 1}
+          - _value: {r: 0.7294118, g: 0.8, b: 0.7019608, a: 1}
+      - _id: f1377c88-2b4a-41a2-8465-7f32210f8814
+        _name:
+          _value: MaterialTheme/onSecondaryFixedVariant
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.23137255, g: 0.29411766, b: 0.21960784, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0.23137255, g: 0.29411766, b: 0.21960784, a: 1}
+          - _value: {r: 0.16862746, g: 0.22745098, b: 0.15686275, a: 1}
+          - _value: {r: 0.02745098, g: 0.078431375, b: 0.023529412, a: 1}
+      - _id: 4e36f864-9305-4174-b605-0f60b88c2d55
+        _name:
+          _value: MaterialTheme/tertiaryFixed
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.7372549, g: 0.92156863, b: 0.9411765, a: 1}
+          - _value: {r: 0.2784314, g: 0.45490196, b: 0.4745098, a: 1}
+          - _value: {r: 0.12941177, g: 0.3137255, b: 0.32941177, a: 1}
+          - _value: {r: 0.7372549, g: 0.92156863, b: 0.9411765, a: 1}
+          - _value: {r: 0.7372549, g: 0.92156863, b: 0.9411765, a: 1}
+          - _value: {r: 0.7372549, g: 0.92156863, b: 0.9411765, a: 1}
+      - _id: 4e5d63c2-8b4c-43fa-b7ad-5e5e9cea13a9
+        _name:
+          _value: MaterialTheme/onTertiaryFixed
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0, g: 0.1254902, b: 0.13333334, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0, g: 0.1254902, b: 0.13333334, a: 1}
+          - _value: {r: 0, g: 0.078431375, b: 0.08627451, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+      - _id: 45983d85-7eaa-4db5-ade8-1671f3b2cdb8
+        _name:
+          _value: MaterialTheme/tertiaryFixedDim
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.627451, g: 0.8117647, b: 0.83137256, a: 1}
+          - _value: {r: 0.18039216, g: 0.36078432, b: 0.3764706, a: 1}
+          - _value: {r: 0.007843138, g: 0.22352941, b: 0.23921569, a: 1}
+          - _value: {r: 0.627451, g: 0.8117647, b: 0.83137256, a: 1}
+          - _value: {r: 0.627451, g: 0.8117647, b: 0.83137256, a: 1}
+          - _value: {r: 0.627451, g: 0.8117647, b: 0.83137256, a: 1}
+      - _id: 0a6fca91-fd0c-4981-a2ea-044fd5ced380
+        _name:
+          _value: MaterialTheme/onTertiaryFixedVariant
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.11764706, g: 0.3019608, b: 0.32156864, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0.11764706, g: 0.3019608, b: 0.32156864, a: 1}
+          - _value: {r: 0.02745098, g: 0.23529412, b: 0.25490198, a: 1}
+          - _value: {r: 0, g: 0.078431375, b: 0.08627451, a: 1}
+      - _id: ec507ebb-bd85-4cc2-8d25-36ed48ace9d4
+        _name:
+          _value: MaterialTheme/surfaceDim
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.84705883, g: 0.85882354, b: 0.8235294, a: 1}
+          - _value: {r: 0.76862746, g: 0.78431374, b: 0.7490196, a: 1}
+          - _value: {r: 0.7137255, g: 0.7294118, b: 0.69411767, a: 1}
+          - _value: {r: 0.0627451, g: 0.078431375, b: 0.05882353, a: 1}
+          - _value: {r: 0.0627451, g: 0.078431375, b: 0.05882353, a: 1}
+          - _value: {r: 0.0627451, g: 0.078431375, b: 0.05882353, a: 1}
+      - _id: 93c39538-4e11-4d98-b983-9a79451c728d
+        _name:
+          _value: MaterialTheme/surfaceBright
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.96862745, g: 0.9843137, b: 0.94509804, a: 1}
+          - _value: {r: 0.96862745, g: 0.9843137, b: 0.94509804, a: 1}
+          - _value: {r: 0.96862745, g: 0.9843137, b: 0.94509804, a: 1}
+          - _value: {r: 0.21176471, g: 0.22745098, b: 0.20392157, a: 1}
+          - _value: {r: 0.25490198, g: 0.27450982, b: 0.24705882, a: 1}
+          - _value: {r: 0.3019608, g: 0.31764707, b: 0.2901961, a: 1}
+      - _id: 6e5e42a1-8b0c-4308-aec7-533a8fca3fe9
+        _name:
+          _value: MaterialTheme/surfaceContainerLowest
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0.043137256, g: 0.05882353, b: 0.039215688, a: 1}
+          - _value: {r: 0.019607844, g: 0.03137255, b: 0.019607844, a: 1}
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+      - _id: fd657434-21b5-4a4d-a580-b35bdb64a410
+        _name:
+          _value: MaterialTheme/surfaceContainerLow
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.9490196, g: 0.9607843, b: 0.92156863, a: 1}
+          - _value: {r: 0.9490196, g: 0.9607843, b: 0.92156863, a: 1}
+          - _value: {r: 0.9372549, g: 0.9490196, b: 0.9137255, a: 1}
+          - _value: {r: 0.09803922, g: 0.11372549, b: 0.09019608, a: 1}
+          - _value: {r: 0.105882354, g: 0.12156863, b: 0.09803922, a: 1}
+          - _value: {r: 0.11372549, g: 0.12941177, b: 0.105882354, a: 1}
+      - _id: 17446685-4cca-4e5d-a681-26b5389afaa9
+        _name:
+          _value: MaterialTheme/surfaceContainer
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.9254902, g: 0.9372549, b: 0.9019608, a: 1}
+          - _value: {r: 0.9019608, g: 0.9137255, b: 0.8784314, a: 1}
+          - _value: {r: 0.8784314, g: 0.89411765, b: 0.85490197, a: 1}
+          - _value: {r: 0.11372549, g: 0.12941177, b: 0.105882354, a: 1}
+          - _value: {r: 0.14509805, g: 0.16078432, b: 0.13725491, a: 1}
+          - _value: {r: 0.1764706, g: 0.19607843, b: 0.16862746, a: 1}
+      - _id: a7574792-2532-4d0b-976e-cc045ea4260e
+        _name:
+          _value: MaterialTheme/surfaceContainerHigh
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.9019608, g: 0.9137255, b: 0.8784314, a: 1}
+          - _value: {r: 0.85882354, g: 0.87058824, b: 0.8352941, a: 1}
+          - _value: {r: 0.8235294, g: 0.8392157, b: 0.8039216, a: 1}
+          - _value: {r: 0.15294118, g: 0.16862746, b: 0.14509805, a: 1}
+          - _value: {r: 0.1882353, g: 0.20392157, b: 0.18039216, a: 1}
+          - _value: {r: 0.21960784, g: 0.23921569, b: 0.21176471, a: 1}
+      - _id: c3410dc1-b188-4b79-9277-b4c196fb7dc9
+        _name:
+          _value: MaterialTheme/surfaceContainerHighest
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.8784314, g: 0.89411765, b: 0.85490197, a: 1}
+          - _value: {r: 0.8117647, g: 0.827451, b: 0.7921569, a: 1}
+          - _value: {r: 0.76862746, g: 0.78431374, b: 0.7490196, a: 1}
+          - _value: {r: 0.19607843, g: 0.21176471, b: 0.1882353, a: 1}
+          - _value: {r: 0.23137255, g: 0.24705882, b: 0.21960784, a: 1}
+          - _value: {r: 0.26666668, g: 0.28235295, b: 0.25490198, a: 1}
+      - _id: 838d9eff-aeeb-4bd9-a438-3eff6c9ce2ec
+        _name:
+          _value: divider
+        _values:
+          _keys:
+          - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+          - b36af7f1-b85b-4f2b-9e32-299735f59204
+          - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+          - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+          - bc6e862d-5c8d-40df-b031-4287f5dc17df
+          - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+          _values:
+          - _value: {r: 0.8784314, g: 0.8784314, b: 0.8784314, a: 1}
+          - _value: {r: 0.8784314, g: 0.8784314, b: 0.8784314, a: 1}
+          - _value: {r: 0.8784314, g: 0.8784314, b: 0.8784314, a: 1}
+          - _value: {r: 0.8784314, g: 0.8784314, b: 0.8784314, a: 1}
+          - _value: {r: 0.8784314, g: 0.8784314, b: 0.8784314, a: 1}
+          - _value: {r: 0.8784314, g: 0.8784314, b: 0.8784314, a: 1}
+    _themes:
+      _keys:
+      - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+      - b36af7f1-b85b-4f2b-9e32-299735f59204
+      - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+      - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+      - bc6e862d-5c8d-40df-b031-4287f5dc17df
+      - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+      _values:
+      - _id: bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+        _name:
+          _value: light
+      - _id: b36af7f1-b85b-4f2b-9e32-299735f59204
+        _name:
+          _value: light-medium-contrast
+      - _id: 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+        _name:
+          _value: light-high-contrast
+      - _id: 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+        _name:
+          _value: dark
+      - _id: bc6e862d-5c8d-40df-b031-4287f5dc17df
+        _name:
+          _value: dark-medium-contrast
+      - _id: 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+        _name:
+          _value: dark-high-contrast
+    _entryOrders:
+      _ids:
+      - d1f1d4ab-ce28-4aed-ac85-9d3dc4dbfcb8
+      - 07d201cf-5385-4ed1-b8df-33ef5e3a3892
+      - 551cc79e-8a89-4ecd-9dd9-2af9a74bc70f
+      - abaf3e32-ede9-4d68-bb25-81651eda1979
+      - 061d46b1-05fa-4988-a860-1504225c4cbb
+      - a86a6678-9513-4c60-b6cc-3f63c4a4ac2a
+      - faaa3edf-ddfc-4061-9883-c7e662830376
+      - 9fea1664-c050-47bd-ab77-a9e6a9382370
+      - 3fd3c2c7-37c3-4f1b-93b0-08c9c5df475e
+      - bca668d1-5431-443d-aabb-3e75c42e4748
+      - d7b3b966-5875-4bea-8f57-e130667f78c9
+      - 741888ac-ffa5-44c4-94b4-976ae9c4f390
+      - e9695f03-2bd0-4009-a251-931ed45ed434
+      - 9c78ba17-b4c7-44bb-b175-67069f58e0a2
+      - dccf497a-61c9-4134-b5ea-6ec68639a084
+      - c5dcc159-8dc8-4a58-adcd-f79880d807e4
+      - 48574586-1a0d-45bd-a354-52097e39cf0d
+      - b44ab376-3c26-458a-9fa9-b89e0c6f4ebe
+      - c7300456-2c96-467d-864d-070c3267c3c3
+      - a1b48c57-aae7-4786-a597-eefbdf4f326f
+      - 8dc34384-cf61-4d47-87cb-d3c37d826acc
+      - 42639afd-186d-4e6a-b92e-2c8f39b35b6b
+      - 4e67beed-869f-4dcf-bd90-7d31821e63ed
+      - 839d6eba-b986-46f2-916b-f85e84b0cd42
+      - c1c3178f-b84f-4fa7-bcfc-dab6dd1df0e5
+      - 1b45c552-f4fa-4ea8-908f-719fdc1e86ab
+      - b100567e-8768-4ccc-90ba-8c7429fd7cc5
+      - 63ece8f8-3904-485b-9db9-b6478e2c41c7
+      - 7a212256-04d6-4740-b0ee-923bcd723556
+      - bc4d5fa4-70c9-4930-ab7f-2762f0c93a7b
+      - ae252d34-5b9b-4421-9c34-51909370131d
+      - a08cbfa1-92b0-4167-b787-d100fa7b430c
+      - a3636ff8-d5cf-4b97-b26a-09f9e393619c
+      - d1d00cde-f39b-48a3-8934-766cba94b9ff
+      - 58abcc9a-10ef-4685-9b67-b7a68733c392
+      - bc639dea-493a-4bac-b2a7-952853715aea
+      - 23352913-4dca-495f-adc4-a952aacf0154
+      - f1377c88-2b4a-41a2-8465-7f32210f8814
+      - 4e36f864-9305-4174-b605-0f60b88c2d55
+      - 4e5d63c2-8b4c-43fa-b7ad-5e5e9cea13a9
+      - 45983d85-7eaa-4db5-ade8-1671f3b2cdb8
+      - 0a6fca91-fd0c-4981-a2ea-044fd5ced380
+      - ec507ebb-bd85-4cc2-8d25-36ed48ace9d4
+      - 93c39538-4e11-4d98-b983-9a79451c728d
+      - 6e5e42a1-8b0c-4308-aec7-533a8fca3fe9
+      - fd657434-21b5-4a4d-a580-b35bdb64a410
+      - 17446685-4cca-4e5d-a681-26b5389afaa9
+      - a7574792-2532-4d0b-976e-cc045ea4260e
+      - c3410dc1-b188-4b79-9277-b4c196fb7dc9
+      - 838d9eff-aeeb-4bd9-a438-3eff6c9ce2ec
+    _themeOrders:
+      _ids:
+      - bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+      - b36af7f1-b85b-4f2b-9e32-299735f59204
+      - 9d921526-9aaa-4f17-b3c0-3433f10a11f6
+      - 3a6105dd-30ce-4ace-9cb4-36693eda77c4
+      - bc6e862d-5c8d-40df-b031-4287f5dc17df
+      - 7b8f57fc-b784-4569-8b21-e302ab0f0c0e
+    _activeThemeId: bf8630a4-ddb4-4ded-a96a-1c2caf28b7b4
+  _gradientPalette:
+    _entries:
+      _keys: []
+      _values: []
+    _themes:
+      _keys:
+      - c0cbb0b7-9aff-4cac-8f29-a1dfa7eeecba
+      _values:
+      - _id: c0cbb0b7-9aff-4cac-8f29-a1dfa7eeecba
+        _name:
+          _value: Default
+    _entryOrders:
+      _ids: []
+    _themeOrders:
+      _ids:
+      - c0cbb0b7-9aff-4cac-8f29-a1dfa7eeecba
+    _activeThemeId: c0cbb0b7-9aff-4cac-8f29-a1dfa7eeecba
+  _characterStylePalette:
+    _entries:
+      _keys: []
+      _values: []
+    _themes:
+      _keys:
+      - 71a8f291-6385-4541-9a2c-74de4165ee6d
+      _values:
+      - _id: 71a8f291-6385-4541-9a2c-74de4165ee6d
+        _name:
+          _value: Default
+    _entryOrders:
+      _ids: []
+    _themeOrders:
+      _ids:
+      - 71a8f291-6385-4541-9a2c-74de4165ee6d
+    _activeThemeId: 71a8f291-6385-4541-9a2c-74de4165ee6d
+  _characterStyleTMPPalette:
+    _entries:
+      _keys: []
+      _values: []
+    _themes:
+      _keys:
+      - 86d3f870-6652-478c-9fb3-7aa694ec7a5f
+      _values:
+      - _id: 86d3f870-6652-478c-9fb3-7aa694ec7a5f
+        _name:
+          _value: Default
+    _entryOrders:
+      _ids: []
+    _themeOrders:
+      _ids:
+      - 86d3f870-6652-478c-9fb3-7aa694ec7a5f
+    _activeThemeId: 86d3f870-6652-478c-9fb3-7aa694ec7a5f
+  _missingEntryErrorLevel: 1

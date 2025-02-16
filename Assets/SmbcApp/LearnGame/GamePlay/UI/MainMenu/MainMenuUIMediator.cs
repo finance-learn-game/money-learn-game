@@ -11,8 +11,6 @@ using Unity.Logging;
 using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityScreenNavigator.Runtime.Core.Modal;
-using UnityScreenNavigator.Runtime.Core.Page;
 using VContainer;
 
 namespace SmbcApp.LearnGame.Gameplay.UI.MainMenu
@@ -23,8 +21,6 @@ namespace SmbcApp.LearnGame.Gameplay.UI.MainMenu
 
         [Inject] internal AuthenticationServiceFacade AuthServiceFacade;
         [Inject] internal ISubscriber<ConnectStatus> ConnectStatusSubscriber;
-        [Inject] internal ModalContainer ModalContainer;
-        [Inject] internal PageContainer PageContainer;
         [Inject] internal ProfileManager ProfileManager;
         [Inject] internal IObjectResolver Resolver;
         [Inject] internal SessionServiceFacade SessionServiceFacade;

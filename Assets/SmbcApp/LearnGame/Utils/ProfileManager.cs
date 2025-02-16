@@ -49,6 +49,17 @@ namespace SmbcApp.LearnGame.Utils
             _disposableBag.Dispose();
         }
 
+        public void SetCurrentProfile(string profileName)
+        {
+            if (!_availableProfiles.Contains(profileName))
+            {
+                Log.Warning("ProfileManager Profile {0} does not exist", profileName);
+                return;
+            }
+
+            _currentProfile.Value = profileName;
+        }
+
         public void CreateProfile(string profileName)
         {
             if (_availableProfiles.Contains(profileName))

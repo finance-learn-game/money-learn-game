@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using MessagePack;
 
 namespace SmbcApp.LearnGame.Data
@@ -14,5 +15,17 @@ namespace SmbcApp.LearnGame.Data
             CurrentProfile = null,
             Profiles = new List<string>()
         };
+
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+
+            builder.Append("{");
+            builder.Append($"{nameof(CurrentProfile)}: {CurrentProfile}");
+            builder.Append($", {nameof(Profiles)}: [{string.Join(", ", Profiles)}]");
+            builder.Append("}");
+
+            return builder.ToString();
+        }
     }
 }

@@ -4,20 +4,23 @@ using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.UIWidgets.Button;
 using UnityEngine;
 using UnityScreenNavigator.Runtime.Core.Modal;
+using VContainer;
+using ScreenNavigatorModal = UnityScreenNavigator.Runtime.Core.Modal.Modal;
 
 namespace SmbcApp.LearnGame.UIWidgets.Modal
 {
-    public sealed class UIModal : MonoBehaviour
+    public class UIModal : ScreenNavigatorModal
     {
         [Required] [SerializeField] private UIButton closeButton;
-        [SerializeField] private ModalContainer modalContainer;
 
-        private void Start()
+        [Inject] internal ModalContainer ModalContainer;
+
+        protected virtual void Start()
         {
-            if (modalContainer == null)
-                modalContainer = ModalContainer.Find("Main");
+            if (ModalContainer == null)
+                ModalContainer = ModalContainer.Find("Main");
             closeButton.OnClick
-                .Subscribe(_ => modalContainer.Pop(true))
+                .Subscribe(_ => ModalContainer.Pop(true))
                 .AddTo(gameObject);
         }
 

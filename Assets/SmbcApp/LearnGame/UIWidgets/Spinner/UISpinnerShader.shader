@@ -162,7 +162,7 @@ Shader "UI/Spinner Shader"
                 //HDR color transparency blend, when it blends with the world's texture.
                 const half alpha_precision = half(0xff);
                 const half inv_alpha_precision = half(1.0 / alpha_precision);
-                IN.color.rgb = lerp(IN.color, _Color2.rgb, _SinTime.w * 0.5 + 0.5);
+                IN.color.rgb = lerp(IN.color.rgb, _Color2.rgb, _SinTime.w * 0.5 + 0.5);
                 IN.color.a = round(IN.color.a * alpha_precision) * inv_alpha_precision;
 
                 // half4 color = IN.color * (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd);

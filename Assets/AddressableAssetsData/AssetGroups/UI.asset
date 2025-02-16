@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: UI
+  m_EditorClassIdentifier: 
+  m_GroupName: UI
+  m_GUID: 05496fb12e23c1a4faa6c25a7f741703
+  m_SerializeEntries:
+  - m_GUID: 29fec5da709dcb642b42670fc86984a5
+    m_Address: Profile Modal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f98ebe68539ac84fb3bf142ac5e59ee
+    m_Address: Create New Profile Modal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70fe9f43b98cfa949b628f6f2e8ccbd2
+    m_Address: Profiles List Item
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a1b007c927fdb5a4da0730615d5f40a8
+    m_Address: Player Progress Item
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9ab8939a391c4b47a0fb835b740b17e
+    m_Address: Loading Progress Tracker
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac18a3ac15dfa2f4ebb024390bc85bef
+    m_Address: Join Session Modal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6282d3d312506643921dbce5444217e
+    m_Address: MainMenu Page
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bc137f6419195fe44871a7f7ea7e3b52
+    m_Address: Profiles List
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d27b1a40eb31d78468ed5f20a842b5ea
+    m_Address: Loading Screen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 0370e0e2358917c428b40bac092a83f5, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 0f3174293af17a1418ead2f34a9ce833, type: 2}
+    - {fileID: 11400000, guid: e34805cf20455414e9ceaa8410548ffe, type: 2}

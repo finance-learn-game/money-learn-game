@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 using UnityScreenNavigator.Runtime.Core.Modal;
 using UnityScreenNavigator.Runtime.Core.Page;
 using VContainer;
@@ -8,50 +9,50 @@ namespace SmbcApp.LearnGame.Gameplay.UI.Common
 {
     public class UIEntryPoint : LifetimeScope
     {
-        [SerializeField] private PageRef initialPage;
+        [SerializeField] [Required] private PageRef initialPage;
+        [SerializeField] [Required] private ModalContainer modalContainer;
+        [SerializeField] [Required] private PageContainer pageContainer;
 
         private ModalCallbackReceiver _modalCallbackReceiver;
-        private ModalContainer _modalContainer;
         private PageCallbackReceiver _pageCallbackReceiver;
-        private PageContainer _pageContainer;
 
         private void Start()
         {
             _modalCallbackReceiver = new ModalCallbackReceiver(Container);
             _pageCallbackReceiver = new PageCallbackReceiver(Container);
 
-            _pageContainer.AddCallbackReceiver(_pageCallbackReceiver);
-            _modalContainer.AddCallbackReceiver(_modalCallbackReceiver);
+            pageContainer.AddCallbackReceiver(_pageCallbackReceiver);
+            modalContainer.AddCallbackReceiver(_modalCallbackReceiver);
 
 #if UNITY_EDITOR
-            for (var i = 0; i < _pageContainer.transform.childCount; i++)
+            for (var i = 0; i < pageContainer.transform.childCount; i++)
             {
-                var child = _pageContainer.transform.GetChild(i);
+                var child = pageContainer.transform.GetChild(i);
                 child.gameObject.SetActive(false);
             }
 
-            for (var i = 0; i < _modalContainer.transform.childCount; i++)
+            for (var i = 0; i < modalContainer.transform.childCount; i++)
             {
-                var child = _modalContainer.transform.GetChild(i);
+                var child = modalContainer.transform.GetChild(i);
                 child.gameObject.SetActive(false);
             }
 #endif
 
-            if (initialPage != null) _pageContainer.Push(initialPage.AssetGUID, false);
+            if (initialPage != null) pageContainer.Push(initialPage.AssetGUID, false);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
 
-            _pageContainer.RemoveCallbackReceiver(_pageCallbackReceiver);
-            _modalContainer.RemoveCallbackReceiver(_modalCallbackReceiver);
+            pageContainer.RemoveCallbackReceiver(_pageCallbackReceiver);
+            modalContainer.RemoveCallbackReceiver(_modalCallbackReceiver);
         }
 
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterComponent(_pageContainer = PageContainer.Find("Main"));
-            builder.RegisterComponent(_modalContainer = ModalContainer.Find("Main"));
+            builder.RegisterComponent(pageContainer);
+            builder.RegisterComponent(modalContainer);
         }
 
         private sealed class ModalCallbackReceiver : IModalContainerCallbackReceiver
