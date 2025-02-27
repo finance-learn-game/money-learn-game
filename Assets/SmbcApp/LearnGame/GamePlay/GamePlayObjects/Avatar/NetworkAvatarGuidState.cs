@@ -4,28 +4,37 @@ using SmbcApp.LearnGame.GamePlay.Configuration;
 using SmbcApp.LearnGame.Infrastructure;
 using Unity.Logging;
 using Unity.Netcode;
+using UnityEditor;
 using UnityEngine;
 
 namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects.Avatar
 {
     internal sealed class NetworkAvatarGuidState : NetworkBehaviour
     {
-        [ReadOnly] public NetworkVariable<NetworkGuid> avatarGuid = new();
         [SerializeField] [Required] private AvatarRegistry avatarRegistry;
 
+        [NonSerialized] public readonly NetworkVariable<NetworkGuid> AvatarGuid = new();
         private Configuration.Avatar _avatar;
 
         public Configuration.Avatar GetRegisteredAvatar()
         {
             if (_avatar == null)
-                RegisterAvatar(avatarGuid.Value.ToGuid());
+                RegisterAvatar(AvatarGuid.Value.ToGuid());
 
             return _avatar;
         }
 
         public void SetRandomAvatar()
         {
-            avatarGuid.Value = avatarRegistry.GetRandomAvatar().Guid.ToNetworkGuid();
+            var avatar = avatarRegistry.GetRandomAvatar();
+            if (avatar == null)
+            {
+                Log.Error("Avatar not found!");
+                return;
+            }
+
+            AvatarGuid.Value = avatar.Guid.ToNetworkGuid();
+            Log.Info("Random avatar set: {0}", AvatarGuid.Value);
         }
 
         private void RegisterAvatar(Guid guid)
@@ -36,4 +45,18 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects.Avatar
             if (!avatarRegistry.TryGetAvatar(guid, out _avatar)) Log.Error("Avatar not found!");
         }
     }
+
+#if UNITY_EDITOR
+    [CustomEditor(typeof(NetworkAvatarGuidState))]
+    internal class NetworkAvatarGuidStateEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+
+            var networkAvatarGuidState = (NetworkAvatarGuidState)target;
+            EditorGUILayout.LabelField("Avatar Guid", networkAvatarGuidState.AvatarGuid.Value.ToGuid().ToString());
+        }
+    }
+#endif
 }

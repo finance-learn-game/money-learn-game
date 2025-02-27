@@ -34,9 +34,9 @@ namespace SmbcApp.LearnGame.UIWidgets.ScrollView
             var targetItem = _items.Find(v => v.Content == item);
             if (targetItem != null)
             {
-                Destroy(targetItem.Content);
+                Destroy(targetItem.Content.gameObject);
                 if (targetItem.Divider != null)
-                    Destroy(targetItem.Divider);
+                    Destroy(targetItem.Divider.gameObject);
                 _items.Remove(targetItem);
             }
             else

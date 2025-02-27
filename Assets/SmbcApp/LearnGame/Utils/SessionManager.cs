@@ -153,6 +153,12 @@ namespace SmbcApp.LearnGame.Utils
             return null;
         }
 
+        public bool HasPlayerData(ulong clientId)
+        {
+            return _clientIDToPlayerId.TryGetValue(clientId, out var playerId)
+                   && _clientData.ContainsKey(playerId);
+        }
+
         /// <summary>
         /// </summary>
         /// <param name="playerId"> Player ID of the client whose data is requested</param>
@@ -163,6 +169,11 @@ namespace SmbcApp.LearnGame.Utils
 
             Log.Info("No PlayerData of matching player ID found: {0}", playerId);
             return null;
+        }
+
+        public bool HasPlayerData(string playerId)
+        {
+            return _clientData.ContainsKey(playerId);
         }
 
         /// <summary>

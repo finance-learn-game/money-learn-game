@@ -19,7 +19,19 @@ namespace SmbcApp.LearnGame.Data
         private const string SaveDataFileName = "SaveData.bin";
 
         private readonly ReactiveProperty<GameSaveData> _saveData = new();
+#if UNITY_EDITOR
+        private static string _saveDataPath;
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void InitializeSaveDataPath()
+        {
+            _saveDataPath = Path.Combine(Directory.GetCurrentDirectory(), SaveDataFileName);
+            Debug.Log($"[SaveDataManager] Save data path: {_saveDataPath}");
+        }
+
+#else
         private readonly string _saveDataPath = Path.Combine(Application.persistentDataPath, SaveDataFileName);
+#endif
         public bool IsDirty { get; private set; }
 
         public ReadOnlyReactiveProperty<GameSaveData> SaveData => _saveData;

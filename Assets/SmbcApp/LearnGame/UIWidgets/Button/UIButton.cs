@@ -1,4 +1,5 @@
 ﻿using R3;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SmbcApp.LearnGame.UIWidgets.Button
@@ -6,7 +7,7 @@ namespace SmbcApp.LearnGame.UIWidgets.Button
     [RequireComponent(typeof(UnityEngine.UI.Button))]
     public sealed class UIButton : MonoBehaviour
     {
-        [SerializeField] private UnityEngine.UI.Button button;
+        [SerializeField] [Required] private UnityEngine.UI.Button button;
 
         private readonly Subject<Unit> _onClick = new();
         public Observable<Unit> OnClick => _onClick;

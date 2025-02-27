@@ -6,9 +6,8 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
     internal enum GameState
     {
         MainMenu,
-        Lobby,
-        InGame,
-        EndGame
+        CharSelect,
+        Game
     }
 
     internal abstract class GameStateBehaviour : LifetimeScope

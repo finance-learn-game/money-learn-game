@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: UI
   m_GUID: 05496fb12e23c1a4faa6c25a7f741703
   m_SerializeEntries:
+  - m_GUID: 219c91dbbca4e614a85b105a5bd1116a
+    m_Address: Avatar Select Page
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 29fec5da709dcb642b42670fc86984a5
     m_Address: Profile Modal
     m_ReadOnly: 0
@@ -40,6 +45,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab3e0a4078ac49647b1a4d18afa04bbd
+    m_Address: Avatar List Variant
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ac18a3ac15dfa2f4ebb024390bc85bef
     m_Address: Join Session Modal
     m_ReadOnly: 0
@@ -55,8 +65,23 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d0c943020678941478ec5dfcdfa573b5
+    m_Address: Player List Item
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d27b1a40eb31d78468ed5f20a842b5ea
     m_Address: Loading Screen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e99c66f20df4c324299f5fa72d069d12
+    m_Address: Avatar List Item
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f430eccec515744458adf89a3b7a55d4
+    m_Address: Player List
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

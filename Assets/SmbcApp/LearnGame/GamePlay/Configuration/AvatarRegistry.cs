@@ -13,7 +13,7 @@ namespace SmbcApp.LearnGame.GamePlay.Configuration
         public bool TryGetAvatar(Guid guid, out Avatar avatar)
         {
             avatar = avatars.FirstOrDefault(v => v.Guid == guid);
-            return false;
+            return avatar != null;
         }
 
         public Avatar GetRandomAvatar()

@@ -1,13 +1,14 @@
 ﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SmbcApp.LearnGame.Infrastructure
 {
     public abstract class GuidScriptableObject : ScriptableObject
     {
-        [SerializeField] private byte[] guid;
+        [SerializeField] [ReadOnly] private byte[] guid;
 
-        public Guid Guid => new(guid);
+        [ShowInInspector] [ReadOnly] public Guid Guid => new(guid);
 
         private void OnValidate()
         {

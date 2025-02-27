@@ -60,7 +60,8 @@ namespace SmbcApp.LearnGame.Gameplay.UI.MainMenu
             profilesList.Clear();
             foreach (var profile in ProfileManager.AvailableProfiles)
             {
-                var item = await profileListItemPrefab.InstantiateAsync();
+                var itemGo = await profileListItemPrefab.InstantiateAsync();
+                itemGo.TryGetComponent(out ProfileListItemView item);
                 item.ProfileName = profile;
                 item.OnSelect
                     .Subscribe(_ => ProfileManager.SetCurrentProfile(profile))

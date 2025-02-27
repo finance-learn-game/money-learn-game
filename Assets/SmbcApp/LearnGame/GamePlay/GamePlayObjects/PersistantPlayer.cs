@@ -1,4 +1,6 @@
-﻿using SmbcApp.LearnGame.ConnectionManagement;
+﻿using System;
+using Sirenix.OdinInspector;
+using SmbcApp.LearnGame.ConnectionManagement;
 using SmbcApp.LearnGame.GamePlay.GamePlayObjects.Avatar;
 using SmbcApp.LearnGame.GamePlay.GamePlayObjects.RuntimeDataContainers;
 using SmbcApp.LearnGame.Utils;
@@ -14,9 +16,10 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects
     [RequireComponent(typeof(NetworkObject))]
     internal sealed class PersistantPlayer : NetworkBehaviour
     {
-        [SerializeField] private PersistantPlayerRuntimeCollection runtimeCollection;
-        [SerializeField] private NetworkAvatarGuidState networkAvatarGuidState;
-        [Sirenix.OdinInspector.ReadOnly] public NetworkVariable<FixedPlayerName> Name { get; } = new();
+        [SerializeField] [Required] private PersistantPlayerRuntimeCollection runtimeCollection;
+        [SerializeField] [Required] private NetworkAvatarGuidState networkAvatarGuidState;
+        public NetworkVariable<FixedPlayerName> Name { get; } = new();
+        public NetworkAvatarGuidState AvatarGuidState => networkAvatarGuidState;
 
         public override void OnDestroy()
         {
@@ -30,6 +33,11 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects
 
             runtimeCollection.AddPlayer(this);
             if (!IsServer) return;
+            if (OwnerClientId == NetworkManager.ServerClientId)
+            {
+                Name.Value = "Server";
+                return;
+            }
 
             var sessionPlayerData = SessionManager<SessionPlayerData>.Instance.GetPlayerData(OwnerClientId);
             if (!sessionPlayerData.HasValue) return;
@@ -38,12 +46,12 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects
             Name.Value = playerData.PlayerName;
             if (playerData.HasCharacterSpawned)
             {
-                networkAvatarGuidState.avatarGuid.Value = playerData.AvatarNetworkGuid;
+                networkAvatarGuidState.AvatarGuid.Value = playerData.AvatarNetworkGuid;
             }
             else
             {
                 networkAvatarGuidState.SetRandomAvatar();
-                playerData.AvatarNetworkGuid = networkAvatarGuidState.avatarGuid.Value;
+                playerData.AvatarNetworkGuid = networkAvatarGuidState.AvatarGuid.Value;
                 SessionManager<SessionPlayerData>.Instance.SetPlayerData(OwnerClientId, playerData);
             }
         }
@@ -63,12 +71,12 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects
 
             var playerData = sessionPlayerData.Value;
             playerData.PlayerName = Name.Value;
-            playerData.AvatarNetworkGuid = networkAvatarGuidState.avatarGuid.Value;
+            playerData.AvatarNetworkGuid = networkAvatarGuidState.AvatarGuid.Value;
             SessionManager<SessionPlayerData>.Instance.SetPlayerData(OwnerClientId, playerData);
         }
     }
 
-    public struct FixedPlayerName : INetworkSerializable
+    public struct FixedPlayerName : INetworkSerializable, IEquatable<FixedPlayerName>
     {
         private FixedString32Bytes _name;
 
@@ -90,6 +98,21 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects
         public static implicit operator FixedPlayerName(string name)
         {
             return new FixedPlayerName { _name = new FixedString32Bytes(name) };
+        }
+
+        public bool Equals(FixedPlayerName other)
+        {
+            return _name.Equals(other._name);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is FixedPlayerName other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return _name.GetHashCode();
         }
     }
 }

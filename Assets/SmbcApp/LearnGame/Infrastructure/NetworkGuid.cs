@@ -12,6 +12,11 @@ namespace SmbcApp.LearnGame.Infrastructure
             FirstHalf = firstHalf;
             SecondHalf = secondHalf;
         }
+
+        public override string ToString()
+        {
+            return $"[{FirstHalf}, {SecondHalf}]";
+        }
     }
 
     public static class NetworkGuidExtensions
@@ -24,11 +29,6 @@ namespace SmbcApp.LearnGame.Infrastructure
                 BitConverter.ToUInt64(bytes, 8)
             );
             return networkId;
-        }
-
-        public static NetworkGuid ToNetworkGuid(this string value)
-        {
-            return Guid.Parse(value).ToNetworkGuid();
         }
 
         public static Guid ToGuid(this NetworkGuid value)
