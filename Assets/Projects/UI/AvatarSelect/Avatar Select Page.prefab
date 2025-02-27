@@ -619,8 +619,47 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8189882908614272426, guid: ab3e0a4078ac49647b1a4d18afa04bbd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3349158381556982292}
   m_SourcePrefab: {fileID: 100100000, guid: ab3e0a4078ac49647b1a4d18afa04bbd, type: 3}
+--- !u!1 &1732779797993390602 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8189882908614272426, guid: ab3e0a4078ac49647b1a4d18afa04bbd, type: 3}
+  m_PrefabInstance: {fileID: 7612311621962147744}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3349158381556982292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732779797993390602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57c06c88dd3847daab7802cf6f12e7e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 4906114134839475809}
+  avatarListItemViewPrefab:
+    m_AssetGUID: e99c66f20df4c324299f5fa72d069d12
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 1
+  avatarRegistry: {fileID: 11400000, guid: 06184a1f2c9d3834c9a602587ebb25cd, type: 2}
+--- !u!114 &4906114134839475809 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3292793068117334465, guid: ab3e0a4078ac49647b1a4d18afa04bbd, type: 3}
+  m_PrefabInstance: {fileID: 7612311621962147744}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732779797993390602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc8e1008d8d344ebb8baba764ad08b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &9171232724816959472 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1649054706724941904, guid: ab3e0a4078ac49647b1a4d18afa04bbd, type: 3}

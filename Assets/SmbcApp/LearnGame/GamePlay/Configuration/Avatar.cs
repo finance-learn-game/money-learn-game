@@ -1,4 +1,6 @@
-﻿using SmbcApp.LearnGame.Infrastructure;
+﻿using Sirenix.OdinInspector;
+using SmbcApp.LearnGame.GamePlay.GamePlayObjects.Avatar;
+using SmbcApp.LearnGame.Infrastructure;
 using UnityEngine;
 
 namespace SmbcApp.LearnGame.GamePlay.Configuration
@@ -6,10 +8,14 @@ namespace SmbcApp.LearnGame.GamePlay.Configuration
     [CreateAssetMenu(fileName = "Avatar", menuName = "Configuration/Avatar")]
     internal sealed class Avatar : GuidScriptableObject
     {
-        [SerializeField] private JobClass jobClass;
-        [SerializeField] private Sprite avatarImage;
+        [SerializeField] [Required] private string avatarName;
+        [SerializeField] [Required] private string description;
+        [SerializeField] [Required] private JobType jobType;
+        [SerializeField] [Required] private Sprite avatarImage;
 
-        public JobClass JobClass => jobClass;
+        public string AvatarName => avatarName;
+        public string Description => description;
+        public JobType JobType => jobType;
         public Sprite AvatarImage => avatarImage;
     }
 }

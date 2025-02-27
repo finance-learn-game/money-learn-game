@@ -8,7 +8,11 @@ namespace SmbcApp.LearnGame.Infrastructure
     {
         [SerializeField] [ReadOnly] private byte[] guid;
 
-        [ShowInInspector] [ReadOnly] public Guid Guid => new(guid);
+        [ShowInInspector]
+        [ReadOnly]
+        public Guid Guid => guid != null && guid.Length != 0
+            ? new Guid(guid)
+            : Guid.Empty;
 
         private void OnValidate()
         {
