@@ -685,10 +685,11 @@ GameObject:
   - component: {fileID: 1558009019}
   - component: {fileID: 1558009020}
   - component: {fileID: 1558009022}
-  - component: {fileID: 1558009021}
   - component: {fileID: 1558009023}
+  - component: {fileID: 1558009021}
+  - component: {fileID: 1558009024}
   m_Layer: 0
-  m_Name: Client Avatar Select State
+  m_Name: Avatar Select State
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -750,7 +751,6 @@ MonoBehaviour:
     TypeName: SmbcApp.LearnGame.ApplicationLifecycle.ApplicationController
   autoRun: 1
   autoInjectGameObjects: []
-  netCodeHooks: {fileID: 1558009022}
   networkAvatarSelection: {fileID: 1558009023}
 --- !u!114 &1558009022
 MonoBehaviour:
@@ -778,6 +778,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &1558009024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558009018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea8fba2d9e9b455c9d735683d97c9431, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: SmbcApp.LearnGame.ApplicationLifecycle.ApplicationController
+  autoRun: 1
+  autoInjectGameObjects: []
+  netCodeHooks: {fileID: 1558009022}
 --- !u!1 &1636794278
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,6 +870,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 850210720727141759, guid: 219c91dbbca4e614a85b105a5bd1116a, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921906523913541585, guid: 219c91dbbca4e614a85b105a5bd1116a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921906523913541585, guid: 219c91dbbca4e614a85b105a5bd1116a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921906523913541585, guid: 219c91dbbca4e614a85b105a5bd1116a, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5804181028435582404, guid: 219c91dbbca4e614a85b105a5bd1116a, type: 3}

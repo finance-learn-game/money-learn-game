@@ -527,6 +527,7 @@ MonoBehaviour:
     _popExitAnimations: []
   sessionCodeView: {fileID: 7937740697623765078}
   playerListView: {fileID: 7604926454976487274}
+  avatarListView: {fileID: 3349158381556982292}
 --- !u!1001 &3328258437225917140
 PrefabInstance:
   m_ObjectHideFlags: 0

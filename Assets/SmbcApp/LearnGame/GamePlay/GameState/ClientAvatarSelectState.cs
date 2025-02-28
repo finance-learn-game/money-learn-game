@@ -1,19 +1,21 @@
 ﻿using Sirenix.OdinInspector;
-using SmbcApp.LearnGame.Utils;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 namespace SmbcApp.LearnGame.Gameplay.GameState
 {
-    [RequireComponent(typeof(NetCodeHooks))]
     internal sealed class ClientAvatarSelectState : GameStateBehaviour
     {
-        [SerializeField] [Required] private NetCodeHooks netCodeHooks;
         [SerializeField] [Required] private NetworkAvatarSelection networkAvatarSelection;
+
         public override GameState ActiveState => GameState.AvatarSelect;
 
-
-        public void OnPlayerClickedReady()
+        protected override void Configure(IContainerBuilder builder)
         {
+            base.Configure(builder);
+
+            builder.RegisterComponent(networkAvatarSelection);
         }
     }
 }

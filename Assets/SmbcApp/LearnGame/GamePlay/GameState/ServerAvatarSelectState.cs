@@ -5,6 +5,7 @@ using SmbcApp.LearnGame.ConnectionManagement;
 using SmbcApp.LearnGame.GamePlay.GamePlayObjects;
 using SmbcApp.LearnGame.Infrastructure;
 using SmbcApp.LearnGame.Utils;
+using Unity.Logging;
 using Unity.Netcode;
 using UnityEngine;
 using VContainer;
@@ -44,8 +45,12 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
         private void CloseAvatarSelectIfReady()
         {
             foreach (var playerInfo in _networkAvatarSelection.SessionPlayers)
+            {
+                // サーバーは除外
+                if (playerInfo.ClientId == NetworkManager.ServerClientId) continue;
                 if (!playerInfo.IsReady)
                     return;
+            }
 
             _networkAvatarSelection.IsAvatarSelectFinished.Value = true;
             SaveAvatarSelectResult();
@@ -87,7 +92,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
 
             _networkAvatarSelection.SessionPlayers.Add(
                 new NetworkAvatarSelection.SessionPlayerState(
-                    clientId, false, default, playerData.PlayerNumber
+                    clientId, playerData.PlayerName, false, playerData.AvatarNetworkGuid, playerData.PlayerNumber
                 )
             );
             SessionManager<SessionPlayerData>.Instance.SetPlayerData(clientId, playerData);
@@ -112,14 +117,24 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
         /// <remarks>SessionPlayersの値を詰め替えて更新を通知</remarks>
         /// <param name="state">変化後の状態</param>
         /// <exception cref="InvalidOperationException">プレイヤー番号が見つからないとき</exception>
-        private void OnClientChangeState(NetworkAvatarSelection.SessionPlayerState state)
+        private void OnClientChangeState(NetworkAvatarSelection.ChangeStateParams state)
         {
+            if (state.ClientId == NetworkManager.ServerClientId) return;
+
             var idx = FindSessionPlayerIdx(state.ClientId);
             if (idx == -1) throw new InvalidOperationException("Client not found in session players");
             if (_networkAvatarSelection.IsAvatarSelectFinished.Value) return;
-            if (state.AvatarGuid.ToGuid() == Guid.Empty) state.IsReady = false;
+            if (state.Avatar.ToGuid() == Guid.Empty) state = state with { IsReady = false };
 
-            _networkAvatarSelection.SessionPlayers[idx] = state;
+            // 更新して通知
+            var prev = _networkAvatarSelection.SessionPlayers[idx];
+            prev.AvatarGuid = state.Avatar;
+            prev.IsReady = state.IsReady;
+            _networkAvatarSelection.SessionPlayers[idx] = prev;
+
+            Log.Info("Client {0} changed state to {1} and avatar {2}", state.ClientId, state.IsReady,
+                state.Avatar.ToString());
+
             CloseAvatarSelectIfReady();
         }
 

@@ -9,6 +9,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
     {
         [SerializeField] [Required] private SessionCodeView sessionCodeView;
         [SerializeField] [Required] private PlayerListView playerListView;
+        [SerializeField] [Required] private AvatarListView avatarListView;
 
         [Inject] internal IObjectResolver Resolver;
 
@@ -16,6 +17,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
         {
             Resolver.Inject(sessionCodeView);
             Resolver.Inject(playerListView);
+            Resolver.Inject(avatarListView);
         }
     }
 }

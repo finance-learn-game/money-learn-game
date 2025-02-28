@@ -1,5 +1,6 @@
 ﻿using System;
 using R3;
+using SmbcApp.LearnGame.GamePlay.GamePlayObjects;
 using SmbcApp.LearnGame.Infrastructure;
 using Unity.Netcode;
 
@@ -10,7 +11,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
     /// </summary>
     internal sealed class NetworkAvatarSelection : NetworkBehaviour
     {
-        private readonly Subject<SessionPlayerState> _onStateChange = new();
+        private readonly Subject<ChangeStateParams> _onStateChange = new();
         public NetworkList<SessionPlayerState> SessionPlayers { get; private set; }
 
         /// <summary>
@@ -21,7 +22,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
         /// <summary>
         ///     準備が完了したクライアントを通知する
         /// </summary>
-        public Observable<SessionPlayerState> OnStateChange => _onStateChange;
+        public Observable<ChangeStateParams> OnStateChange => _onStateChange;
 
         private void Awake()
         {
@@ -37,7 +38,19 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
         [Rpc(SendTo.Server, RequireOwnership = false)]
         public void ServerChangeStateRpc(ulong clientId, bool isReady, NetworkGuid avatar)
         {
-            _onStateChange.OnNext(new SessionPlayerState(clientId, isReady, avatar));
+            _onStateChange.OnNext(new ChangeStateParams
+            {
+                ClientId = clientId,
+                IsReady = isReady,
+                Avatar = avatar
+            });
+        }
+
+        public record ChangeStateParams
+        {
+            public ulong ClientId { get; init; }
+            public bool IsReady { get; init; }
+            public NetworkGuid Avatar { get; init; }
         }
 
         /// <summary>
@@ -49,9 +62,11 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
             public bool IsReady;
             public NetworkGuid AvatarGuid;
             public int PlayerNumber;
+            public FixedPlayerName PlayerName;
 
             public SessionPlayerState(
                 ulong clientId,
+                in FixedPlayerName playerName,
                 bool isReady = false,
                 NetworkGuid avatarGuid = default,
                 int playerNumber = -1
@@ -61,6 +76,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
                 IsReady = isReady;
                 AvatarGuid = avatarGuid;
                 PlayerNumber = playerNumber;
+                PlayerName = playerName;
             }
 
             public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
@@ -69,6 +85,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
                 serializer.SerializeValue(ref IsReady);
                 serializer.SerializeValue(ref AvatarGuid);
                 serializer.SerializeValue(ref PlayerNumber);
+                serializer.SerializeValue(ref PlayerName);
             }
 
             public bool Equals(SessionPlayerState other)
@@ -76,7 +93,8 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
                 return ClientId == other.ClientId &&
                        IsReady == other.IsReady &&
                        AvatarGuid == other.AvatarGuid &&
-                       PlayerNumber == other.PlayerNumber;
+                       PlayerNumber == other.PlayerNumber &&
+                       PlayerName.Equals(other.PlayerName);
             }
         }
     }

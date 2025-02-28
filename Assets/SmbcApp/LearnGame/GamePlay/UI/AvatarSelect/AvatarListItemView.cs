@@ -1,5 +1,7 @@
 ﻿using System;
+using R3;
 using Sirenix.OdinInspector;
+using SmbcApp.LearnGame.UIWidgets.Button;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +14,15 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
         [SerializeField] [Required] private Image avatarImage;
         [SerializeField] [Required] private TMP_Text avatarNameText;
         [SerializeField] [Required] private TMP_Text descriptionText;
+        [SerializeField] [Required] private UIButton selectButton;
+
+        public Observable<Unit> OnSelect => selectButton.OnClick;
+
+        public bool Interactable
+        {
+            get => selectButton.IsInteractable;
+            set => selectButton.IsInteractable = value;
+        }
 
         public void Configure(Avatar avatar)
         {

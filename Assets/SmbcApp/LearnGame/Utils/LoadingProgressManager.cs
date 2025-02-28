@@ -120,7 +120,8 @@ namespace SmbcApp.LearnGame.Utils
             if (!IsServer) return;
             if (!ProgressTrackers.TryGetValue(clientId, out var tracker)) return;
 
-            tracker.NetworkObject.Despawn();
+            if (tracker.IsSpawned)
+                tracker.NetworkObject.Despawn();
             ProgressTrackers.Remove(clientId);
             ClientUpdateTrackersRpc();
         }
