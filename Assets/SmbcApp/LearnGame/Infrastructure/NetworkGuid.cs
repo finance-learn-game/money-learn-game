@@ -3,7 +3,7 @@ using Unity.Netcode;
 
 namespace SmbcApp.LearnGame.Infrastructure
 {
-    public readonly struct NetworkGuid : INetworkSerializeByMemcpy
+    public readonly struct NetworkGuid : INetworkSerializeByMemcpy, IEquatable<NetworkGuid>
     {
         public readonly ulong FirstHalf, SecondHalf;
 
@@ -16,6 +16,31 @@ namespace SmbcApp.LearnGame.Infrastructure
         public override string ToString()
         {
             return $"[{FirstHalf}, {SecondHalf}]";
+        }
+
+        public static bool operator ==(NetworkGuid a, NetworkGuid b)
+        {
+            return a.FirstHalf == b.FirstHalf && a.SecondHalf == b.SecondHalf;
+        }
+
+        public static bool operator !=(NetworkGuid a, NetworkGuid b)
+        {
+            return !(a == b);
+        }
+
+        public bool Equals(NetworkGuid other)
+        {
+            return FirstHalf == other.FirstHalf && SecondHalf == other.SecondHalf;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is NetworkGuid other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(FirstHalf, SecondHalf);
         }
     }
 

@@ -778,8 +778,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  avatarConfiguration:
-  - {fileID: 11400000, guid: 9173f7ee0bb2f2e4d8d59c5c068a373f, type: 2}
 --- !u!1 &1636794278
 GameObject:
   m_ObjectHideFlags: 0

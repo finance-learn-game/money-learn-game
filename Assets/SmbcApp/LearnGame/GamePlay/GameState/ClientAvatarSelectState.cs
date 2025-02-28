@@ -9,7 +9,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
     {
         [SerializeField] [Required] private NetCodeHooks netCodeHooks;
         [SerializeField] [Required] private NetworkAvatarSelection networkAvatarSelection;
-        public override GameState ActiveState => GameState.CharSelect;
+        public override GameState ActiveState => GameState.AvatarSelect;
 
 
         public void OnPlayerClickedReady()

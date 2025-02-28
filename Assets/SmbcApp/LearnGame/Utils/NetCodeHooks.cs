@@ -7,6 +7,7 @@ namespace SmbcApp.LearnGame.Utils
     {
         private readonly Subject<Unit> _onNetworkDespawnHook = new();
         private readonly Subject<Unit> _onNetworkSpawnHook = new();
+        public DisposableBag NetworkDisposable;
 
         public Observable<Unit> OnNetworkSpawnHook => _onNetworkSpawnHook;
         public Observable<Unit> OnNetworkDespawnHook => _onNetworkDespawnHook;
@@ -14,6 +15,7 @@ namespace SmbcApp.LearnGame.Utils
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
+            NetworkDisposable = new DisposableBag();
             _onNetworkSpawnHook.OnNext(Unit.Default);
         }
 
@@ -21,6 +23,7 @@ namespace SmbcApp.LearnGame.Utils
         {
             base.OnNetworkDespawn();
             _onNetworkDespawnHook.OnNext(Unit.Default);
+            NetworkDisposable.Dispose();
         }
     }
 }

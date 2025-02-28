@@ -1,11 +1,7 @@
 ﻿using System;
 using R3;
-using SmbcApp.LearnGame.GamePlay.GamePlayObjects;
+using SmbcApp.LearnGame.Infrastructure;
 using Unity.Netcode;
-using UnityEngine;
-using UnityEngine.InputSystem.Utilities;
-using Avatar = SmbcApp.LearnGame.GamePlay.Configuration.Avatar;
-using SeatChangeEvent = System.ValueTuple<ulong, int, bool>;
 
 namespace SmbcApp.LearnGame.Gameplay.GameState
 {
@@ -14,94 +10,73 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
     /// </summary>
     internal sealed class NetworkAvatarSelection : NetworkBehaviour
     {
-        public enum SeatState : byte
-        {
-            Inactive,
-            Active,
-            LockedIn
-        }
-
-        [SerializeField] private Avatar[] avatarConfiguration;
-
-        private readonly Subject<SeatChangeEvent> _onPlayerSeatChange = new();
-
+        private readonly Subject<SessionPlayerState> _onStateChange = new();
         public NetworkList<SessionPlayerState> SessionPlayers { get; private set; }
-        public ReadOnlyArray<Avatar> AvatarConfiguration => avatarConfiguration;
 
         /// <summary>
-        ///     全員のアバター選択が完了し、ゲームを開始したとき
+        ///     全員のアバター選択が完了し、フラグがReadyになったかどうか
         /// </summary>
         public NetworkVariable<bool> IsAvatarSelectFinished { get; } = new();
 
-        public Observable<SeatChangeEvent> OnPlayerSeatChange => _onPlayerSeatChange;
+        /// <summary>
+        ///     準備が完了したクライアントを通知する
+        /// </summary>
+        public Observable<SessionPlayerState> OnStateChange => _onStateChange;
 
         private void Awake()
         {
             SessionPlayers = new NetworkList<SessionPlayerState>();
         }
 
+        /// <summary>
+        ///     サーバーに状態の変化を通知するRPC
+        /// </summary>
+        /// <param name="clientId">準備状態を通知するクライアントID</param>
+        /// <param name="isReady">準備状態</param>
+        /// <param name="avatar">アバター</param>
         [Rpc(SendTo.Server, RequireOwnership = false)]
-        public void ServerChangeSeatRpc(ulong clientId, int seadIdx, bool lockedIn)
+        public void ServerChangeStateRpc(ulong clientId, bool isReady, NetworkGuid avatar)
         {
-            _onPlayerSeatChange.OnNext((clientId, seadIdx, lockedIn));
+            _onStateChange.OnNext(new SessionPlayerState(clientId, isReady, avatar));
         }
 
         /// <summary>
-        ///     セッション内のプレイヤーと、プレイヤーが選んだアバターを表すデータ
+        ///     セッション内のプレイヤーと、プレイヤーの準備状態を表す構造体
         /// </summary>
         public struct SessionPlayerState : INetworkSerializable, IEquatable<SessionPlayerState>
         {
             public ulong ClientId;
+            public bool IsReady;
+            public NetworkGuid AvatarGuid;
             public int PlayerNumber;
-            public int SeatIdx;
-            public float LastChangeTime;
-            public SeatState SeatState;
-
-            private FixedPlayerName _playerName;
 
             public SessionPlayerState(
                 ulong clientId,
-                string name,
-                int playerNumber,
-                SeatState state,
-                int seatIdx = -1,
-                float lastChangeTime = 0
+                bool isReady = false,
+                NetworkGuid avatarGuid = default,
+                int playerNumber = -1
             )
             {
                 ClientId = clientId;
+                IsReady = isReady;
+                AvatarGuid = avatarGuid;
                 PlayerNumber = playerNumber;
-                SeatState = state;
-                SeatIdx = seatIdx;
-                LastChangeTime = lastChangeTime;
-                _playerName = new FixedPlayerName();
-
-                PlayerName = name;
-            }
-
-            public string PlayerName
-            {
-                get => _playerName;
-                private set => _playerName = value;
             }
 
             public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
             {
                 serializer.SerializeValue(ref ClientId);
-                serializer.SerializeValue(ref _playerName);
+                serializer.SerializeValue(ref IsReady);
+                serializer.SerializeValue(ref AvatarGuid);
                 serializer.SerializeValue(ref PlayerNumber);
-                serializer.SerializeValue(ref SeatState);
-                serializer.SerializeValue(ref SeatIdx);
-                serializer.SerializeValue(ref LastChangeTime);
             }
 
             public bool Equals(SessionPlayerState other)
             {
                 return ClientId == other.ClientId &&
-                       _playerName.Equals(other._playerName) &&
-                       PlayerNumber == other.PlayerNumber &&
-                       SeatIdx == other.SeatIdx &&
-                       LastChangeTime.Equals(other.LastChangeTime) &&
-                       SeatState == other.SeatState;
+                       IsReady == other.IsReady &&
+                       AvatarGuid == other.AvatarGuid &&
+                       PlayerNumber == other.PlayerNumber;
             }
         }
     }

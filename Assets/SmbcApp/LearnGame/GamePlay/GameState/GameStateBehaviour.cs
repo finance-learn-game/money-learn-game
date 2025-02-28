@@ -6,7 +6,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
     internal enum GameState
     {
         MainMenu,
-        CharSelect,
+        AvatarSelect,
         Game
     }
 
