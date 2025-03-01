@@ -11,7 +11,7 @@ namespace SmbcApp.LearnGame.ApplicationLifecycle
     /// <summary>
     ///     アプリケーション内のInitializeOnxxx処理をまとめる
     /// </summary>
-    public static class InitializeOnLoadApp
+    internal static class InitializeOnLoadApp
     {
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void InitializeOnLoad()
@@ -19,7 +19,8 @@ namespace SmbcApp.LearnGame.ApplicationLifecycle
             ConfigureLogger();
 
 #if UNITY_EDITOR
-            SceneManager.LoadScene(AppScenes.StartUp);
+            if (SceneInitializerEditor.IsLoadStartUp())
+                SceneManager.LoadScene(AppScenes.StartUp);
 #endif
         }
 
@@ -44,7 +45,8 @@ namespace SmbcApp.LearnGame.ApplicationLifecycle
         [InitializeOnEnterPlayMode]
         private static void InitializeOnEnterPlayMode()
         {
-            SetActiveRootGameObjects(false);
+            if (SceneInitializerEditor.IsLoadStartUp())
+                SetActiveRootGameObjects(false);
         }
 
         private static void SetActiveRootGameObjects(bool active)
@@ -59,4 +61,30 @@ namespace SmbcApp.LearnGame.ApplicationLifecycle
         }
 #endif
     }
+
+#if UNITY_EDITOR
+    public static class SceneInitializerEditor
+    {
+        private const string MenuPath = "Tools/Scene Initializer";
+        private const string LoadStartUpItemKey = "SceneInitializerEditor.LoadStartUp";
+
+        [MenuItem(MenuPath)]
+        private static void LoadStartUp()
+        {
+            EditorPrefs.SetBool(LoadStartUpItemKey, !EditorPrefs.GetBool(LoadStartUpItemKey, false));
+        }
+
+        [MenuItem(MenuPath, true)]
+        private static bool LoadStartUpValidate()
+        {
+            Menu.SetChecked(MenuPath, EditorPrefs.GetBool(LoadStartUpItemKey, false));
+            return true;
+        }
+
+        public static bool IsLoadStartUp()
+        {
+            return EditorPrefs.GetBool(LoadStartUpItemKey, false);
+        }
+    }
+#endif
 }
