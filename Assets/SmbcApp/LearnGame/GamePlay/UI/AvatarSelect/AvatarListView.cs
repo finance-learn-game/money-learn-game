@@ -35,9 +35,8 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
             item.OnSelect.Subscribe(_ =>
             {
                 var networkManager = NetworkManager.Singleton;
-                NetworkAvatarSelection.ServerChangeStateRpc(
+                NetworkAvatarSelection.ServerChangeAvatarStateRpc(
                     networkManager.LocalClientId,
-                    false,
                     avatar.Guid.ToNetworkGuid()
                 );
             }).AddTo(item);

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Duplicate Asset Isolation
+  m_EditorClassIdentifier: 
+  m_GroupName: Duplicate Asset Isolation
+  m_GUID: a4afdd4dc89604149bbb786ad46ef830
+  m_SerializeEntries:
+  - m_GUID: 9d7c03d6a7012ae4b9bbe4e646ea95c7
+    m_Address: Assets/SmbcApp/LearnGame/UIWidgets/Icons/researcher_icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f402fb44752aaf440a49b1edf99e5d6a
+    m_Address: Assets/SmbcApp/LearnGame/UIWidgets/Icons/artist_icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 0370e0e2358917c428b40bac092a83f5, type: 2}
+  m_SchemaSet:
+    m_Schemas: []

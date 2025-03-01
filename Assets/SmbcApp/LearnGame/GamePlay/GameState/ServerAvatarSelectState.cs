@@ -5,7 +5,6 @@ using SmbcApp.LearnGame.ConnectionManagement;
 using SmbcApp.LearnGame.GamePlay.GamePlayObjects;
 using SmbcApp.LearnGame.Infrastructure;
 using SmbcApp.LearnGame.Utils;
-using Unity.Logging;
 using Unity.Netcode;
 using UnityEngine;
 using VContainer;
@@ -124,16 +123,14 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
             var idx = FindSessionPlayerIdx(state.ClientId);
             if (idx == -1) throw new InvalidOperationException("Client not found in session players");
             if (_networkAvatarSelection.IsAvatarSelectFinished.Value) return;
-            if (state.Avatar.ToGuid() == Guid.Empty) state = state with { IsReady = false };
+            if (state.Avatar != null && state.Avatar.Value.ToGuid() == Guid.Empty)
+                state = state with { IsReady = false };
 
             // 更新して通知
             var prev = _networkAvatarSelection.SessionPlayers[idx];
-            prev.AvatarGuid = state.Avatar;
-            prev.IsReady = state.IsReady;
+            prev.AvatarGuid = state.Avatar ?? prev.AvatarGuid;
+            prev.IsReady = state.IsReady ?? prev.IsReady;
             _networkAvatarSelection.SessionPlayers[idx] = prev;
-
-            Log.Info("Client {0} changed state to {1} and avatar {2}", state.ClientId, state.IsReady,
-                state.Avatar.ToString());
 
             CloseAvatarSelectIfReady();
         }

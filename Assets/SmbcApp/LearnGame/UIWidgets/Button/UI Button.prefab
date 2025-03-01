@@ -151,6 +151,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 9007753212146195769}
+  colorSynchronizer: {fileID: 2116964992944356923}
+  textColorSynchronizer: {fileID: 2846292224863784701}
+  buttonText: {fileID: 6356780459406322873}
 --- !u!1 &1490544425745747899
 GameObject:
   m_ObjectHideFlags: 0

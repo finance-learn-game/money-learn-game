@@ -486,3 +486,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 1498148304218600986}
+  colorSynchronizer: {fileID: 3619994289758652758}
+  textColorSynchronizer: {fileID: 0}

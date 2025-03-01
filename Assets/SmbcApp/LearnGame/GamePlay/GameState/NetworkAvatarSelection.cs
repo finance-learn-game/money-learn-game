@@ -29,28 +29,33 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
             SessionPlayers = new NetworkList<SessionPlayerState>();
         }
 
-        /// <summary>
-        ///     サーバーに状態の変化を通知するRPC
-        /// </summary>
-        /// <param name="clientId">準備状態を通知するクライアントID</param>
-        /// <param name="isReady">準備状態</param>
-        /// <param name="avatar">アバター</param>
         [Rpc(SendTo.Server, RequireOwnership = false)]
-        public void ServerChangeStateRpc(ulong clientId, bool isReady, NetworkGuid avatar)
+        public void ServerChangeAvatarStateRpc(ulong clientId, NetworkGuid avatar)
+        {
+            _onStateChange.OnNext(new ChangeStateParams
+            {
+                ClientId = clientId,
+                IsReady = null,
+                Avatar = avatar
+            });
+        }
+
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        public void ServerChangeReadyStateRpc(ulong clientId, bool isReady)
         {
             _onStateChange.OnNext(new ChangeStateParams
             {
                 ClientId = clientId,
                 IsReady = isReady,
-                Avatar = avatar
+                Avatar = null
             });
         }
 
         public record ChangeStateParams
         {
             public ulong ClientId { get; init; }
-            public bool IsReady { get; init; }
-            public NetworkGuid Avatar { get; init; }
+            public bool? IsReady { get; init; }
+            public NetworkGuid? Avatar { get; init; }
         }
 
         /// <summary>

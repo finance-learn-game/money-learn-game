@@ -42,7 +42,6 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
 
         private void OnChangePlayers(NetworkListEvent<NetworkAvatarSelection.SessionPlayerState> ev)
         {
-            Log.Info("PlayerListView: {0}", ev.Type);
             switch (ev.Type)
             {
                 case EventType.Add:
@@ -56,6 +55,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
                     if (_playerListItems.TryGetValue(ev.Value.ClientId, out var playerListItem))
                     {
                         playerListItem.PlayerName = ev.Value.PlayerName;
+                        playerListItem.IsReady = ev.Value.IsReady;
                         if (avatarRegistry.TryGetAvatar(ev.Value.AvatarGuid.ToGuid(), out var avatar))
                             playerListItem.PlayerAvatar = avatar.AvatarImage;
                         else

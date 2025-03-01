@@ -61,6 +61,19 @@ MonoBehaviour:
               _internalList: []
         _addressProviderInternal:
           rid: 5166619747940040788
+      - _id: a7df7d6e-acd9-48c0-8653-c846b6877e77
+        _addressableGroup: {fileID: 11400000, guid: eba2edfe862f37040804c804c94560ac, type: 2}
+        _control:
+          _value: 0
+        _assetGroups:
+          _internalList:
+          - _id: 2a2c8fd7-1b76-4681-be58-71ac619a1480
+            _name:
+              _value: Default Asset Group
+            _filters:
+              _internalList: []
+        _addressProviderInternal:
+          rid: 5166620088310431831
     _labelRules:
       _internalList: []
     _versionRules:
@@ -107,3 +120,10 @@ MonoBehaviour:
           _isListMode: 0
           _values:
           - {fileID: 102900000, guid: 36c48cc63a30d1949a18c72a050cd1c8, type: 3}
+    - rid: 5166620088310431831
+      type: {class: AssetPathBasedAddressProvider, ns: SmartAddresser.Editor.Core.Models.LayoutRules.AddressRules, asm: SmartAddresser.Editor}
+      data:
+        _source: 2
+        _replaceWithRegex: 0
+        _pattern: 
+        _replacement: 

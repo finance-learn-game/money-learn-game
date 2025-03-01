@@ -25,6 +25,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8cb7f81492f495148bebb3a3db0a49b9
+    m_Address: Researcher Avatar
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9173f7ee0bb2f2e4d8d59c5c068a373f
     m_Address: Artist Avatar
     m_ReadOnly: 0
