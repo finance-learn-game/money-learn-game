@@ -23,7 +23,12 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
         private List<int> _indices;
         private List<UIVertex> _vertices;
 
-        public float2 YDataRange => yDataRange;
+        public float2 YDataRange
+        {
+            get => yDataRange;
+            set => SetData(yData, value);
+        }
+
         public float GridStep => gridStepDistance;
         public Observable<float[]> OnDataChanged => _onDataChanged;
 
@@ -54,12 +59,26 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
             SetAllDirty();
         }
 
-        public void SetData(float[] data, float2 dataRange)
+        /// <summary>
+        ///     表示用のデータを設定する
+        /// </summary>
+        /// <param name="data">データ</param>
+        /// <param name="dataRange">データの幅、指定なしの場合は自動設定</param>
+        public void SetData(float[] data, float2 dataRange = default)
         {
             yData = data;
-            yDataRange = dataRange;
+            yDataRange = dataRange.Equals(default) ? AutoSetDataRange() : dataRange;
             Configure();
             _onDataChanged.OnNext(data);
+
+            return;
+
+            float2 AutoSetDataRange()
+            {
+                var min = math.floor(data.Min() / GridStep) * GridStep;
+                var max = math.ceil(data.Max() / GridStep) * GridStep;
+                return new float2(min, max);
+            }
         }
 
         protected override void OnPopulateMesh(VertexHelper vh)

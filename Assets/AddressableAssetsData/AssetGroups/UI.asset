@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 217ba7fd84467234397e24a58ae807b1
+    m_Address: Chart Modal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 219c91dbbca4e614a85b105a5bd1116a
     m_Address: Avatar Select Page
     m_ReadOnly: 0
@@ -52,6 +57,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 88544ce089243154a841796cc4f2f414
     m_Address: UI Modal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f13a6552a352014a9288577f879564f
+    m_Address: UI Dropdown
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -122,6 +132,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f430eccec515744458adf89a3b7a55d4
     m_Address: Player List
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fb4ab00af8e67d441869f0cc343e0abd
+    m_Address: InGame Main Page
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

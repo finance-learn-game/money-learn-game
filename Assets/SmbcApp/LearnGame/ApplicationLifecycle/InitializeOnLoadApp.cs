@@ -21,6 +21,9 @@ namespace SmbcApp.LearnGame.ApplicationLifecycle
 #if UNITY_EDITOR
             if (SceneInitializerEditor.IsLoadStartUp())
                 SceneManager.LoadScene(AppScenes.StartUp);
+            else
+                Log.Warning(
+                    "Now you are in the Editor. If you want to load the startup scene, please select the menu item.");
 #endif
         }
 
@@ -65,7 +68,7 @@ namespace SmbcApp.LearnGame.ApplicationLifecycle
 #if UNITY_EDITOR
     public static class SceneInitializerEditor
     {
-        private const string MenuPath = "Tools/Scene Initializer";
+        private const string MenuPath = "Tools/Auto Load Startup Scene";
         private const string LoadStartUpItemKey = "SceneInitializerEditor.LoadStartUp";
 
         [MenuItem(MenuPath)]
