@@ -32,6 +32,13 @@ MonoBehaviour:
             _filters:
               _internalList:
               - rid: 5166619747940040790
+          - _id: 64779306-a270-48a8-a728-b7f1ff2752d3
+            _name:
+              _value: New Asset Group
+            _filters:
+              _internalList:
+              - rid: 5166620088310432070
+              - rid: 5166620088310432072
         _addressProviderInternal:
           rid: 5166619747940040789
       - _id: 11fe6819-eb92-461d-9fb1-c91a3e621de4
@@ -127,3 +134,20 @@ MonoBehaviour:
         _replaceWithRegex: 0
         _pattern: 
         _replacement: 
+    - rid: 5166620088310432070
+      type: {class: ObjectBasedAssetFilter, ns: SmartAddresser.Editor.Core.Models.Shared.AssetGroups.AssetFilterImpl, asm: SmartAddresser.Editor}
+      data:
+        _id: 0ede8eec-2650-44ea-bf95-d40098640ce9
+        _folderTargetingMode: 0
+        _object:
+          _isListMode: 0
+          _values:
+          - {fileID: 102900000, guid: 0a7148a92bba4c308615f479cf742ff8, type: 3}
+    - rid: 5166620088310432072
+      type: {class: ExtensionBasedAssetFilter, ns: SmartAddresser.Editor.Core.Models.Shared.AssetGroups.AssetFilterImpl, asm: SmartAddresser.Editor}
+      data:
+        _id: d389ef8a-3f67-4761-b4af-d4e9e2f53fd6
+        _extension:
+          _isListMode: 0
+          _values:
+          - prefab

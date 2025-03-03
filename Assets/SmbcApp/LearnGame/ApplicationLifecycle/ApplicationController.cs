@@ -92,6 +92,7 @@ namespace SmbcApp.LearnGame.ApplicationLifecycle
                 c.Add<ProfileManager>().AsSelf();
                 c.Add<SaveDataManager>().AsSelf();
                 c.Add<AuthenticationServiceFacade>().AsSelf();
+                c.Add<MasterData>().AsSelf();
             });
         }
     }
