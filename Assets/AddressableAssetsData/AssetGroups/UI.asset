@@ -120,6 +120,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dedd387cf0bd25f45b01430fdf27edcc
+    m_Address: Server InGame Main Page
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e9728178ddff13949abbd7f1a1c57c30
     m_Address: Chart Y Label
     m_ReadOnly: 0
@@ -136,7 +141,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fb4ab00af8e67d441869f0cc343e0abd
-    m_Address: InGame Main Page
+    m_Address: Client InGame Main Page
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
