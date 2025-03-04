@@ -11,7 +11,10 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
         public DateTime CurrentTime
         {
             get => new(_currentTimeTick.Value);
-            set => _currentTimeTick.Value = value.Ticks;
+            set
+            {
+                if (IsServer) _currentTimeTick.Value = value.Ticks;
+            }
         }
 
         public Observable<DateTime> OnChangeAsObservable()

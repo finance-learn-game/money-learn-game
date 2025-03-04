@@ -19,6 +19,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
         private NetworkAvatarSelection _networkAvatarSelection;
 
         [Inject] internal ConnectionManager ConnectionManager;
+        [Inject] internal SceneLoader SceneLoader;
 
         public override GameState ActiveState => GameState.AvatarSelect;
 
@@ -41,6 +42,9 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
             return -1;
         }
 
+        /// <summary>
+        ///     全員が選択完了しているか確認し、完了していたら結果を保存してゲームシーンに遷移
+        /// </summary>
         private void CloseAvatarSelectIfReady()
         {
             foreach (var playerInfo in _networkAvatarSelection.SessionPlayers)
@@ -53,6 +57,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
 
             _networkAvatarSelection.IsAvatarSelectFinished.Value = true;
             SaveAvatarSelectResult();
+            SceneLoader.LoadScene(AppScenes.GameScene, true);
         }
 
         private bool IsPlayerNumberAvailable(int playerNumber)

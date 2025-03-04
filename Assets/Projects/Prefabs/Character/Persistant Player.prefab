@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1622253997212808400}
   - component: {fileID: 2166774113176649640}
   - component: {fileID: 7048834328317243559}
+  - component: {fileID: 738439780426861149}
   m_Layer: 0
   m_Name: Persistant Player
   m_TagString: Untagged
@@ -74,6 +75,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   runtimeCollection: {fileID: 11400000, guid: 5743e623b30092f429fe135ba4adef66, type: 2}
   networkAvatarGuidState: {fileID: 7048834328317243559}
+  networkBalanceState: {fileID: 738439780426861149}
 --- !u!114 &7048834328317243559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,3 +90,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   avatarRegistry: {fileID: 11400000, guid: 06184a1f2c9d3834c9a602587ebb25cd, type: 2}
+--- !u!114 &738439780426861149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2483656595537399850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957aa349b9a04729a03a314366f8033d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1

@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.ConnectionManagement;
 using SmbcApp.LearnGame.GamePlay.GamePlayObjects.Avatar;
+using SmbcApp.LearnGame.GamePlay.GamePlayObjects.Character;
 using SmbcApp.LearnGame.GamePlay.GamePlayObjects.RuntimeDataContainers;
 using SmbcApp.LearnGame.Utils;
 using Unity.Collections;
@@ -18,8 +19,10 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects
     {
         [SerializeField] [Required] private PersistantPlayerRuntimeCollection runtimeCollection;
         [SerializeField] [Required] private NetworkAvatarGuidState networkAvatarGuidState;
+        [SerializeField] [Required] private NetworkBalanceState networkBalanceState;
         public NetworkVariable<FixedPlayerName> Name { get; } = new();
         public NetworkAvatarGuidState AvatarGuidState => networkAvatarGuidState;
+        public NetworkBalanceState BalanceState => networkBalanceState;
 
         public override void OnDestroy()
         {
@@ -47,11 +50,15 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects
             if (playerData.HasCharacterSpawned)
             {
                 networkAvatarGuidState.AvatarGuid.Value = playerData.AvatarNetworkGuid;
+                networkBalanceState.CurrentBalance = playerData.CurrentBalance;
             }
             else
             {
                 networkAvatarGuidState.SetRandomAvatar();
+                networkBalanceState.InitializeBalance();
+
                 playerData.AvatarNetworkGuid = networkAvatarGuidState.AvatarGuid.Value;
+                playerData.CurrentBalance = networkBalanceState.CurrentBalance;
                 SessionManager<SessionPlayerData>.Instance.SetPlayerData(OwnerClientId, playerData);
             }
         }

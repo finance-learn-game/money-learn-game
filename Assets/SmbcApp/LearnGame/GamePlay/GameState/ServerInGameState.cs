@@ -3,6 +3,7 @@ using R3;
 using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.Data;
 using SmbcApp.LearnGame.Utils;
+using Unity.Netcode;
 using UnityEngine;
 using VContainer;
 
@@ -26,6 +27,13 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
 
         private void OnNetworkSpawn(Unit _)
         {
+            var networkManager = NetworkManager.Singleton;
+            if (!networkManager.IsServer)
+            {
+                enabled = false;
+                return;
+            }
+
             // ゲーム開始時間を設定
             var db = MasterData.DB;
             var minDate = db.StockDataTable.SortByDate.First.Date.AddMonths(6);

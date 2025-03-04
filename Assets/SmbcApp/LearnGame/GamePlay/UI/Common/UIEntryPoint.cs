@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using Unity.Netcode;
 using UnityEngine;
 using UnityScreenNavigator.Runtime.Core.Modal;
 using UnityScreenNavigator.Runtime.Core.Page;
@@ -10,6 +11,7 @@ namespace SmbcApp.LearnGame.Gameplay.UI.Common
     public class UIEntryPoint : LifetimeScope
     {
         [SerializeField] [Required] private PageRef initialPage;
+        [SerializeField] private PageRef serverInitialPage;
         [SerializeField] [Required] private ModalContainer modalContainer;
         [SerializeField] [Required] private PageContainer pageContainer;
 
@@ -38,7 +40,10 @@ namespace SmbcApp.LearnGame.Gameplay.UI.Common
             }
 #endif
 
-            if (initialPage != null) pageContainer.Push(initialPage.AssetGUID, false);
+            if (serverInitialPage != null && NetworkManager.Singleton.IsServer)
+                pageContainer.Push(serverInitialPage.AssetGUID, false);
+            else if (initialPage != null)
+                pageContainer.Push(initialPage.AssetGUID, false);
         }
 
         protected override void OnDestroy()

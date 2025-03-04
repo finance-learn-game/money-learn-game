@@ -34,7 +34,7 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects.Avatar
             }
 
             AvatarGuid.Value = avatar.Guid.ToNetworkGuid();
-            Log.Info("Random avatar set: {0}", AvatarGuid.Value);
+            Log.Info("Random avatar set: {0}", AvatarGuid.Value.ToString());
         }
 
         private void RegisterAvatar(Guid guid)

@@ -34,6 +34,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement
 
         public void Reinitialize()
         {
+            HasCharacterSpawned = false;
         }
     }
 }
