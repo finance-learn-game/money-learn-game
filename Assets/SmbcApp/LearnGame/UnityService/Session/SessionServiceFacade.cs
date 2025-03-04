@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
-using SmbcApp.LearnGame.ConnectionManagement;
+using SmbcApp.LearnGame.GamePlay.Configuration;
 using SmbcApp.LearnGame.UnityService.Infrastructure;
 using SmbcApp.LearnGame.UnityService.Infrastructure.Messages;
 using SmbcApp.LearnGame.Utils;
@@ -48,7 +48,7 @@ namespace SmbcApp.LearnGame.UnityService.Session
             {
                 CurrentSession = await MultiplayerService.Instance.CreateSessionAsync(new SessionOptions
                 {
-                    MaxPlayers = ConnectionManager.MaxConnectionPlayers,
+                    MaxPlayers = GameConfiguration.Instance.MaxPlayers,
                     IsPrivate = true
                 });
                 return true;

@@ -1,13 +1,13 @@
 ﻿using Cysharp.Threading.Tasks;
+using SmbcApp.LearnGame.SceneLoader;
 using SmbcApp.LearnGame.UnityService.Session;
-using SmbcApp.LearnGame.Utils;
 using VContainer;
 
 namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
 {
     internal sealed class OfflineState : ConnectionState
     {
-        [Inject] internal SceneLoader SceneLoader;
+        [Inject] internal SceneLoader.SceneLoader SceneLoader;
         [Inject] internal SessionServiceFacade SessionServiceFacade;
 
         public override UniTask Enter()

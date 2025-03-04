@@ -1,15 +1,15 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 /// <summary>
-/// Creates an AssetReference that is restricted to having a specific Component.
-/// * This is the class that inherits from AssetReference.  It is generic and does not specify which Components it might care about.  A concrete child of this class is required for serialization to work.
-/// * At edit-time it validates that the asset set on it is a GameObject with the required Component.
-/// * At runtime it can load/instantiate the GameObject, then return the desired component.  API matches base class (LoadAssetAsync &amp; InstantiateAsync).
+///     Creates an AssetReference that is restricted to having a specific Component.
+///     * This is the class that inherits from AssetReference.  It is generic and does not specify which Components it
+///     might care about.  A concrete child of this class is required for serialization to work.
+///     * At edit-time it validates that the asset set on it is a GameObject with the required Component.
+///     * At runtime it can load/instantiate the GameObject, then return the desired component.  API matches base class
+///     (LoadAssetAsync &amp; InstantiateAsync).
 /// </summary>
 /// <typeparam name="TComponent">The component type.</typeparam>
 public class ComponentReference<TComponent> : AssetReference
@@ -20,32 +20,38 @@ public class ComponentReference<TComponent> : AssetReference
     }
 
     /// <inheritdoc />
-    public new AsyncOperationHandle<TComponent> InstantiateAsync(Vector3 position, Quaternion rotation, Transform parent = null)
+    public new AsyncOperationHandle<TComponent> InstantiateAsync(Vector3 position, Quaternion rotation,
+        Transform parent = null)
     {
-        return Addressables.ResourceManager.CreateChainOperation<TComponent, GameObject>(base.InstantiateAsync(position, Quaternion.identity, parent), GameObjectReady);
+        return Addressables.ResourceManager.CreateChainOperation(
+            base.InstantiateAsync(position, Quaternion.identity, parent), GameObjectReady);
     }
 
     /// <inheritdoc />
-    public new AsyncOperationHandle<TComponent> InstantiateAsync(Transform parent = null, bool instantiateInWorldSpace = false)
+    public new AsyncOperationHandle<TComponent> InstantiateAsync(Transform parent = null,
+        bool instantiateInWorldSpace = false)
     {
-        return Addressables.ResourceManager.CreateChainOperation<TComponent, GameObject>(base.InstantiateAsync(parent, instantiateInWorldSpace), GameObjectReady);
+        return Addressables.ResourceManager.CreateChainOperation(
+            base.InstantiateAsync(parent, instantiateInWorldSpace), GameObjectReady);
     }
 
     /// <inheritdoc />
     public AsyncOperationHandle<TComponent> LoadAssetAsync()
     {
-        return Addressables.ResourceManager.CreateChainOperation<TComponent, GameObject>(base.LoadAssetAsync<GameObject>(), GameObjectReady);
+        return Addressables.ResourceManager.CreateChainOperation(
+            base.LoadAssetAsync<GameObject>(), GameObjectReady);
     }
 
     /// <inheritdoc />
-    AsyncOperationHandle<TComponent> GameObjectReady(AsyncOperationHandle<GameObject> arg)
+    private AsyncOperationHandle<TComponent> GameObjectReady(AsyncOperationHandle<GameObject> arg)
     {
         var comp = arg.Result.GetComponent<TComponent>();
-        return Addressables.ResourceManager.CreateCompletedOperation<TComponent>(comp, string.Empty);
+        return Addressables.ResourceManager.CreateCompletedOperation(comp,
+            string.Empty);
     }
 
     /// <summary>
-    /// Validates that the assigned asset has the component type
+    ///     Validates that the assigned asset has the component type
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
@@ -56,7 +62,7 @@ public class ComponentReference<TComponent> : AssetReference
     }
 
     /// <summary>
-    /// Validates that the assigned asset has the component type, but only in the Editor
+    ///     Validates that the assigned asset has the component type, but only in the Editor
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
@@ -76,10 +82,7 @@ public class ComponentReference<TComponent> : AssetReference
     {
         // Release the instance
         var component = op.Result as Component;
-        if (component != null)
-        {
-            Addressables.ReleaseInstance(component.gameObject);
-        }
+        if (component != null) Addressables.ReleaseInstance(component.gameObject);
 
         // Release the handle
         op.Release();

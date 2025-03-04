@@ -2,7 +2,9 @@
 using System.Text;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
+using SmbcApp.LearnGame.GamePlay.Configuration;
 using SmbcApp.LearnGame.Infrastructure;
+using SmbcApp.LearnGame.SceneLoader;
 using SmbcApp.LearnGame.UnityService.Session;
 using SmbcApp.LearnGame.Utils;
 using Unity.Logging;
@@ -16,7 +18,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
     {
         private const int MaxConnectPayload = 1024;
         [Inject] internal IPublisher<ConnectionEventMessage> ConnectionEventPublisher;
-        [Inject] internal SceneLoader SceneLoader;
+        [Inject] internal SceneLoader.SceneLoader SceneLoader;
         [Inject] internal SessionServiceFacade SessionServiceFacade;
 
         public override UniTask Enter()
@@ -161,7 +163,8 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
 
         private ConnectStatus GetConnectStatus(ConnectionPayload payload)
         {
-            if (ConnectionManager.NetworkManager.ConnectedClientsIds.Count >= ConnectionManager.MaxConnectionPlayers)
+            var maxConnectionPlayers = GameConfiguration.Instance.MaxPlayers;
+            if (ConnectionManager.NetworkManager.ConnectedClientsIds.Count >= maxConnectionPlayers)
                 return ConnectStatus.ServerFull;
 
             if (payload.isDebug != Debug.isDebugBuild) return ConnectStatus.IncompatibleBuildType;

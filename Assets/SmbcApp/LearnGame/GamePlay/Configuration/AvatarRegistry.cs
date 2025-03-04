@@ -1,19 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.InputSystem.Utilities;
 using Random = UnityEngine.Random;
 
 namespace SmbcApp.LearnGame.GamePlay.Configuration
 {
     [CreateAssetMenu(fileName = "Avatar Registry", menuName = "Configuration/Avatar Registry", order = 0)]
-    internal sealed class AvatarRegistry : ScriptableObject
+    public sealed class AvatarRegistry : ScriptableObject
     {
         [ValidateInput(nameof(ValidateAvatars))] [SerializeField]
         private Avatar[] avatars;
 
-        public ReadOnlyArray<Avatar> Avatars => avatars;
+        public IReadOnlyList<Avatar> Avatars => avatars;
 
 #if UNITY_EDITOR
         private bool ValidateAvatars(Avatar[] self, ref string msg)

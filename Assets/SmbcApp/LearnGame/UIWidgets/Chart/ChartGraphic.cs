@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace SmbcApp.LearnGame.UIWidgets.Chart
 {
-    internal sealed class ChartGraphic : Graphic
+    public sealed class ChartGraphic : Graphic
     {
         [SerializeField] [BoxGroup("Line")] private float lineThickness;
         [SerializeField] [BoxGroup("Line")] private float stepDistance = 10f;

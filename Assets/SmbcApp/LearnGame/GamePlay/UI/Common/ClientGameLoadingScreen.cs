@@ -1,5 +1,5 @@
 ﻿using SmbcApp.LearnGame.GamePlay.GamePlayObjects.RuntimeDataContainers;
-using SmbcApp.LearnGame.Utils;
+using SmbcApp.LearnGame.SceneLoader;
 using UnityEngine;
 
 namespace SmbcApp.LearnGame.Gameplay.UI.Common

@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.ApplicationLifecycle.Messages;
 using SmbcApp.LearnGame.ConnectionManagement;
 using SmbcApp.LearnGame.Data;
+using SmbcApp.LearnGame.SceneLoader;
 using SmbcApp.LearnGame.UnityService.Auth;
 using SmbcApp.LearnGame.UnityService.Infrastructure.Messages;
 using SmbcApp.LearnGame.UnityService.Session;
@@ -22,7 +23,7 @@ namespace SmbcApp.LearnGame.ApplicationLifecycle
     {
         [SerializeField] [Required] private NetworkManager networkManager;
         [SerializeField] [Required] private ConnectionManager connectionManager;
-        [SerializeField] [Required] private SceneLoader sceneLoader;
+        [SerializeField] [Required] private SceneLoader.SceneLoader sceneLoader;
 
         private SaveDataManager _saveDataManager;
 

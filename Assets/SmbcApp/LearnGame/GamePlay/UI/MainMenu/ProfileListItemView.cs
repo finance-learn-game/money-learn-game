@@ -10,8 +10,8 @@ namespace SmbcApp.LearnGame.Gameplay.UI.MainMenu
     public class ProfileListItemView : MonoBehaviour
     {
         [SerializeField] [Required] private TMP_Text profileName;
-        [SerializeField] [Required] private UIButton selectButton;
         [SerializeField] [Required] private UIButton deleteButton;
+        [SerializeField] [Required] private UIButton selectButton;
 
         public Observable<Unit> OnSelect => selectButton.OnClick;
         public Observable<Unit> OnDelete => deleteButton.OnClick;

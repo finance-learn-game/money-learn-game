@@ -70,9 +70,9 @@ namespace SmbcApp.LearnGame.Data
                 return;
             }
 
-            await using var fileStream = new FileStream(_saveDataPath, FileMode.Open);
             try
             {
+                await using var fileStream = new FileStream(_saveDataPath, FileMode.Open);
                 var loadedData =
                     await MessagePackSerializer.Typeless.DeserializeAsync(fileStream, cancellationToken: cancellation);
                 if (loadedData is not GameSaveData data) throw new Exception("Failed to load save data");

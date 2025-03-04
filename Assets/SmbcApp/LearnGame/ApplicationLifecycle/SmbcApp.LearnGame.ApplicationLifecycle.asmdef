@@ -1,0 +1,30 @@
+{
+    "name": "SmbcApp.LearnGame.ApplicationLifecycle",
+    "rootNamespace": "",
+    "references": [
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:08b38f39e2d9e594389b7a4cf4c2c338",
+        "GUID:77221876cc6b8244180b96e320b1bcd4",
+        "GUID:fd228c28e14f1a34cbe508676c914dd7",
+        "GUID:1491147abca9d7d4bb7105af628b223e",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:2665a8d13d1b3f18800f46e256720795",
+        "GUID:e0cd26848372d4e5c891c569017e11f1",
+        "GUID:e82705304ef4b59489df45c377ae4d2f",
+        "GUID:d549a856e6b550f46a694a2f4363dcf9",
+        "GUID:7c4240105bcf1cf4b9c3755ca8b70d6f",
+        "GUID:4732838f954ee9b47a059bd2b67be42f",
+        "GUID:91204e94afa9664439c6961a0407a6b8",
+        "GUID:4f682e06dbb3e624faedad9cc27106cc",
+        "GUID:433be713abf01a0408db34fa75eae436"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

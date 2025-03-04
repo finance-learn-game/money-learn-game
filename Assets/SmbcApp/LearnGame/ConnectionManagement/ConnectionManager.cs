@@ -41,8 +41,6 @@ namespace SmbcApp.LearnGame.ConnectionManagement
     /// </summary>
     public sealed class ConnectionManager : MonoBehaviour
     {
-        public const int MaxConnectionPlayers = 10;
-
         private ConnectionState.ConnectionState _currentState;
 
         [Inject] internal NetworkManager NetworkManager;

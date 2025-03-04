@@ -1,0 +1,17 @@
+{
+    "name": "SmbcApp.LearnGame.GamePlay.Configuration",
+    "rootNamespace": "",
+    "references": [
+        "GUID:91204e94afa9664439c6961a0407a6b8",
+        "GUID:90cee55343bfcde48affd7c5535ff412"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

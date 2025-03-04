@@ -1,4 +1,4 @@
-﻿using SmbcApp.LearnGame.Utils;
+﻿using SmbcApp.LearnGame.SceneLoader;
 using Unity.Logging;
 using Unity.Logging.Sinks;
 using UnityEditor;

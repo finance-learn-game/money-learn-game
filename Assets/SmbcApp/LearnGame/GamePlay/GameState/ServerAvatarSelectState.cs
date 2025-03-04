@@ -2,8 +2,10 @@
 using R3;
 using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.ConnectionManagement;
+using SmbcApp.LearnGame.GamePlay.Configuration;
 using SmbcApp.LearnGame.GamePlay.GamePlayObjects;
 using SmbcApp.LearnGame.Infrastructure;
+using SmbcApp.LearnGame.SceneLoader;
 using SmbcApp.LearnGame.Utils;
 using Unity.Netcode;
 using UnityEngine;
@@ -19,7 +21,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
         private NetworkAvatarSelection _networkAvatarSelection;
 
         [Inject] internal ConnectionManager ConnectionManager;
-        [Inject] internal SceneLoader SceneLoader;
+        [Inject] internal SceneLoader.SceneLoader SceneLoader;
 
         public override GameState ActiveState => GameState.AvatarSelect;
 
@@ -75,7 +77,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
 
         private int GetAvailablePlayerNumber()
         {
-            for (var i = 0; i < ConnectionManager.MaxConnectionPlayers; i++)
+            for (var i = 0; i < GameConfiguration.Instance.MaxPlayers; i++)
                 if (IsPlayerNumberAvailable(i))
                     return i;
 

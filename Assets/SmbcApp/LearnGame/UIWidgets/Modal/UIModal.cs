@@ -13,7 +13,7 @@ namespace SmbcApp.LearnGame.UIWidgets.Modal
     {
         [Required] [SerializeField] private UIButton closeButton;
 
-        [Inject] internal ModalContainer ModalContainer;
+        [Inject] public ModalContainer ModalContainer { get; internal set; }
 
         protected virtual void Start()
         {
