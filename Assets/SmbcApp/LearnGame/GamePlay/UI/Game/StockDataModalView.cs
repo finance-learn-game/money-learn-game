@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 using R3;
 using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.Data;
-using SmbcApp.LearnGame.Gameplay.GameState;
+using SmbcApp.LearnGame.GamePlay.GameState.NetworkData;
 using SmbcApp.LearnGame.UIWidgets.Chart;
 using SmbcApp.LearnGame.UIWidgets.Modal;
 using SmbcApp.LearnGame.UIWidgets.UI_Dropdown;

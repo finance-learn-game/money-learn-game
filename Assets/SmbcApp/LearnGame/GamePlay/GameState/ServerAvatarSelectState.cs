@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.ConnectionManagement;
 using SmbcApp.LearnGame.GamePlay.Configuration;
 using SmbcApp.LearnGame.GamePlay.GamePlayObjects;
+using SmbcApp.LearnGame.GamePlay.GameState.NetworkData;
 using SmbcApp.LearnGame.Infrastructure;
 using SmbcApp.LearnGame.SceneLoader;
 using SmbcApp.LearnGame.Utils;

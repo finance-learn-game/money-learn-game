@@ -1,6 +1,6 @@
 ﻿using R3;
 using Sirenix.OdinInspector;
-using SmbcApp.LearnGame.Gameplay.GameState;
+using SmbcApp.LearnGame.GamePlay.GameState.NetworkData;
 using TMPro;
 using UnityEngine;
 using VContainer;

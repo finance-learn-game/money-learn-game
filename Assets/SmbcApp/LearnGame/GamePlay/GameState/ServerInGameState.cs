@@ -2,6 +2,7 @@
 using R3;
 using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.Data;
+using SmbcApp.LearnGame.GamePlay.GameState.NetworkData;
 using SmbcApp.LearnGame.Utils;
 using Unity.Netcode;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
     internal sealed class ServerInGameState : GameStateBehaviour
     {
         [SerializeField] [Required] private NetworkGameTime gameTime;
+        [SerializeField] [Required] private NetworkStockData stockData;
         [SerializeField] [Required] private NetCodeHooks netCodeHooks;
 
         [Inject] internal MasterData MasterData;

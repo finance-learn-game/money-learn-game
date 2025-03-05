@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using SmbcApp.LearnGame.GamePlay.GameState.NetworkData;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;

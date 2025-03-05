@@ -2,7 +2,7 @@
 using R3;
 using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.GamePlay.Configuration;
-using SmbcApp.LearnGame.Gameplay.GameState;
+using SmbcApp.LearnGame.GamePlay.GameState.NetworkData;
 using SmbcApp.LearnGame.Infrastructure;
 using SmbcApp.LearnGame.UIWidgets.ScrollView;
 using Unity.Netcode;
