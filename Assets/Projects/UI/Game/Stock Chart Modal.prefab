@@ -59,9 +59,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.51445293, b: 0.16509432, a: 0.8}
+  m_Color: {r: 1, g: 0.60731685, b: 0.3254717, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  svgPixelsPerUnit: 1
   lineThickness: 6
   stepDistance: 50
   yData:
@@ -78,6 +79,10 @@ MonoBehaviour:
   yDataRange:
     x: 400
     y: 5000
+  circleRadius: 10
+  circleThickness: 3
+  circleStrokeColor: {r: 1, g: 0.60731685, b: 0.3254717, a: 1}
+  circleFillColor: {r: 1, g: 1, b: 1, a: 1}
   gridColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0.36078432}
   gridThickness: 8
   gridStepDistance: 500
@@ -194,7 +199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7322354996573372666, guid: 88544ce089243154a841796cc4f2f414, type: 3}
       propertyPath: m_Name
-      value: Chart Modal Variant
+      value: Stock Chart Modal
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4770470663575623644, guid: 88544ce089243154a841796cc4f2f414, type: 3}

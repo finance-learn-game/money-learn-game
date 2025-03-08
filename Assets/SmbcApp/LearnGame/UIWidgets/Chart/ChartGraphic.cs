@@ -11,17 +11,21 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
 {
     public sealed class ChartGraphic : Graphic
     {
+        [SerializeField] [BoxGroup("Svg")] private float svgPixelsPerUnit = 100f;
         [SerializeField] [BoxGroup("Line")] private float lineThickness;
         [SerializeField] [BoxGroup("Line")] private float stepDistance = 10f;
         [SerializeField] [BoxGroup("Line")] private float[] yData;
         [SerializeField] [BoxGroup("Line")] private float2 yDataRange;
+        [SerializeField] [BoxGroup("Circle")] private float circleRadius;
+        [SerializeField] [BoxGroup("Circle")] private float circleThickness;
+        [SerializeField] [BoxGroup("Circle")] private Color circleStrokeColor;
+        [SerializeField] [BoxGroup("Circle")] private Color circleFillColor;
         [SerializeField] [BoxGroup("Grid")] private Color gridColor;
         [SerializeField] [BoxGroup("Grid")] private float gridThickness;
         [SerializeField] [BoxGroup("Grid")] private float gridStepDistance = 10f;
-        private readonly Subject<float[]> _onDataChanged = new();
 
-        private List<int> _indices;
-        private List<UIVertex> _vertices;
+        private readonly Subject<float[]> _onDataChanged = new();
+        private List<VectorUtils.Geometry> _geomList;
 
         public float2 YDataRange
         {
@@ -49,13 +53,23 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
         [Button]
         private void Configure()
         {
-            _vertices ??= new List<UIVertex>();
-            _indices ??= new List<int>();
-            _vertices.Clear();
-            _indices.Clear();
+            var shapes = new List<Shape>
+            {
+                GridShape(),
+                new()
+                {
+                    Contours = new[]
+                    {
+                        ChartContour(CalcData(yData))
+                    },
+                    PathProps = GetPathProperties(lineThickness, color)
+                }
+            };
+            shapes.AddRange(PointCircleShape(CalcData(yData)));
 
-            DrawGrid();
-            DrawLine(CalcData(yData));
+            var scene = new Scene { Root = new SceneNode { Shapes = shapes } };
+            _geomList = VectorUtils.TessellateScene(scene, GetTessellationOptions());
+
             SetAllDirty();
         }
 
@@ -83,12 +97,27 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
 
         protected override void OnPopulateMesh(VertexHelper vh)
         {
+            if (_geomList == null) return;
+
             vh.Clear();
 
-            if (_vertices == null || _indices == null) return;
-            if (_vertices.Count == 0 || _indices.Count == 0) return;
+            var verts = new List<UIVertex>();
+            var indices = new List<int>();
+            foreach (var geometry in _geomList)
+            {
+                var indexOffset = verts.Count;
 
-            vh.AddUIVertexStream(_vertices, _indices);
+                verts.AddRange(geometry.Vertices
+                    .Select(vert => new UIVertex
+                    {
+                        position = new float3(geometry.WorldTransform * vert / svgPixelsPerUnit, 0),
+                        color = geometry.Color
+                    })
+                );
+                indices.AddRange(geometry.Indices.Select(idx => idx + indexOffset));
+            }
+
+            vh.AddUIVertexStream(verts, indices);
         }
 
         private float2[] CalcData(float[] data)
@@ -106,30 +135,26 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
             return resData;
         }
 
-        private void DrawGrid()
+        private Shape GridShape()
         {
-            foreach (var y in YGridPositions)
+            var contours = from y in YGridPositions
+                let p0 = new float2(XRange.x, y)
+                let p1 = new float2(XRange.y, y)
+                select new BezierContour
+                {
+                    Segments = VectorUtils.MakePathLine(p0, p1).ToArray(),
+                    Closed = false
+                };
+            return new Shape
             {
-                var p0 = new float2(XRange.x, y);
-                var p1 = new float2(XRange.y, y);
-                VectorUtils.TessellatePath(
-                    new BezierContour
-                    {
-                        Segments = VectorUtils.MakePathLine(p0, p1).ToArray(),
-                        Closed = false
-                    },
-                    GetPathProperties(gridThickness, gridColor, PathCorner.Tipped, PathEnding.Square),
-                    GetTessellationOptions(),
-                    out var vertices,
-                    out var indices
-                );
-                AddUiVertexes(vertices, indices, gridColor);
-            }
+                Contours = contours.ToArray(),
+                PathProps = GetPathProperties(gridThickness, gridColor, PathCorner.Tipped, PathEnding.Square)
+            };
         }
 
-        private void DrawLine(float2[] data)
+        private static BezierContour ChartContour(float2[] data)
         {
-            var segments = new List<BezierPathSegment>();
+            var segments = new BezierPathSegment[data.Length];
 
             for (var i = 0; i < data.Length - 1; i++)
             {
@@ -137,23 +162,34 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
                 var next = data[i + 1];
 
                 var lineSegments = VectorUtils.MakePathLine(curr, next);
-                segments.Add(lineSegments[0]);
-                if (i == data.Length - 2) segments.Add(lineSegments[1]);
+                segments[i] = lineSegments[0];
+                if (i == data.Length - 2)
+                    segments[i + 1] = lineSegments[1];
             }
 
-            VectorUtils.TessellatePath(
-                new BezierContour
-                {
-                    Segments = segments.ToArray(),
-                    Closed = false
-                },
-                GetPathProperties(lineThickness, color),
-                GetTessellationOptions(),
-                out var vertices,
-                out var indices
-            );
+            return new BezierContour
+            {
+                Segments = segments.ToArray(),
+                Closed = false
+            };
+        }
 
-            AddUiVertexes(vertices, indices, color);
+        private Shape[] PointCircleShape(float2[] data)
+        {
+            var shapes = new Shape[data.Length];
+            for (var i = 0; i < data.Length; i++)
+            {
+                var point = data[i];
+                shapes[i] = new Shape
+                {
+                    PathProps = GetPathProperties(circleThickness, circleStrokeColor, PathCorner.Round,
+                        PathEnding.Square),
+                    Fill = new SolidFill { Color = circleFillColor }
+                };
+                VectorUtils.MakeCircleShape(shapes[i], point, circleRadius);
+            }
+
+            return shapes;
         }
 
         private static PathProperties GetPathProperties(float thickness, Color pathColor,
@@ -181,20 +217,6 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
                 MaxTanAngleDeviation = 0.05f,
                 SamplingStepSize = 0.01f
             };
-        }
-
-        private void AddUiVertexes(Vector2[] vertices, ushort[] indices, Color vertColor, float z = 0)
-        {
-            var vertexCount = _vertices.Count;
-            foreach (var vert in vertices)
-                _vertices.Add(new UIVertex
-                {
-                    position = new float3(vert, z),
-                    uv0 = Vector2.zero,
-                    color = vertColor
-                });
-
-            foreach (var idx in indices) _indices.Add(idx + vertexCount);
         }
     }
 }
