@@ -479,6 +479,7 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 1
+  enableServerInitialPage: 1
   serverInitialPage:
     m_AssetGUID: dedd387cf0bd25f45b01430fdf27edcc
     m_SubObjectName: 

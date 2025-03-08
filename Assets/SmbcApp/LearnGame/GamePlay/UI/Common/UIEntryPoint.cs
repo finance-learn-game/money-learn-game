@@ -11,7 +11,11 @@ namespace SmbcApp.LearnGame.Gameplay.UI.Common
     public class UIEntryPoint : LifetimeScope
     {
         [SerializeField] [Required] private PageRef initialPage;
-        [SerializeField] private PageRef serverInitialPage;
+        [SerializeField] private bool enableServerInitialPage;
+
+        [SerializeField] [ShowIf(nameof(enableServerInitialPage))] [Required]
+        private PageRef serverInitialPage;
+
         [SerializeField] [Required] private ModalContainer modalContainer;
         [SerializeField] [Required] private PageContainer pageContainer;
 
@@ -40,9 +44,9 @@ namespace SmbcApp.LearnGame.Gameplay.UI.Common
             }
 #endif
 
-            if (serverInitialPage != null && serverInitialPage.IsValid() && !NetworkManager.Singleton.IsClient)
+            if (enableServerInitialPage && NetworkManager.Singleton.IsServer)
                 pageContainer.Push(serverInitialPage.AssetGUID, false);
-            else if (initialPage != null)
+            else
                 pageContainer.Push(initialPage.AssetGUID, false);
         }
 
