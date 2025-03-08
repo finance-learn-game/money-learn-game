@@ -39,7 +39,6 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects.Character
         public void InitializeBalance()
         {
             _currentBalance.Value = GameConfiguration.Instance.InitialBalance;
-            Log.Info("Balance initialized.");
         }
     }
 }

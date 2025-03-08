@@ -16,8 +16,8 @@ namespace SmbcApp.LearnGame.Data.Editor
         [MenuItem("Tools/Master Data/Generate Binary")]
         private static void GenerateBinary()
         {
+            Debug.Log("Generating Binary");
             SaveBinary().Forget();
-            Debug.Log("Binary generated");
         }
 
         private static async UniTask SaveBinary()
@@ -31,6 +31,7 @@ namespace SmbcApp.LearnGame.Data.Editor
             await using var stream = new FileStream(Path.Combine(MasterData.BinaryDirectory, MasterData.BinaryFileName),
                 FileMode.Create);
             builder.WriteToStream(stream);
+            Debug.Log("Binary generated and saved");
         }
 
         private static async UniTask<(List<StockData> Stocks, List<OrganizationData> Organizations)> LoadStockData()

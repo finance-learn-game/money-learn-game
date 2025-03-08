@@ -1,6 +1,5 @@
 ﻿using System;
 using R3;
-using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.ConnectionManagement;
 using SmbcApp.LearnGame.GamePlay.Configuration;
 using SmbcApp.LearnGame.GamePlay.GamePlayObjects;
@@ -14,11 +13,9 @@ using VContainer;
 
 namespace SmbcApp.LearnGame.Gameplay.GameState
 {
-    [RequireComponent(typeof(NetCodeHooks), typeof(NetworkAvatarSelection))]
-    internal sealed class ServerAvatarSelectState : GameStateBehaviour
+    [RequireComponent(typeof(NetworkAvatarSelection))]
+    internal sealed class ServerAvatarSelectState : ServerGameStateBehaviour
     {
-        [SerializeField] [Required] private NetCodeHooks netCodeHooks;
-
         private NetworkAvatarSelection _networkAvatarSelection;
 
         [Inject] internal ConnectionManager ConnectionManager;
@@ -30,11 +27,6 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
         {
             base.Awake();
             TryGetComponent(out _networkAvatarSelection);
-
-            netCodeHooks.OnNetworkSpawnHook.Subscribe(OnNetworkSpawn)
-                .AddTo(gameObject);
-            netCodeHooks.OnNetworkDespawnHook.Subscribe(OnNetworkDespawn)
-                .AddTo(gameObject);
         }
 
         private int FindSessionPlayerIdx(ulong clientId)
@@ -143,32 +135,12 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
             CloseAvatarSelectIfReady();
         }
 
-        private void OnNetworkSpawn(Unit _)
+        protected override void OnServerNetworkSpawn()
         {
-            var networkManager = NetworkManager.Singleton;
-            if (!networkManager.IsServer)
-            {
-                enabled = false;
-            }
-            else
-            {
-                networkManager.OnClientDisconnectCallback += OnClientDisconnectCallback;
-                networkManager.SceneManager.OnSceneEvent += OnSceneEvent;
-                _networkAvatarSelection.OnStateChange.Subscribe(OnClientChangeState)
-                    .AddTo(ref netCodeHooks.NetworkDisposable);
-            }
+            _networkAvatarSelection.OnStateChange.Subscribe(OnClientChangeState).AddTo(gameObject);
         }
 
-        private void OnNetworkDespawn(Unit _)
-        {
-            var networkManager = NetworkManager.Singleton;
-            if (!networkManager) return;
-
-            networkManager.OnClientDisconnectCallback -= OnClientDisconnectCallback;
-            networkManager.SceneManager.OnSceneEvent -= OnSceneEvent;
-        }
-
-        private void OnClientDisconnectCallback(ulong clientId)
+        protected override void OnClientDisconnect(ulong clientId)
         {
             for (var i = 0; i < _networkAvatarSelection.SessionPlayers.Count; i++)
                 if (_networkAvatarSelection.SessionPlayers[i].ClientId == clientId)
@@ -182,7 +154,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
                 CloseAvatarSelectIfReady();
         }
 
-        private void OnSceneEvent(SceneEvent sceneEvent)
+        protected override void OnSceneEvent(SceneEvent sceneEvent)
         {
             // シーンがロード完了したら、新規プレイヤーを追加
             if (sceneEvent.SceneEventType != SceneEventType.LoadComplete) return;

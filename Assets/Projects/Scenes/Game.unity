@@ -332,7 +332,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -506,6 +506,7 @@ GameObject:
   - component: {fileID: 1058224388}
   - component: {fileID: 1058224391}
   - component: {fileID: 1058224390}
+  - component: {fileID: 1058224393}
   m_Layer: 0
   m_Name: InGame State
   m_TagString: Untagged
@@ -545,6 +546,7 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   gameTime: {fileID: 1058224390}
+  stockDomain: {fileID: 1058224393}
 --- !u!114 &1058224389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,8 +601,9 @@ MonoBehaviour:
     TypeName: SmbcApp.LearnGame.ApplicationLifecycle.ApplicationController
   autoRun: 1
   autoInjectGameObjects: []
-  gameTime: {fileID: 1058224390}
   netCodeHooks: {fileID: 1058224392}
+  gameTime: {fileID: 1058224390}
+  playerCollection: {fileID: 11400000, guid: 5743e623b30092f429fe135ba4adef66, type: 2}
 --- !u!114 &1058224392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,6 +617,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &1058224393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058224386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d30240e5c44e799b03edeb87bc1b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  playerCollection: {fileID: 11400000, guid: 5743e623b30092f429fe135ba4adef66, type: 2}
 --- !u!1 &1686490683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,6 +1026,10 @@ PrefabInstance:
     - target: {fileID: 5301769067624423693, guid: fb4ab00af8e67d441869f0cc343e0abd, type: 3}
       propertyPath: m_Name
       value: Client InGame Main Page
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301769067624423693, guid: fb4ab00af8e67d441869f0cc343e0abd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

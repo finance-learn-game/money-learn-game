@@ -40,7 +40,7 @@ namespace SmbcApp.LearnGame.Gameplay.UI.Common
             }
 #endif
 
-            if (serverInitialPage != null && serverInitialPage.IsValid() && NetworkManager.Singleton.IsServer)
+            if (serverInitialPage != null && serverInitialPage.IsValid() && !NetworkManager.Singleton.IsClient)
                 pageContainer.Push(serverInitialPage.AssetGUID, false);
             else if (initialPage != null)
                 pageContainer.Push(initialPage.AssetGUID, false);

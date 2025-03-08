@@ -8,7 +8,6 @@ using SmbcApp.LearnGame.UnityService.Auth;
 using SmbcApp.LearnGame.UnityService.Session;
 using SmbcApp.LearnGame.Utils;
 using Unity.Logging;
-using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -38,9 +37,6 @@ namespace SmbcApp.LearnGame.Gameplay.UI.MainMenu
             try
             {
                 await AuthServiceFacade.SignIn(profile);
-
-                var auth = AuthenticationService.Instance;
-                Log.Info("Signed in as {0}, Unity Player ID {1}", auth.Profile ?? "null", auth.PlayerId ?? "null");
             }
             catch (Exception e)
             {

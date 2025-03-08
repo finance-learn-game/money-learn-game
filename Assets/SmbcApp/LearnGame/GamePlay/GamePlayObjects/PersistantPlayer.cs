@@ -20,9 +20,11 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects
         [SerializeField] [Required] private PersistantPlayerRuntimeCollection runtimeCollection;
         [SerializeField] [Required] private NetworkAvatarGuidState networkAvatarGuidState;
         [SerializeField] [Required] private NetworkBalanceState networkBalanceState;
+        [SerializeField] [Required] private NetworkStockState networkStockState;
         public NetworkVariable<FixedPlayerName> Name { get; } = new();
         public NetworkAvatarGuidState AvatarGuidState => networkAvatarGuidState;
         public NetworkBalanceState BalanceState => networkBalanceState;
+        public NetworkStockState StockState => networkStockState;
 
         public override void OnDestroy()
         {
@@ -47,18 +49,24 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects
 
             var playerData = sessionPlayerData.Value;
             Name.Value = playerData.PlayerName;
+
             if (playerData.HasCharacterSpawned)
             {
                 networkAvatarGuidState.AvatarGuid.Value = playerData.AvatarNetworkGuid;
                 networkBalanceState.CurrentBalance = playerData.CurrentBalance;
+                networkStockState.SetStockAmount(playerData.StockAmounts);
             }
             else
             {
                 networkAvatarGuidState.SetRandomAvatar();
                 networkBalanceState.InitializeBalance();
+                networkStockState.SetStockAmount(Array.Empty<int>());
 
                 playerData.AvatarNetworkGuid = networkAvatarGuidState.AvatarGuid.Value;
                 playerData.CurrentBalance = networkBalanceState.CurrentBalance;
+                // 一旦空の配列を入れておいて、ゲーム開始時に初期化する
+                playerData.StockAmounts = Array.Empty<int>();
+
                 SessionManager<SessionPlayerData>.Instance.SetPlayerData(OwnerClientId, playerData);
             }
         }
@@ -79,6 +87,8 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects
             var playerData = sessionPlayerData.Value;
             playerData.PlayerName = Name.Value;
             playerData.AvatarNetworkGuid = networkAvatarGuidState.AvatarGuid.Value;
+            playerData.CurrentBalance = networkBalanceState.CurrentBalance;
+            playerData.StockAmounts = networkStockState.ToArray();
             SessionManager<SessionPlayerData>.Instance.SetPlayerData(OwnerClientId, playerData);
         }
     }

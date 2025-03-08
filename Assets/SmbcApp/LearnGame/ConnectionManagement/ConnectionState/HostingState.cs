@@ -136,7 +136,14 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
                     SessionManager<SessionPlayerData>.Instance.SetupConnectingPlayerSessionData(
                         clientId,
                         connectionPayload.playerId,
-                        new SessionPlayerData(clientId, connectionPayload.playerName, new NetworkGuid(), 0, true)
+                        new SessionPlayerData(
+                            clientId,
+                            connectionPayload.playerName,
+                            new NetworkGuid(),
+                            0,
+                            Array.Empty<int>(),
+                            true
+                        )
                     );
 
                     Log.Info("Connection approved for client {0}", clientId);

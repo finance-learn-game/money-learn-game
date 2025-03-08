@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2166774113176649640}
   - component: {fileID: 7048834328317243559}
   - component: {fileID: 738439780426861149}
+  - component: {fileID: -2241803322224610558}
   m_Layer: 0
   m_Name: Persistant Player
   m_TagString: Untagged
@@ -76,6 +77,7 @@ MonoBehaviour:
   runtimeCollection: {fileID: 11400000, guid: 5743e623b30092f429fe135ba4adef66, type: 2}
   networkAvatarGuidState: {fileID: 7048834328317243559}
   networkBalanceState: {fileID: 738439780426861149}
+  networkStockState: {fileID: -2241803322224610558}
 --- !u!114 &7048834328317243559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +102,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 957aa349b9a04729a03a314366f8033d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &-2241803322224610558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2483656595537399850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b09bb05e14b84ecdb66f09f8347d7ff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1

@@ -16,6 +16,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement
             string playerName,
             in NetworkGuid avatarNetworkGuid,
             int currentBalance,
+            int[] stockAmounts,
             bool isConnected = false,
             bool hasCharacterSpawned = false
         )
@@ -27,10 +28,12 @@ namespace SmbcApp.LearnGame.ConnectionManagement
             HasCharacterSpawned = hasCharacterSpawned;
             IsConnected = isConnected;
             ClientID = clientID;
+            StockAmounts = stockAmounts;
         }
 
         public bool IsConnected { get; set; }
         public ulong ClientID { get; set; }
+        public int[] StockAmounts { get; set; }
 
         public void Reinitialize()
         {
