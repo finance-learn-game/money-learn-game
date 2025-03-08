@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using R3;
@@ -9,12 +10,13 @@ using SmbcApp.LearnGame.UIWidgets.Chart;
 using SmbcApp.LearnGame.UIWidgets.Modal;
 using SmbcApp.LearnGame.UIWidgets.UI_Dropdown;
 using TMPro;
+using Unity.Logging;
 using UnityEngine;
 using VContainer;
 
 namespace SmbcApp.LearnGame.GamePlay.UI.Game
 {
-    internal sealed class StockDataModalView : UIModal
+    internal sealed class StockChartModalView : UIModal
     {
         [SerializeField] [Required] private ChartGraphic chartGraphic;
         [SerializeField] [Required] private UIDropdown rangeDropdown;
@@ -71,11 +73,22 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
         {
             var option = _rangeOptions[rangeDropdown.Value];
             var range = option.DateRangeFunc();
-            var data = MasterData.DB.StockDataTable.FindRangeByDate(
-                range.Min,
-                range.Max
-            );
-            chartGraphic.SetData(data.Select(v => (float)v.StockPrice).ToArray());
+            var stockTable = MasterData.DB.StockDataTable;
+
+            var data = new List<float>();
+            for (var date = range.Min; date <= range.Max; date = date.AddMonths(1))
+            {
+                var stock = stockTable.FindClosestByDateAndOrganizationId((date, 0), false);
+                if (stock == null)
+                {
+                    Log.Warning($"Stock not found: {date}");
+                    continue;
+                }
+
+                data.Add(stock.StockPrice);
+            }
+
+            chartGraphic.SetData(data.ToArray());
         }
 
         private readonly struct RangeOptionData

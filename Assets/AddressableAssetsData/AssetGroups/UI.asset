@@ -21,7 +21,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 217ba7fd84467234397e24a58ae807b1
-    m_Address: Chart Modal
+    m_Address: Stock Chart Modal
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -116,7 +116,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d2cb6bf4ecea39943a50060bcc75e048
-    m_Address: Stock Modal
+    m_Address: Stock Trade Modal
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

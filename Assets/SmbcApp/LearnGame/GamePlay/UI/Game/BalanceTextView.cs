@@ -18,7 +18,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
             var clientId = NetworkManager.Singleton.LocalClientId;
             if (playerCollection.TryGetPlayer(clientId, out var player))
                 player.BalanceState.OnChangeAsObservable()
-                    .Subscribe(balance => balanceText.text = $"￥{balance}")
+                    .Subscribe(balance => balanceText.text = $"所持金：￥{balance}")
                     .AddTo(gameObject);
             else
                 Log.Error("Failed to get player object.");
