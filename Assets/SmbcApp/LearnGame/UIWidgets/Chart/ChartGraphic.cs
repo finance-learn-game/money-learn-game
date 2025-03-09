@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using R3;
 using Sirenix.OdinInspector;
 using Unity.Mathematics;
@@ -63,9 +64,13 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
             }
 
             var scene = new Scene { Root = new SceneNode { Shapes = shapes } };
-            _geomList = VectorUtils.TessellateScene(scene, GetTessellationOptions());
-
-            SetAllDirty();
+            UniTask.Void(async () =>
+            {
+                _geomList = await UniTask.RunOnThreadPool(() =>
+                    VectorUtils.TessellateScene(scene, GetTessellationOptions())
+                );
+                SetAllDirty();
+            });
         }
 
         /// <summary>
