@@ -39,7 +39,7 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
         public Observable<ChartData[]> OnDataChanged => _onDataChanged;
 
         private float2 XRange => new(RectTransform.rect.xMin, RectTransform.rect.xMax);
-        private float2 YRange => new(RectTransform.rect.yMin, RectTransform.rect.yMax);
+        public float2 YRange => new(RectTransform.rect.yMin, RectTransform.rect.yMax);
 
         public IEnumerable<float> YGridPositions => Enumerable
             .Range(0, (int)((dataRange.y - dataRange.x) / gridStepDistance) + 1)
@@ -49,6 +49,17 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
                 YRange.x, YRange.y,
                 y
             ));
+
+        public IEnumerable<float> XLabelPositions
+        {
+            get
+            {
+                if (chartDataArr.Length == 0) yield break;
+                var data = chartDataArr[0].data;
+                var xStep = (XRange.y - XRange.x) / (data.Length - 1);
+                for (var i = 0; i < data.Length; i++) yield return i * xStep;
+            }
+        }
 
         private RectTransform RectTransform => transform as RectTransform;
 

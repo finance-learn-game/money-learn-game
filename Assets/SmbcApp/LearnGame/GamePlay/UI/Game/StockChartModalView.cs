@@ -5,27 +5,27 @@ using Cysharp.Threading.Tasks;
 using R3;
 using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.Data;
+using SmbcApp.LearnGame.GamePlay.Domain;
 using SmbcApp.LearnGame.GamePlay.GameState.NetworkData;
 using SmbcApp.LearnGame.UIWidgets.Chart;
 using SmbcApp.LearnGame.UIWidgets.Modal;
 using SmbcApp.LearnGame.UIWidgets.UI_Dropdown;
 using TMPro;
-using Unity.Logging;
 using UnityEngine;
-using UnityEngine.Pool;
 using VContainer;
 
 namespace SmbcApp.LearnGame.GamePlay.UI.Game
 {
     internal sealed class StockChartModalView : UIModal
     {
-        [SerializeField] [Required] private ChartGraphic chartGraphic;
+        [SerializeField] [Required] private UIChart uiChart;
         [SerializeField] [Required] private UIDropdown rangeDropdown;
 
         private RangeOptionData[] _rangeOptions;
 
         [Inject] internal NetworkGameTime GameTime;
         [Inject] internal MasterData MasterData;
+        [Inject] internal StockDomain StockDomain;
 
         protected override void Start()
         {
@@ -39,16 +39,16 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
                     var min = now.AddMonths(-6);
                     return (min, now);
                 }),
-                new RangeOptionData("過去12月", () =>
+                new RangeOptionData("過去10月", () =>
                 {
                     var now = GameTime.CurrentTime;
-                    var min = now.AddMonths(-12);
+                    var min = now.AddMonths(-10);
                     return (min, now);
                 }),
-                new RangeOptionData("過去18月", () =>
+                new RangeOptionData("過去14月", () =>
                 {
                     var now = GameTime.CurrentTime;
-                    var min = now.AddMonths(-18);
+                    var min = now.AddMonths(-14);
                     return (min, now);
                 })
             };
@@ -74,29 +74,32 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
         {
             var option = _rangeOptions[rangeDropdown.Value];
             var range = option.DateRangeFunc();
-            var stockTable = MasterData.DB.StockDataTable;
             var organizations = MasterData.DB.OrganizationDataTable.All;
+            var stockDataView = StockDataView().GroupBy(s => s.OrganizationId).OrderBy(g => g.Key);
 
-            var data = new List<ChartGraphic.ChartData>();
-            foreach (var org in organizations)
+            uiChart.ChartGraphic.SetData(stockDataView.Select(group =>
+                new ChartGraphic.ChartData(
+                    group.Select(g => (float)g.StockPrice).ToArray(), group.Key,
+                    organizations[group.Key].Name
+                )
+            ).ToArray());
+            uiChart.SetXLabels(XLabels()).Forget();
+
+            return;
+
+            IEnumerable<StockData> StockDataView()
             {
-                var prices = ListPool<float>.Get();
+                var stockDataTable = MasterData.DB.StockDataTable;
                 for (var date = range.Min; date <= range.Max; date = date.AddMonths(1))
-                {
-                    var stock = stockTable.FindClosestByDateAndOrganizationId((date, org.Id), false);
-                    if (stock == null)
-                    {
-                        Log.Warning($"Stock not found: {date}");
-                        continue;
-                    }
-
-                    prices.Add(stock.StockPrice);
-                }
-
-                data.Add(new ChartGraphic.ChartData(prices.ToArray(), org.Id, org.Name));
+                    foreach (var stockData in stockDataTable.FindClosestByDate(date, false))
+                        yield return stockData;
             }
 
-            chartGraphic.SetData(data.ToArray());
+            IEnumerable<string> XLabels()
+            {
+                for (var date = range.Min; date <= range.Max; date = date.AddMonths(1))
+                    yield return date.ToString("MM/dd");
+            }
         }
 
         private readonly struct RangeOptionData

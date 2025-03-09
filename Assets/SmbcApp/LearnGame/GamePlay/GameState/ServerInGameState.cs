@@ -23,7 +23,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
         {
             // ゲーム開始時間を設定
             var db = MasterData.DB;
-            var minDate = db.StockDataTable.SortByDate.First.Date.AddMonths(18);
+            var minDate = db.StockDataTable.SortByDate.First.Date.AddMonths(14);
             gameTime.CurrentTime = new DateTime(minDate.Year, minDate.Month, 1);
         }
 

@@ -14,6 +14,11 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
             set => valueLabel.text = value;
         }
 
+        public TextAlignmentOptions TextAlignment
+        {
+            set => valueLabel.alignment = value;
+        }
+
         [Serializable]
         public class Ref : ComponentReference<UIChartValueLabel>
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using JetBrains.Annotations;
 using R3;
 using Sirenix.OdinInspector;
@@ -81,7 +82,8 @@ namespace SmbcApp.LearnGame.GamePlay.Domain
         /// <returns>取得できたか</returns>
         public bool TryGetStockDataByDate(int orgId, DateTime date, out StockData stockData)
         {
-            stockData = MasterData.DB.StockDataTable.FindClosestByDateAndOrganizationId((date, orgId), false);
+            var view = MasterData.DB.StockDataTable.FindClosestByDate(date, false);
+            stockData = view.FirstOrDefault(s => s.OrganizationId == orgId);
             return stockData != null;
         }
 

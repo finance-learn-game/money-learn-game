@@ -12,19 +12,27 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
 {
     internal sealed class ChartLegend : MonoBehaviour
     {
+        private static readonly Dictionary<string, bool> MinimizedTable = new();
+
         [SerializeField] [Required] private ChartGraphic chartGraphic;
         [SerializeField] [Required] private UIButton minimizeButton;
         [SerializeField] [Required] private Sprite minimizeIcon;
         [SerializeField] [Required] private Sprite maximizeIcon;
         [SerializeField] [Required] private ChartLegendItem.Ref legendItemPrefab;
+        [SerializeField] [Required] private string legendKey;
 
         private readonly Stack<ChartLegendItem> _items = new();
-        private bool _minimized;
 
         private void Start()
         {
             HandleMinimizeButton();
             HandleOnDataChanged();
+        }
+
+        [RuntimeInitializeOnLoadMethod]
+        private static void Initialize()
+        {
+            MinimizedTable.Clear();
         }
 
         private void HandleOnDataChanged()
@@ -42,7 +50,7 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
                 {
                     var item = await pool.Rent();
                     item.Configure(data.label, data.color);
-                    item.gameObject.SetActive(!_minimized);
+                    item.gameObject.SetActive(!MinimizedTable[legendKey]);
                     item.IsShow = data.show;
                     item.OnToggle
                         .Subscribe(isShow => chartGraphic.SetChartShow(i, isShow))
@@ -54,18 +62,21 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
 
         private void HandleMinimizeButton()
         {
-            SetMinimized(false);
+            if (MinimizedTable.TryGetValue(legendKey, out var minimized))
+                SetMinimized(minimized);
+            else
+                SetMinimized(MinimizedTable[legendKey] = false);
             minimizeButton.OnClick
-                .Subscribe(_ => SetMinimized(!_minimized))
+                .Subscribe(_ => SetMinimized(!MinimizedTable[legendKey]))
                 .AddTo(gameObject);
 
             return;
 
             void SetMinimized(bool value)
             {
-                _minimized = value;
-                foreach (var item in _items) item.gameObject.SetActive(!_minimized);
-                minimizeButton.Image.sprite = _minimized ? maximizeIcon : minimizeIcon;
+                MinimizedTable[legendKey] = value;
+                foreach (var item in _items) item.gameObject.SetActive(!MinimizedTable[legendKey]);
+                minimizeButton.Image.sprite = MinimizedTable[legendKey] ? maximizeIcon : minimizeIcon;
             }
         }
     }

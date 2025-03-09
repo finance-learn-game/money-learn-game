@@ -64,6 +64,7 @@ namespace SmbcApp.LearnGame.Data.Editor
 
                     stocks.Add(new StockData
                     {
+                        Id = stocks.Count,
                         Date = date,
                         StockPrice = stockPrice,
                         OrganizationId = org.Id,

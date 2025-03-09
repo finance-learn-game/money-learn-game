@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 25, y: -25}
-  m_SizeDelta: {x: -250, y: -150}
+  m_AnchoredPosition: {x: 25, y: -10}
+  m_SizeDelta: {x: -250, y: -180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2168808736378455654
 CanvasRenderer:
@@ -258,7 +258,7 @@ MonoBehaviour:
     _enterAnimations: []
     _exitAnimations: []
   closeButton: {fileID: 1645267460419343480}
-  chartGraphic: {fileID: 3467825571148776928}
+  uiChart: {fileID: 1790424242402902295}
   rangeDropdown: {fileID: 1032332273904105547}
 --- !u!224 &6241736503407660779 stripped
 RectTransform:
@@ -312,6 +312,10 @@ PrefabInstance:
     - target: {fileID: 3841528999123993045, guid: 68f51d786e3a2124c914ecf5f308b00a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7000411328790770305, guid: 68f51d786e3a2124c914ecf5f308b00a, type: 3}
+      propertyPath: legendKey
+      value: StockChart
       objectReference: {fileID: 0}
     - target: {fileID: 7000411328790770305, guid: 68f51d786e3a2124c914ecf5f308b00a, type: 3}
       propertyPath: chartGraphic
