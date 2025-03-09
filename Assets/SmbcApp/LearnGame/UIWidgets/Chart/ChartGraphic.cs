@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using R3;
 using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using Unity.VectorGraphics;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.UI;
 
 namespace SmbcApp.LearnGame.UIWidgets.Chart
@@ -14,36 +16,35 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
         [SerializeField] [BoxGroup("Svg")] private float svgPixelsPerUnit = 100f;
         [SerializeField] [BoxGroup("Line")] private float lineThickness;
         [SerializeField] [BoxGroup("Line")] private float stepDistance = 10f;
-        [SerializeField] [BoxGroup("Line")] private float[] yData;
-        [SerializeField] [BoxGroup("Line")] private float2 yDataRange;
+        [SerializeField] [BoxGroup("Line")] private ChartData[] chartDataArr;
+        [SerializeField] [BoxGroup("Line")] private float2 dataRange;
         [SerializeField] [BoxGroup("Circle")] private float circleRadius;
         [SerializeField] [BoxGroup("Circle")] private float circleThickness;
-        [SerializeField] [BoxGroup("Circle")] private Color circleStrokeColor;
         [SerializeField] [BoxGroup("Circle")] private Color circleFillColor;
         [SerializeField] [BoxGroup("Grid")] private Color gridColor;
         [SerializeField] [BoxGroup("Grid")] private float gridThickness;
         [SerializeField] [BoxGroup("Grid")] private float gridStepDistance = 10f;
 
-        private readonly Subject<float[]> _onDataChanged = new();
+        private readonly Subject<ChartData[]> _onDataChanged = new();
         private List<VectorUtils.Geometry> _geomList;
 
         public float2 YDataRange
         {
-            get => yDataRange;
-            set => SetData(yData, value);
+            get => dataRange;
+            set => SetData(chartDataArr, value);
         }
 
         public float GridStep => gridStepDistance;
-        public Observable<float[]> OnDataChanged => _onDataChanged;
+        public Observable<ChartData[]> OnDataChanged => _onDataChanged;
 
         private float2 XRange => new(RectTransform.rect.xMin, RectTransform.rect.xMax);
         private float2 YRange => new(RectTransform.rect.yMin, RectTransform.rect.yMax);
 
         public IEnumerable<float> YGridPositions => Enumerable
-            .Range(0, (int)((yDataRange.y - yDataRange.x) / gridStepDistance) + 1)
-            .Select(i => i * gridStepDistance + yDataRange.x)
+            .Range(0, (int)((dataRange.y - dataRange.x) / gridStepDistance) + 1)
+            .Select(i => i * gridStepDistance + dataRange.x)
             .Select(y => math.remap(
-                yDataRange.x, yDataRange.y,
+                dataRange.x, dataRange.y,
                 YRange.x, YRange.y,
                 y
             ));
@@ -53,19 +54,13 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
         [Button]
         private void Configure()
         {
-            var shapes = new List<Shape>
+            var shapes = new List<Shape> { GridShape() };
+            foreach (var chartData in chartDataArr.Where(data => data.show))
             {
-                GridShape(),
-                new()
-                {
-                    Contours = new[]
-                    {
-                        ChartContour(CalcData(yData))
-                    },
-                    PathProps = GetPathProperties(lineThickness, color)
-                }
-            };
-            shapes.AddRange(PointCircleShape(CalcData(yData)));
+                var calcData = CalcData(chartData.data);
+                shapes.Add(ChartShape(calcData, chartData.color));
+                shapes.AddRange(PointCircleShape(calcData, chartData.color));
+            }
 
             var scene = new Scene { Root = new SceneNode { Shapes = shapes } };
             _geomList = VectorUtils.TessellateScene(scene, GetTessellationOptions());
@@ -76,23 +71,31 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
         /// <summary>
         ///     表示用のデータを設定する
         /// </summary>
-        /// <param name="data">データ</param>
-        /// <param name="dataRange">データの幅、指定なしの場合は自動設定</param>
-        public void SetData(float[] data, float2 dataRange = default)
+        /// <param name="dataArr">データ</param>
+        /// <param name="range">データの幅、指定なしの場合は自動設定</param>
+        public void SetData(ChartData[] dataArr, float2 range = default)
         {
-            yData = data;
-            yDataRange = dataRange.Equals(default) ? AutoSetDataRange() : dataRange;
+            chartDataArr = dataArr;
+            dataRange = range.Equals(default) ? AutoSetDataRange() : range;
             Configure();
-            _onDataChanged.OnNext(data);
+            _onDataChanged.OnNext(dataArr);
 
             return;
 
             float2 AutoSetDataRange()
             {
-                var min = math.floor(data.Min() / GridStep) * GridStep;
-                var max = math.ceil(data.Max() / GridStep) * GridStep;
+                var min = math.floor(dataArr.Min(d => d.data.Min()) / GridStep) * GridStep;
+                var max = math.ceil(dataArr.Max(d => d.data.Max()) / GridStep) * GridStep;
                 return new float2(min, max);
             }
+        }
+
+        public void SetChartShow(int dataIndex, bool isShow)
+        {
+            if (dataIndex < 0 || dataIndex >= chartDataArr.Length) return;
+
+            chartDataArr[dataIndex].show = isShow;
+            Configure();
         }
 
         protected override void OnPopulateMesh(VertexHelper vh)
@@ -101,8 +104,8 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
 
             vh.Clear();
 
-            var verts = new List<UIVertex>();
-            var indices = new List<int>();
+            var verts = ListPool<UIVertex>.Get();
+            var indices = ListPool<int>.Get();
             foreach (var geometry in _geomList)
             {
                 var indexOffset = verts.Count;
@@ -118,6 +121,8 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
             }
 
             vh.AddUIVertexStream(verts, indices);
+            ListPool<UIVertex>.Release(verts);
+            ListPool<int>.Release(indices);
         }
 
         private float2[] CalcData(float[] data)
@@ -128,7 +133,7 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
             for (var i = 0; i < data.Length; i++)
             {
                 var x = XRange.x + i * xStep;
-                var y = math.remap(yDataRange.x, yDataRange.y, YRange.x, YRange.y, data[i]);
+                var y = math.remap(dataRange.x, dataRange.y, YRange.x, YRange.y, data[i]);
                 resData[i] = new float2(x, y);
             }
 
@@ -152,7 +157,7 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
             };
         }
 
-        private static BezierContour ChartContour(float2[] data)
+        private Shape ChartShape(float2[] data, Color chartColor)
         {
             var segments = new BezierPathSegment[data.Length];
 
@@ -167,14 +172,21 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
                     segments[i + 1] = lineSegments[1];
             }
 
-            return new BezierContour
+            return new Shape
             {
-                Segments = segments.ToArray(),
-                Closed = false
+                Contours = new[]
+                {
+                    new BezierContour
+                    {
+                        Segments = segments.ToArray(),
+                        Closed = false
+                    }
+                },
+                PathProps = GetPathProperties(lineThickness, chartColor)
             };
         }
 
-        private Shape[] PointCircleShape(float2[] data)
+        private Shape[] PointCircleShape(float2[] data, Color circleColor)
         {
             var shapes = new Shape[data.Length];
             for (var i = 0; i < data.Length; i++)
@@ -182,7 +194,7 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
                 var point = data[i];
                 shapes[i] = new Shape
                 {
-                    PathProps = GetPathProperties(circleThickness, circleStrokeColor, PathCorner.Round,
+                    PathProps = GetPathProperties(circleThickness, circleColor, PathCorner.Round,
                         PathEnding.Square),
                     Fill = new SolidFill { Color = circleFillColor }
                 };
@@ -217,6 +229,38 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
                 MaxTanAngleDeviation = 0.05f,
                 SamplingStepSize = 0.01f
             };
+        }
+
+        /// <summary>
+        ///     チャートのデータを表す構造体
+        /// </summary>
+        [Serializable]
+        public struct ChartData
+        {
+            public float[] data;
+            public Color color;
+            public string label;
+            public bool show;
+
+            public ChartData(float[] data, int colorIndex, string label)
+            {
+                this.data = data;
+                color = HsvColor(colorIndex);
+                this.label = label;
+                show = true;
+            }
+
+            private static Color HsvColor(int colorIndex)
+            {
+                const int palette = 10;
+                return Color.HSVToRGB(colorIndex % palette / (float)palette, 1, 1);
+            }
+
+            [Button]
+            private void SetHsvColor(int colorIndex)
+            {
+                color = HsvColor(colorIndex);
+            }
         }
     }
 }

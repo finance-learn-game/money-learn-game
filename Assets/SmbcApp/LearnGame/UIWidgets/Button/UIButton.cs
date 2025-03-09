@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using uPalette.Generated;
 using uPalette.Runtime.Core.Synchronizer.Color;
 
@@ -29,6 +30,8 @@ namespace SmbcApp.LearnGame.UIWidgets.Button
             get => buttonText.text;
             set => buttonText.text = value;
         }
+
+        public Image Image => button.image;
 
         private void Start()
         {

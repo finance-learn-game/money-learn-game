@@ -12,6 +12,7 @@ using SmbcApp.LearnGame.UIWidgets.UI_Dropdown;
 using TMPro;
 using Unity.Logging;
 using UnityEngine;
+using UnityEngine.Pool;
 using VContainer;
 
 namespace SmbcApp.LearnGame.GamePlay.UI.Game
@@ -74,18 +75,25 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
             var option = _rangeOptions[rangeDropdown.Value];
             var range = option.DateRangeFunc();
             var stockTable = MasterData.DB.StockDataTable;
+            var organizations = MasterData.DB.OrganizationDataTable.All;
 
-            var data = new List<float>();
-            for (var date = range.Min; date <= range.Max; date = date.AddMonths(1))
+            var data = new List<ChartGraphic.ChartData>();
+            foreach (var org in organizations)
             {
-                var stock = stockTable.FindClosestByDateAndOrganizationId((date, 0), false);
-                if (stock == null)
+                var prices = ListPool<float>.Get();
+                for (var date = range.Min; date <= range.Max; date = date.AddMonths(1))
                 {
-                    Log.Warning($"Stock not found: {date}");
-                    continue;
+                    var stock = stockTable.FindClosestByDateAndOrganizationId((date, org.Id), false);
+                    if (stock == null)
+                    {
+                        Log.Warning($"Stock not found: {date}");
+                        continue;
+                    }
+
+                    prices.Add(stock.StockPrice);
                 }
 
-                data.Add(stock.StockPrice);
+                data.Add(new ChartGraphic.ChartData(prices.ToArray(), org.Id, org.Name));
             }
 
             chartGraphic.SetData(data.ToArray());

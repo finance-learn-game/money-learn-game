@@ -30,7 +30,7 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
             chartGraphic.OnDataChanged.Subscribe(OnDataChanged).AddTo(gameObject);
         }
 
-        private void OnDataChanged(float[] _)
+        private void OnDataChanged(ChartGraphic.ChartData[] _)
         {
             SetYValueLabel().Forget();
         }
