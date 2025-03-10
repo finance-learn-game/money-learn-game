@@ -5,9 +5,9 @@ using Unity.Netcode;
 namespace SmbcApp.LearnGame.GamePlay.GameState.NetworkData
 {
     /// <summary>
-    ///     インゲームでの時間を管理する
+    ///     インゲームでのターンを管理する
     /// </summary>
-    internal sealed class NetworkGameTime : NetworkBehaviour
+    internal sealed class NetworkGameTurn : NetworkBehaviour
     {
         private readonly NetworkVariable<long> _currentTimeTick = new();
 

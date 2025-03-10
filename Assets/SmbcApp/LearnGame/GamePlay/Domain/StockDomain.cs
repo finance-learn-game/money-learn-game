@@ -20,7 +20,7 @@ namespace SmbcApp.LearnGame.GamePlay.Domain
     {
         [SerializeField] [Required] private PersistantPlayerRuntimeCollection playerCollection;
 
-        [Inject] internal NetworkGameTime GameTime;
+        [Inject] internal NetworkGameTurn GameTurn;
         [Inject] internal MasterData MasterData;
 
         [Rpc(SendTo.Server)]
@@ -62,7 +62,7 @@ namespace SmbcApp.LearnGame.GamePlay.Domain
             var newAmount = stockAmounts[orgId] + request.Amount;
             if (newAmount < 0) return false;
 
-            if (!TryGetStockDataByDate(orgId, GameTime.CurrentTime, out var stockData)) return false;
+            if (!TryGetStockDataByDate(orgId, GameTurn.CurrentTime, out var stockData)) return false;
 
             var changeMoney = stockData.StockPrice * -request.Amount;
             var balanceState = player.BalanceState;

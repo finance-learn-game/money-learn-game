@@ -11,11 +11,11 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
     {
         [SerializeField] [Required] private TMP_Text timeText;
 
-        [Inject] internal NetworkGameTime GameTime;
+        [Inject] internal NetworkGameTurn GameTurn;
 
         private void Start()
         {
-            GameTime.OnChangeAsObservable()
+            GameTurn.OnChangeAsObservable()
                 .Subscribe(time => timeText.text = time.ToString("yyyy/MM/dd"))
                 .AddTo(gameObject);
         }

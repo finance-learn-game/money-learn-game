@@ -23,7 +23,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
 
         private RangeOptionData[] _rangeOptions;
 
-        [Inject] internal NetworkGameTime GameTime;
+        [Inject] internal NetworkGameTurn GameTurn;
         [Inject] internal MasterData MasterData;
         [Inject] internal StockDomain StockDomain;
 
@@ -35,19 +35,19 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
             {
                 new RangeOptionData("過去6月", () =>
                 {
-                    var now = GameTime.CurrentTime;
+                    var now = GameTurn.CurrentTime;
                     var min = now.AddMonths(-6);
                     return (min, now);
                 }),
                 new RangeOptionData("過去10月", () =>
                 {
-                    var now = GameTime.CurrentTime;
+                    var now = GameTurn.CurrentTime;
                     var min = now.AddMonths(-10);
                     return (min, now);
                 }),
                 new RangeOptionData("過去14月", () =>
                 {
-                    var now = GameTime.CurrentTime;
+                    var now = GameTurn.CurrentTime;
                     var min = now.AddMonths(-14);
                     return (min, now);
                 })
@@ -75,14 +75,18 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
             var option = _rangeOptions[rangeDropdown.Value];
             var range = option.DateRangeFunc();
             var organizations = MasterData.DB.OrganizationDataTable.All;
-            var stockDataView = StockDataView().GroupBy(s => s.OrganizationId).OrderBy(g => g.Key);
-
-            uiChart.ChartGraphic.SetData(stockDataView.Select(group =>
-                new ChartGraphic.ChartData(
-                    group.Select(g => (float)g.StockPrice).ToArray(), group.Key,
-                    organizations[group.Key].Name
-                )
-            ).ToArray());
+            uiChart.ChartGraphic.SetData(
+                StockDataView()
+                    .GroupBy(s => s.OrganizationId)
+                    .OrderBy(g => g.Key)
+                    .Select(group =>
+                        new ChartGraphic.ChartData(
+                            group.Select(g => (float)g.StockPrice).ToArray(), group.Key,
+                            organizations[group.Key].Name
+                        )
+                    )
+                    .ToArray()
+            );
             uiChart.SetXLabels(XLabels()).Forget();
 
             return;

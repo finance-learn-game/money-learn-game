@@ -13,7 +13,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
     [RequireComponent(typeof(NetCodeHooks))]
     internal sealed class ServerInGameState : ServerGameStateBehaviour
     {
-        [SerializeField] [Required] private NetworkGameTime gameTime;
+        [SerializeField] [Required] private NetworkGameTurn gameTurn;
         [SerializeField] [Required] private PersistantPlayerRuntimeCollection playerCollection;
 
         [Inject] internal MasterData MasterData;
@@ -24,7 +24,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
             // ゲーム開始時間を設定
             var db = MasterData.DB;
             var minDate = db.StockDataTable.SortByDate.First.Date.AddMonths(14);
-            gameTime.CurrentTime = new DateTime(minDate.Year, minDate.Month, 1);
+            gameTurn.CurrentTime = new DateTime(minDate.Year, minDate.Month, 1);
         }
 
         protected override void OnClientDisconnect(ulong clientId)

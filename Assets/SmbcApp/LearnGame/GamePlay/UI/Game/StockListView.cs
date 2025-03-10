@@ -24,7 +24,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
         private readonly List<StockListItemView> _stockItems = new();
 
         [Inject] internal MasterData MasterData;
-        [Inject] internal NetworkGameTime NetworkGameTime;
+        [Inject] internal NetworkGameTurn NetworkGameTurn;
         [Inject] internal StockDomain StockDomain;
 
         private void Start()
@@ -79,7 +79,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
             foreach (var (item, i) in _stockItems.Select((item, i) => (item, i)))
             {
                 var org = MasterData.DB.OrganizationDataTable.FindById(i);
-                ConfigureItem(NetworkGameTime.CurrentTime, org, stockData, item);
+                ConfigureItem(NetworkGameTurn.CurrentTime, org, stockData, item);
             }
         }
 
