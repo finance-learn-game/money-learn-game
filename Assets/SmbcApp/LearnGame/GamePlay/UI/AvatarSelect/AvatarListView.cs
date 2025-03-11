@@ -30,7 +30,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
         {
             var itemGo = await avatarListItemViewPrefab.InstantiateAsync();
             itemGo.TryGetComponent(out AvatarListItemView item);
-            item.Configure(avatar);
+            await item.Configure(avatar);
 
             item.OnSelect.Subscribe(_ =>
             {

@@ -1,4 +1,6 @@
 ﻿using System;
+using Addler.Runtime.Core.LifetimeBinding;
+using Cysharp.Threading.Tasks;
 using R3;
 using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.UIWidgets.Button;
@@ -24,9 +26,13 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
             set => selectButton.IsInteractable = value;
         }
 
-        public void Configure(Avatar avatar)
+        public async UniTask Configure(Avatar avatar)
         {
-            avatarImage.sprite = avatar.AvatarImage;
+            if (avatar.AvatarImage.IsValid())
+                avatarImage.sprite = await avatar.AvatarImage.OperationHandle.Task as Sprite;
+            else
+                avatarImage.sprite = await avatar.AvatarImage.LoadAssetAsync().BindTo(gameObject);
+
             avatarNameText.text = avatar.AvatarName;
             descriptionText.text = avatar.Description;
         }

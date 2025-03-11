@@ -14,7 +14,7 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
     {
         private static readonly Dictionary<string, bool> MinimizedTable = new();
 
-        [SerializeField] [Required] private ChartGraphic chartGraphic;
+        [SerializeField] private ChartGraphic chartGraphic;
         [SerializeField] [Required] private UIButton minimizeButton;
         [SerializeField] [Required] private Sprite minimizeIcon;
         [SerializeField] [Required] private Sprite maximizeIcon;

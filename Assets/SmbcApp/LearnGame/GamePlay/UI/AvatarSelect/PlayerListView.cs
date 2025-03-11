@@ -57,7 +57,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
                         playerListItem.PlayerName = ev.Value.PlayerName;
                         playerListItem.IsReady = ev.Value.IsReady;
                         if (avatarRegistry.TryGetAvatar(ev.Value.AvatarGuid.ToGuid(), out var avatar))
-                            playerListItem.PlayerAvatar = avatar.AvatarImage;
+                            playerListItem.SetPlayerAvatar(avatar).Forget();
                         else
                             Log.Error("Avatar not found for {0}", ev.Value.AvatarGuid.ToString());
                     }
@@ -83,7 +83,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
 
             var avatarGuid = player.AvatarGuid.ToGuid();
             if (avatarRegistry.TryGetAvatar(avatarGuid, out var avatar))
-                item.PlayerAvatar = avatar.AvatarImage;
+                await item.SetPlayerAvatar(avatar);
             else
                 Log.Error("Avatar not found for {0}", avatarGuid.ToString());
 

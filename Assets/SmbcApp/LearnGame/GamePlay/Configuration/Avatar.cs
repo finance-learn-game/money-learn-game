@@ -1,6 +1,8 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.Infrastructure;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace SmbcApp.LearnGame.GamePlay.Configuration
 {
@@ -10,11 +12,19 @@ namespace SmbcApp.LearnGame.GamePlay.Configuration
         [SerializeField] [Required] private string avatarName;
         [SerializeField] [Required] private string description;
         [SerializeField] [Required] private JobType jobType;
-        [SerializeField] [Required] private Sprite avatarImage;
+        [SerializeField] [Required] private AssetReferenceSprite avatarImage;
 
         public string AvatarName => avatarName;
         public string Description => description;
         public JobType JobType => jobType;
-        public Sprite AvatarImage => avatarImage;
+        public AssetReferenceSprite AvatarImage => avatarImage;
+
+        [Serializable]
+        public class Ref : AssetReferenceT<Avatar>
+        {
+            public Ref(string guid) : base(guid)
+            {
+            }
+        }
     }
 }

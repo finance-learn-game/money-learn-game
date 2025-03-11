@@ -16,4 +16,10 @@ MonoBehaviour:
   avatarName: "\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8"
   description: "\u305F\u307E\u306B\u4F5C\u54C1\u304C\u58F2\u308C\u308B\u3068\u7D66\u6599\u304C\u5165\u3063\u3066\u304F\u308B\u3002"
   jobType: 4
-  avatarImage: {fileID: 21300000, guid: f402fb44752aaf440a49b1edf99e5d6a, type: 3}
+  avatarImage:
+    m_AssetGUID: f402fb44752aaf440a49b1edf99e5d6a
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
