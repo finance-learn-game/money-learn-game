@@ -55,6 +55,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 652dd97f5a624db4c9b18c7794b5cc59
+    m_Address: Turn Info Modal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 68f51d786e3a2124c914ecf5f308b00a
     m_Address: Legend
     m_ReadOnly: 0

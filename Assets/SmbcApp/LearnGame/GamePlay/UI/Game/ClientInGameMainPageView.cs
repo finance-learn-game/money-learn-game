@@ -16,7 +16,9 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
         [SerializeField] [Required] private GameTimeTextView timeTextView;
         [SerializeField] [Required] private UIButton openStockModalButton;
         [SerializeField] [Required] private UIButton turnEndButton;
+        [SerializeField] [Required] private UIButton openTurnInfoModalButton;
         [SerializeField] [Required] private UIModal.Ref stockModalPrefab;
+        [SerializeField] [Required] private UIModal.Ref turnInfoModalPrefab;
 
         private NetworkGameTurn _gameTurn;
         private ModalContainer _modalContainer;
@@ -33,7 +35,18 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
                 .AddTo(gameObject);
             _gameTurn.ObserveChangeTurnEnd(clientId)
                 .Prepend(false)
-                .Subscribe(turnEnd => turnEndButton.Text = turnEnd ? "待機中" : "次のターンへ")
+                .Subscribe(turnEnd =>
+                {
+                    turnEndButton.Text = turnEnd ? "待機中" : "次のターンへ";
+                    openStockModalButton.IsInteractable = !turnEnd;
+                    openTurnInfoModalButton.IsInteractable = !turnEnd;
+                })
+                .AddTo(gameObject);
+            _gameTurn.OnChangeTime
+                .Subscribe(_ => _modalContainer.Push(turnInfoModalPrefab.AssetGUID, true))
+                .AddTo(gameObject);
+            openTurnInfoModalButton.OnClick
+                .Subscribe(_ => _modalContainer.Push(turnInfoModalPrefab.AssetGUID, true))
                 .AddTo(gameObject);
         }
 

@@ -16,6 +16,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
         private void Start()
         {
             GameTurn.OnChangeTime
+                .Prepend(GameTurn.CurrentTime)
                 .Subscribe(time => timeText.text = time.ToString("yyyy/MM/dd"))
                 .AddTo(gameObject);
         }

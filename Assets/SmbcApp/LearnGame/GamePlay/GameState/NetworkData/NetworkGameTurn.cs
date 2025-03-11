@@ -38,7 +38,6 @@ namespace SmbcApp.LearnGame.GamePlay.GameState.NetworkData
         {
             return _isTurnEndList.OnChangedAsObservable()
                 .Where(e => e.Value.ClientId == clientId)
-                .Do(e => Log.Info("ListEvent: {0}", e.Type.ToString()))
                 .Where(e => e.Type == NetworkListEvent<ClientTurn>.EventType.Value)
                 .Select(e => e.Value.IsTurnEnd);
         }
