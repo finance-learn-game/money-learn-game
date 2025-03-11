@@ -3,6 +3,8 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using MasterMemory;
 using Unity.Logging;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
 using VContainer;
 using VContainer.Unity;
 
@@ -11,7 +13,7 @@ namespace SmbcApp.LearnGame.Data
     public sealed class MasterData : IAsyncStartable
     {
         public const string BinaryDirectory = "Assets/Projects/MasterData/Binary";
-        public const string BinaryFileName = "MasterData.bin";
+        public const string BinaryFileName = "MasterData.bytes";
 
         [Inject]
         public MasterData()
@@ -24,17 +26,15 @@ namespace SmbcApp.LearnGame.Data
 
         public async UniTask StartAsync(CancellationToken cancellation = new())
         {
-            DB = await LoadDB(cancellation);
+            DB = await LoadDB();
             Initialized = true;
             Log.Info("MasterData loaded.");
         }
 
-        private static async UniTask<MemoryDatabase> LoadDB(CancellationToken cancellation = new())
+        private static async UniTask<MemoryDatabase> LoadDB()
         {
-            await using var stream = new FileStream(Path.Combine(BinaryDirectory, BinaryFileName), FileMode.Open);
-            var buffer = new byte[stream.Length];
-            _ = await stream.ReadAsync(buffer, cancellation);
-            var db = new MemoryDatabase(buffer);
+            var bin = await Addressables.LoadAssetAsync<TextAsset>(Path.GetFileNameWithoutExtension(BinaryFileName));
+            var db = new MemoryDatabase(bin.bytes);
             return db;
         }
     }
