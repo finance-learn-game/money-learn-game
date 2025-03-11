@@ -228,6 +228,7 @@ MonoBehaviour:
     _popExitAnimations: []
   timeTextView: {fileID: 6386343240206881005}
   openStockModalButton: {fileID: 5819846641915956358}
+  turnEndButton: {fileID: 7088379918827806477}
   stockModalPrefab:
     m_AssetGUID: d2cb6bf4ecea39943a50060bcc75e048
     m_SubObjectName: 
@@ -411,7 +412,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1005736052289607254, guid: cd3775c13bb2a324b9b20f477faf1937, type: 3}
       propertyPath: m_Name
-      value: UI Button
+      value: TurnEnd Button
       objectReference: {fileID: 0}
     - target: {fileID: 1181362328993394941, guid: cd3775c13bb2a324b9b20f477faf1937, type: 3}
       propertyPath: m_Pivot.x
@@ -507,6 +508,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1181362328993394941, guid: cd3775c13bb2a324b9b20f477faf1937, type: 3}
   m_PrefabInstance: {fileID: 6022783858412472979}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7088379918827806477 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -5635197235124791906, guid: cd3775c13bb2a324b9b20f477faf1937, type: 3}
+  m_PrefabInstance: {fileID: 6022783858412472979}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c77cd9c219f41e58a2868bca1586e2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6994088396947265816
 PrefabInstance:
   m_ObjectHideFlags: 0

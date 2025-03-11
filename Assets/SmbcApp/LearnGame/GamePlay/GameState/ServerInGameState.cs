@@ -1,4 +1,5 @@
 ﻿using System;
+using R3;
 using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.Data;
 using SmbcApp.LearnGame.GamePlay.GamePlayObjects.RuntimeDataContainers;
@@ -25,10 +26,20 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
             var db = MasterData.DB;
             var minDate = db.StockDataTable.SortByDate.First.Date.AddMonths(14);
             gameTurn.CurrentTime = new DateTime(minDate.Year, minDate.Month, 1);
+
+            // ターン終了時のイベントを購読
+            gameTurn.OnTurnEnd.Subscribe(OnTurnEnd).AddTo(gameObject);
+        }
+
+        private void OnTurnEnd(Unit _)
+        {
+            gameTurn.CurrentTime = gameTurn.CurrentTime.AddMonths(1);
         }
 
         protected override void OnClientDisconnect(ulong clientId)
         {
+            // ターン終了リストからプレイヤーを削除
+            gameTurn.RemovePlayer(clientId);
         }
 
         protected override void OnSceneEvent(SceneEvent sceneEvent)
@@ -40,6 +51,9 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
             if (player.StockState.StockAmounts.Count == 0)
                 // プレイヤーの初期データを設定
                 player.StockState.SetStockAmount(new int[MasterData.DB.OrganizationDataTable.Count]);
+
+            // ターン終了リストにプレイヤーを追加
+            gameTurn.AddPlayer(sceneEvent.ClientId);
         }
     }
 }

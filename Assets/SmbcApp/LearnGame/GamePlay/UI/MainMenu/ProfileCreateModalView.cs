@@ -1,4 +1,5 @@
-﻿using R3;
+﻿using System.Text.RegularExpressions;
+using R3;
 using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.UIWidgets.Button;
 using SmbcApp.LearnGame.UIWidgets.Modal;
@@ -27,6 +28,14 @@ namespace SmbcApp.LearnGame.Gameplay.UI.MainMenu
                 ProfileManager.CreateProfile(profileName);
                 ModalContainer.Pop(true);
             }).AddTo(gameObject);
+            profileNameInput.onValueChanged.AsObservable()
+                .Subscribe(dirty =>
+                {
+                    const int maxLength = 30;
+                    var sanitized = Regex.Replace(dirty, "[^a-zA-Z0-9]", "");
+                    profileNameInput.text = sanitized.Length > maxLength ? sanitized[..maxLength] : sanitized;
+                })
+                .AddTo(gameObject);
         }
     }
 }

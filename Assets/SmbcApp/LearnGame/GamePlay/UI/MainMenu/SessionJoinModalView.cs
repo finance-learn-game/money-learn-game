@@ -59,7 +59,9 @@ namespace SmbcApp.LearnGame.Gameplay.UI.MainMenu
 
         private static string SanitizeJoinCode(string dirtyString)
         {
-            return Regex.Replace(dirtyString.ToUpper(), "[^A-Z0-9]", "");
+            const int maxLength = 6;
+            var sanitized = Regex.Replace(dirtyString.ToUpper(), "[^A-Z0-9]", "");
+            return sanitized.Length > maxLength ? sanitized[..maxLength] : sanitized;
         }
     }
 }

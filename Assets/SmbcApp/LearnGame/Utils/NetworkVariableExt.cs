@@ -32,5 +32,20 @@ namespace SmbcApp.LearnGame.Utils
                 return Disposable.Create(() => list.OnListChanged -= observer.OnNext);
             });
         }
+
+        public static int IndexOfClientId<T>(this NetworkList<T> self, ulong playerId)
+            where T : unmanaged, IEquatable<T>, IDataWithClientId
+        {
+            for (var i = 0; i < self.Count; i++)
+                if (self[i].ClientId == playerId)
+                    return i;
+
+            return -1;
+        }
+    }
+
+    public interface IDataWithClientId
+    {
+        public ulong ClientId { get; }
     }
 }
