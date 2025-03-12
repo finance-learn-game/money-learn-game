@@ -31,4 +31,17 @@ namespace SmbcApp.LearnGame.Data
         [PrimaryKey] public int Id { get; init; }
         public string Name { get; init; }
     }
+
+    [MemoryTable("News")]
+    [MessagePackObject(true)]
+    public record NewsData
+    {
+        [PrimaryKey] public int Id { get; init; }
+
+        // ReSharper disable all
+        [SecondaryKey(0), NonUnique] public DateTime Date { get; init; }
+        // ReSharper restore all
+
+        public string Detail { get; init; }
+    }
 }
