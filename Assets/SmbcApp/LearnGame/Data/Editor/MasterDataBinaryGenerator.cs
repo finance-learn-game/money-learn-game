@@ -22,13 +22,23 @@ namespace SmbcApp.LearnGame.Data.Editor
 
         private static async UniTask SaveBinary()
         {
+            var path = Path.Combine(MasterData.BinaryDirectory, MasterData.BinaryFileName);
+            MemoryDatabase db;
+            await using (var fs = new FileStream(path, FileMode.Open))
+            {
+                var buf = new byte[fs.Length];
+                _ = await fs.ReadAsync(buf);
+                db = new MemoryDatabase(buf);
+            }
+
             var (stocks, organizations) = await LoadStockData();
             var builder = new DatabaseBuilder();
 
+            builder.Append(db.NewsDataTable.All);
             builder.Append(stocks);
             builder.Append(organizations);
 
-            await using var stream = new FileStream(Path.Combine(MasterData.BinaryDirectory, MasterData.BinaryFileName),
+            await using var stream = new FileStream(path,
                 FileMode.Create);
             builder.WriteToStream(stream);
             Debug.Log("Binary generated and saved");

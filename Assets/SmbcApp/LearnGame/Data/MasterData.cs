@@ -33,8 +33,9 @@ namespace SmbcApp.LearnGame.Data
 
         private static async UniTask<MemoryDatabase> LoadDB()
         {
-            var bin = await Addressables.LoadAssetAsync<TextAsset>(Path.GetFileNameWithoutExtension(BinaryFileName));
-            var db = new MemoryDatabase(bin.bytes);
+            var handle = Addressables.LoadAssetAsync<TextAsset>(Path.GetFileNameWithoutExtension(BinaryFileName));
+            var db = new MemoryDatabase((await handle).bytes);
+            Addressables.Release(handle);
             return db;
         }
     }

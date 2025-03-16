@@ -1,6 +1,7 @@
 ﻿using System;
 using MasterMemory;
 using MessagePack;
+using Sirenix.OdinInspector;
 
 namespace SmbcApp.LearnGame.Data
 {
@@ -36,12 +37,20 @@ namespace SmbcApp.LearnGame.Data
     [MessagePackObject(true)]
     public record NewsData
     {
-        [PrimaryKey] public int Id { get; init; }
+        [ShowInInspector] [PrimaryKey] public int Id { get; init; }
+        [ShowInInspector] public string Detail { get; init; }
+        [ShowInInspector] public string DirtyDate { get; init; }
 
         // ReSharper disable all
-        [SecondaryKey(0), NonUnique] public DateTime Date { get; init; }
-        // ReSharper restore all
+        [ShowInInspector]
+        [SecondaryKey(0), NonUnique]
+        [SecondaryKey(2), NonUnique]
+        public int Year { get; init; }
 
-        public string Detail { get; init; }
+        [ShowInInspector]
+        [SecondaryKey(1), NonUnique]
+        [SecondaryKey(2), NonUnique]
+        public int Month { get; init; }
+        // ReSharper restore all
     }
 }
