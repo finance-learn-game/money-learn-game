@@ -80,6 +80,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 960c7432476f61a4aabaaa0d0feae8a8
+    m_Address: News List
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a1b007c927fdb5a4da0730615d5f40a8
     m_Address: Player Progress Item
     m_ReadOnly: 0
@@ -162,6 +167,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: edc6e43e508a83144ba59d03710e60d1
     m_Address: UI CheckBox
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f42fab85328390c4a8461100ac0a55e0
+    m_Address: News List Item
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

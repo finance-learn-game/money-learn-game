@@ -454,6 +454,7 @@ MonoBehaviour:
   closeButton: {fileID: 2295692010603754157}
   dateText: {fileID: 8888214286885795650}
   salaryText: {fileID: 2706052226375161351}
+  newsListView: {fileID: 1160451843611387101}
 --- !u!224 &6886531553489528894 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8572416776895370350, guid: 88544ce089243154a841796cc4f2f414, type: 3}
@@ -579,27 +580,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6246621285083983931, guid: 960c7432476f61a4aabaaa0d0feae8a8, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6246621285083983931, guid: 960c7432476f61a4aabaaa0d0feae8a8, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6246621285083983931, guid: 960c7432476f61a4aabaaa0d0feae8a8, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7715110259137702549, guid: 960c7432476f61a4aabaaa0d0feae8a8, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4794116170486832961, guid: 960c7432476f61a4aabaaa0d0feae8a8, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 960c7432476f61a4aabaaa0d0feae8a8, type: 3}
+--- !u!114 &1160451843611387101 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -4925066406395540852, guid: 960c7432476f61a4aabaaa0d0feae8a8, type: 3}
+  m_PrefabInstance: {fileID: 3151507085241544273}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ed48b69cfcd48f5b0069ce95d1477ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8027562356995051248 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4961778842983080097, guid: 960c7432476f61a4aabaaa0d0feae8a8, type: 3}

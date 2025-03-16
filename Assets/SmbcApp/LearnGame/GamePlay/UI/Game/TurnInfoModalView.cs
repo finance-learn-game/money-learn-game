@@ -11,15 +11,23 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
     {
         [SerializeField] [Required] private TMP_Text dateText;
         [SerializeField] [Required] private TMP_Text salaryText;
+        [SerializeField] [Required] private NewsListView newsListView;
 
-        [Inject] internal NetworkGameTurn GameTurn;
+        private NetworkGameTurn _gameTurn;
 
         protected override void Start()
         {
             base.Start();
 
-            var date = GameTurn.CurrentTime;
+            var date = _gameTurn.CurrentTime;
             dateText.text = $"{date:yyyy/MM/dd} になりました";
+        }
+
+        [Inject]
+        internal void Construct(IObjectResolver resolver, NetworkGameTurn gameTurn)
+        {
+            _gameTurn = gameTurn;
+            resolver.Inject(newsListView);
         }
     }
 }
