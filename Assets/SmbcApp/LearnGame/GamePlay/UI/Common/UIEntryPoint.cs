@@ -30,7 +30,6 @@ namespace SmbcApp.LearnGame.Gameplay.UI.Common
             pageContainer.AddCallbackReceiver(_pageCallbackReceiver);
             modalContainer.AddCallbackReceiver(_modalCallbackReceiver);
 
-#if UNITY_EDITOR
             for (var i = 0; i < pageContainer.transform.childCount; i++)
             {
                 var child = pageContainer.transform.GetChild(i);
@@ -42,7 +41,6 @@ namespace SmbcApp.LearnGame.Gameplay.UI.Common
                 var child = modalContainer.transform.GetChild(i);
                 child.gameObject.SetActive(false);
             }
-#endif
 
             if (enableServerInitialPage && NetworkManager.Singleton.IsServer)
                 pageContainer.Push(serverInitialPage.AssetGUID, false);

@@ -1,4 +1,6 @@
-﻿using SmbcApp.LearnGame.SceneLoader;
+﻿using System;
+using System.IO;
+using SmbcApp.LearnGame.SceneLoader;
 using Unity.Logging;
 using Unity.Logging.Sinks;
 using UnityEditor;
@@ -29,19 +31,45 @@ namespace SmbcApp.LearnGame.ApplicationLifecycle
 
         private static void ConfigureLogger()
         {
-            Log.Logger = new Logger(EditorConfiguration());
-            return;
+            Log.Logger = new Logger(
+#if UNITY_EDITOR
+                EditorConfiguration()
+#elif DEBUG
+                DevelopmentConfiguration()
+#else
+                DevelopmentConfiguration()
+#endif
+            );
+        }
 
-            static LoggerConfig EditorConfiguration()
-            {
-                return new LoggerConfig()
-                    .SyncMode.FatalIsSync()
-                    .RedirectUnityLogs()
-                    .WriteTo.UnityEditorConsole(
-                        minLevel: LogLevel.Info,
-                        captureStackTrace: true
-                    );
-            }
+        private static LoggerConfig EditorConfiguration()
+        {
+            return new LoggerConfig()
+                .SyncMode.FatalIsSync()
+                .RedirectUnityLogs()
+                .WriteTo.UnityEditorConsole(
+                    minLevel: LogLevel.Info,
+                    captureStackTrace: true
+                );
+        }
+
+        private static LoggerConfig DevelopmentConfiguration()
+        {
+            var random = Guid.NewGuid().ToString()[..8];
+            var path = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                $"Logs/dev-{random}",
+                $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log"
+            );
+            return new LoggerConfig()
+                .SyncMode.FatalIsSync()
+                .RedirectUnityLogs()
+                .WriteTo.File(
+                    path,
+                    minLevel: LogLevel.Debug,
+                    captureStackTrace: true,
+                    outputTemplate: "{Timestamp} [{Level}] {Message}{NewLine}{Stacktrace}"
+                );
         }
 
 #if UNITY_EDITOR

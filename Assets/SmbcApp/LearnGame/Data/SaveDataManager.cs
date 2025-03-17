@@ -8,6 +8,9 @@ using R3;
 using Unity.Logging;
 using UnityEngine;
 using VContainer.Unity;
+#if UNITY_WEBGL && !UNITY_EDITOR
+using System.Runtime.InteropServices;
+#endif
 
 namespace SmbcApp.LearnGame.Data
 {
@@ -19,7 +22,7 @@ namespace SmbcApp.LearnGame.Data
         private const string SaveDataFileName = "SaveData.bin";
 
         private readonly ReactiveProperty<GameSaveData> _saveData = new();
-#if UNITY_EDITOR
+
         private static string _saveDataPath;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -29,13 +32,18 @@ namespace SmbcApp.LearnGame.Data
             Debug.Log($"[SaveDataManager] Save data path: {_saveDataPath}");
         }
 
-#else
+#if UNITY_WEBGL && !UNITY_EDITOR
         private readonly string _saveDataPath = Path.Combine(Application.persistentDataPath, SaveDataFileName);
 #endif
         public bool IsDirty { get; private set; }
 
         public ReadOnlyReactiveProperty<GameSaveData> SaveData => _saveData;
         public bool Initialized { get; private set; }
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern void syncDB();
+#endif
 
         /// <summary>
         ///     ゲーム終了時にセーブデータを保存する用途で使用する
@@ -106,6 +114,9 @@ namespace SmbcApp.LearnGame.Data
             await MessagePackSerializer.Typeless.SerializeAsync(fileStream, _saveData.Value,
                 cancellationToken: cancellation);
             IsDirty = false;
+#if UNITY_WEBGL && !UNITY_EDITOR
+            syncDB();
+#endif
             Log.Info("Save data saved to {0}", _saveDataPath);
         }
     }

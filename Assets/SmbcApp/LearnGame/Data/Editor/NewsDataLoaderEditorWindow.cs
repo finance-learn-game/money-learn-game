@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if UNITY_EDITOR
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -102,3 +103,4 @@ namespace SmbcApp.LearnGame.Data.Editor
         }
     }
 }
+#endif

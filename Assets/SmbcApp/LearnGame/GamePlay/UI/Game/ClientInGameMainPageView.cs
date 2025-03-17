@@ -14,6 +14,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
     internal sealed class ClientInGameMainPageView : Page
     {
         [SerializeField] [Required] private GameTimeTextView timeTextView;
+        [SerializeField] [Required] private BalanceTextView balanceTextView;
         [SerializeField] [Required] private UIButton openStockModalButton;
         [SerializeField] [Required] private UIButton turnEndButton;
         [SerializeField] [Required] private UIButton openTurnInfoModalButton;
@@ -57,6 +58,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
             _gameTurn = gameTurn;
 
             resolver.Inject(timeTextView);
+            resolver.Inject(balanceTextView);
         }
     }
 }

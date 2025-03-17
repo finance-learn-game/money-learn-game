@@ -1,6 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
-using WebSocketSharp;
 
 namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
 {
@@ -19,17 +18,17 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
         public override void OnClientDisconnect(ulong _)
         {
             var reason = ConnectionManager.NetworkManager.DisconnectReason;
-            if (reason.IsNullOrEmpty() || reason == "Disconnected due to host shutting down.")
+            if (string.IsNullOrEmpty(reason) || reason == "Disconnected due to host shutting down.")
             {
                 ConnectStatusPublisher.Publish(ConnectStatus.Undefined);
-                ConnectionManager.ChangeState(ConnectionManager.Offline);
             }
             else
             {
                 var connectStatus = JsonUtility.FromJson<ConnectStatus>(reason);
                 ConnectStatusPublisher.Publish(connectStatus);
-                ConnectionManager.ChangeState(ConnectionManager.Offline);
             }
+
+            ConnectionManager.ChangeState(ConnectionManager.Offline);
         }
     }
 }

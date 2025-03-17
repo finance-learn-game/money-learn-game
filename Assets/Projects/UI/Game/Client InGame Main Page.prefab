@@ -228,6 +228,7 @@ MonoBehaviour:
     _popEnterAnimations: []
     _popExitAnimations: []
   timeTextView: {fileID: 6386343240206881005}
+  balanceTextView: {fileID: 2829150755481482501}
   openStockModalButton: {fileID: 5819846641915956358}
   turnEndButton: {fileID: 7088379918827806477}
   openTurnInfoModalButton: {fileID: 3254783386516985664}
@@ -409,7 +410,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   balanceText: {fileID: 238492938752329898}
-  playerCollection: {fileID: 11400000, guid: 5743e623b30092f429fe135ba4adef66, type: 2}
 --- !u!1001 &2080823309434323678
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -15,7 +15,6 @@ namespace SmbcApp.LearnGame.GamePlay.Configuration
 
         public IReadOnlyList<Avatar> Avatars => avatars;
 
-#if UNITY_EDITOR
         private bool ValidateAvatars(Avatar[] self, ref string msg)
         {
             foreach (var avatar in self)
@@ -28,7 +27,6 @@ namespace SmbcApp.LearnGame.GamePlay.Configuration
 
             return true;
         }
-#endif
 
         public bool TryGetAvatar(Guid guid, out Avatar avatar)
         {

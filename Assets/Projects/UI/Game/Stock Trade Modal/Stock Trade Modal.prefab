@@ -166,7 +166,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   balanceText: {fileID: 8947404249240871457}
-  playerCollection: {fileID: 11400000, guid: 5743e623b30092f429fe135ba4adef66, type: 2}
 --- !u!1001 &2674844483940636005
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -592,6 +591,7 @@ MonoBehaviour:
   closeButton: {fileID: 5675297667193734303}
   stockList: {fileID: 6087296867856564467}
   stockChartButton: {fileID: 1501164438725476603}
+  balanceTextView: {fileID: 8791531099533055418}
   stockChartModal:
     m_AssetGUID: 217ba7fd84467234397e24a58ae807b1
     m_SubObjectName: 

@@ -548,6 +548,7 @@ MonoBehaviour:
   autoInjectGameObjects: []
   gameTurn: {fileID: 1058224390}
   stockDomain: {fileID: 1058224393}
+  playerCollection: {fileID: 11400000, guid: 5743e623b30092f429fe135ba4adef66, type: 2}
 --- !u!114 &1058224389
 MonoBehaviour:
   m_ObjectHideFlags: 0

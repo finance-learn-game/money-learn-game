@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.GamePlay.Domain;
+using SmbcApp.LearnGame.GamePlay.GamePlayObjects.RuntimeDataContainers;
 using SmbcApp.LearnGame.GamePlay.GameState.NetworkData;
 using UnityEngine;
 using VContainer;
@@ -11,6 +12,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
     {
         [SerializeField] [Required] private NetworkGameTurn gameTurn;
         [SerializeField] [Required] private StockDomain stockDomain;
+        [SerializeField] [Required] private PersistantPlayerRuntimeCollection playerCollection;
 
         public override GameState ActiveState => GameState.Game;
 
@@ -18,6 +20,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
         {
             builder.RegisterComponent(gameTurn);
             builder.RegisterComponent(stockDomain);
+            builder.RegisterInstance(playerCollection);
         }
     }
 }

@@ -1,0 +1,162 @@
+<linker>
+  <assembly fullname="SmbcApp.LearnGame.GamePlay, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="SmbcApp.LearnGame.GamePlay.GamePlayObjects.RuntimeDataContainers.PersistantPlayerRuntimeCollection" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.AvatarSelect.AvatarListItemView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.AvatarSelect.AvatarListView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.AvatarSelect.AvatarSelectPageView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.AvatarSelect.PlayerListItemView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.AvatarSelect.PlayerListView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.AvatarSelect.SessionCodeView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.Gameplay.UI.Common.ClientGameLoadingScreen" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.Game.BalanceTextView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.Game.ClientInGameMainPageView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.Game.GameTimeTextView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.Game.NewsListItemView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.Game.NewsListView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.Game.ServerInGameMainPageView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.Game.StockChartModalView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.Game.StockListItemView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.Game.StockListView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.Game.StockModalView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.Game.TurnInfoModalView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.MainMenu.MainMenuPageView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.Gameplay.UI.MainMenu.ProfileCreateModalView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.Gameplay.UI.MainMenu.ProfileListItemView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.Gameplay.UI.MainMenu.ProfileListModalView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.Gameplay.UI.MainMenu.SessionJoinModalView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.AvatarSelect.AvatarListItemView/Ref" preserve="nothing" serialized="true" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.AvatarSelect.PlayerListItemView/Ref" preserve="nothing" serialized="true" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.Game.NewsListItemView/Ref" preserve="nothing" serialized="true" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.UI.Game.StockListItemView/Ref" preserve="nothing" serialized="true" />
+    <type fullname="SmbcApp.LearnGame.Gameplay.UI.MainMenu.ProfileListItemView/Ref" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="SmbcApp.LearnGame.GamePlay.Configuration, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="SmbcApp.LearnGame.GamePlay.Configuration.Avatar" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.Configuration.AvatarRegistry" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.GamePlay.Configuration.GameConfiguration" preserve="all" />
+  </assembly>
+  <assembly fullname="SmbcApp.LearnGame.SceneLoader, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="SmbcApp.LearnGame.SceneLoader.NetworkedLoadingProgressTracker" preserve="all" />
+  </assembly>
+  <assembly fullname="SmbcApp.LearnGame.UIWidgets, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="SmbcApp.LearnGame.UIWidgets.Button.UIButton" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.UIWidgets.Chart.ChartGraphic" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.UIWidgets.Chart.ChartLegend" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.UIWidgets.Chart.ChartLegendItem" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.UIWidgets.Chart.UIChart" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.UIWidgets.Chart.UIChartValueLabel" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.UIWidgets.Modal.UIModal" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.UIWidgets.ScrollView.UIScrollView" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.UIWidgets.Slider.UINoInteractSlider" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.UIWidgets.Spinner.UISpinner" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.UIWidgets.UI_Dropdown.UIDropdown" preserve="all" />
+    <type fullname="SmbcApp.LearnGame.UIWidgets.Chart.ChartGraphic/ChartData" preserve="nothing" serialized="true" />
+    <type fullname="SmbcApp.LearnGame.UIWidgets.Chart.ChartLegendItem/Ref" preserve="nothing" serialized="true" />
+    <type fullname="SmbcApp.LearnGame.UIWidgets.Chart.UIChartValueLabel/Ref" preserve="nothing" serialized="true" />
+    <type fullname="SmbcApp.LearnGame.UIWidgets.Modal.UIModal/Ref" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="Unity.Addressables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
+    <type fullname="UnityEngine.AddressableAssets.Addressables" preserve="all" />
+    <type fullname="UnityEngine.AddressableAssets.AssetReferenceSprite" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="Unity.Netcode.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="Unity.Netcode.NetworkObject" preserve="all" />
+  </assembly>
+  <assembly fullname="Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.AssetBundleProvider" preserve="all" />
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.BundledAssetProvider" preserve="all" />
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.InstanceProvider" preserve="all" />
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.SceneProvider" preserve="all" />
+  </assembly>
+  <assembly fullname="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="TMPro.TextMeshProUGUI" preserve="all" />
+    <type fullname="TMPro.TMP_Dropdown" preserve="all" />
+    <type fullname="TMPro.TMP_FontAsset" preserve="all" />
+    <type fullname="TMPro.TMP_InputField" preserve="all" />
+    <type fullname="TMPro.FaceInfo_Legacy" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.FontAssetCreationSettings" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.GlyphAnchorPoint" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.KerningTable" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.LigatureSubstitutionRecord" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.MarkPositionAdjustment" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.MarkToBaseAdjustmentRecord" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_Character" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_Dropdown/DropdownEvent" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_Dropdown/OptionData" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_Dropdown/OptionDataList" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_FontFeatureTable" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_FontWeightPair" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_InputField/OnChangeEvent" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_InputField/SelectionEvent" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_InputField/SubmitEvent" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_InputField/TextSelectionEvent" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_InputField/TouchScreenKeyboardEvent" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.VertexGradient" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.GameObject" preserve="all" />
+    <type fullname="UnityEngine.Material" preserve="all" />
+    <type fullname="UnityEngine.Object" preserve="all" />
+    <type fullname="UnityEngine.RectTransform" preserve="all" />
+    <type fullname="UnityEngine.Shader" preserve="all" />
+    <type fullname="UnityEngine.Sprite" preserve="all" />
+    <type fullname="UnityEngine.TextAsset" preserve="all" />
+    <type fullname="UnityEngine.Texture2D" preserve="all" />
+    <type fullname="UnityEngine.Transform" preserve="all" />
+    <type fullname="UnityEngine.Events.PersistentCallGroup" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.RectOffset" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Font" preserve="all" />
+  </assembly>
+  <assembly fullname="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.UI.Button" preserve="all" />
+    <type fullname="UnityEngine.UI.CanvasScaler" preserve="all" />
+    <type fullname="UnityEngine.UI.ContentSizeFitter" preserve="all" />
+    <type fullname="UnityEngine.UI.GraphicRaycaster" preserve="all" />
+    <type fullname="UnityEngine.UI.Image" preserve="all" />
+    <type fullname="UnityEngine.UI.LayoutElement" preserve="all" />
+    <type fullname="UnityEngine.UI.Mask" preserve="all" />
+    <type fullname="UnityEngine.UI.RectMask2D" preserve="all" />
+    <type fullname="UnityEngine.UI.Scrollbar" preserve="all" />
+    <type fullname="UnityEngine.UI.ScrollRect" preserve="all" />
+    <type fullname="UnityEngine.UI.Slider" preserve="all" />
+    <type fullname="UnityEngine.UI.Toggle" preserve="all" />
+    <type fullname="UnityEngine.UI.VerticalLayoutGroup" preserve="all" />
+    <type fullname="UnityEngine.UI.AnimationTriggers" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.Button/ButtonClickedEvent" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.ColorBlock" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.MaskableGraphic/CullStateChangedEvent" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.Navigation" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.ScrollRect/ScrollRectEvent" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.Scrollbar/ScrollEvent" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.Slider/SliderEvent" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.SpriteState" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.Toggle/ToggleEvent" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Canvas" preserve="all" />
+    <type fullname="UnityEngine.CanvasGroup" preserve="all" />
+    <type fullname="UnityEngine.CanvasRenderer" preserve="all" />
+  </assembly>
+  <assembly fullname="uPalette, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="uPalette.Runtime.Core.Synchronizer.Color.GraphicColorSynchronizer" preserve="all" />
+    <type fullname="uPalette.Runtime.Core.ColorEntryId" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="Unity.Mathematics">
+    <type fullname="Unity.Mathematics.float2" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="UnityEngine.TextCoreFontEngineModule">
+    <type fullname="UnityEngine.TextCore.FaceInfo" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.TextCore.Glyph" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.TextCore.GlyphMetrics" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.TextCore.GlyphRect" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.TextCore.LowLevel.GlyphAdjustmentRecord" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.TextCore.LowLevel.GlyphPairAdjustmentRecord" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.TextCore.LowLevel.GlyphValueRecord" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="UnityScreenNavigator">
+    <type fullname="UnityScreenNavigator.Runtime.Core.Modal.ModalTransitionAnimationContainer" preserve="nothing" serialized="true" />
+    <type fullname="UnityScreenNavigator.Runtime.Core.Page.PageTransitionAnimationContainer" preserve="nothing" serialized="true" />
+  </assembly>
+</linker>

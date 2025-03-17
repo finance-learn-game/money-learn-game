@@ -14,6 +14,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
     {
         [SerializeField] [Required] private StockListView stockList;
         [SerializeField] [Required] private UIButton stockChartButton;
+        [SerializeField] [Required] private BalanceTextView balanceTextView;
         [SerializeField] [Required] private Ref stockChartModal;
 
         protected override void Start()
@@ -29,6 +30,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
         internal void Construct(IObjectResolver resolver)
         {
             resolver.Inject(stockList);
+            resolver.Inject(balanceTextView);
         }
     }
 }
