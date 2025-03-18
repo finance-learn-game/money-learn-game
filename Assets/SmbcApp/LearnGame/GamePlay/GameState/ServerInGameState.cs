@@ -2,6 +2,8 @@
 using R3;
 using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.Data;
+using SmbcApp.LearnGame.GamePlay.Configuration;
+using SmbcApp.LearnGame.GamePlay.Domain;
 using SmbcApp.LearnGame.GamePlay.GamePlayObjects.RuntimeDataContainers;
 using SmbcApp.LearnGame.GamePlay.GameState.NetworkData;
 using SmbcApp.LearnGame.Utils;
@@ -15,7 +17,10 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
     internal sealed class ServerInGameState : ServerGameStateBehaviour
     {
         [SerializeField] [Required] private NetworkGameTurn gameTurn;
+        [SerializeField] [Required] private AvatarRegistry avatarRegistry;
         [SerializeField] [Required] private PersistantPlayerRuntimeCollection playerCollection;
+
+        private SalaryDomain _salaryDomain;
 
         [Inject] internal MasterData MasterData;
         public override GameState ActiveState => GameState.Game;
@@ -26,6 +31,10 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
             var db = MasterData.DB;
             var minDate = db.StockDataTable.SortByDate.First.Date.AddMonths(14);
             gameTurn.CurrentTime = new DateTime(minDate.Year, minDate.Month, 1);
+            gameTurn.GameStartTime = gameTurn.CurrentTime;
+
+            // 給料ドメインを初期化
+            _salaryDomain = new SalaryDomain(avatarRegistry, gameTurn);
 
             // ターン終了時のイベントを購読
             gameTurn.OnTurnEnd.Subscribe(OnTurnEnd).AddTo(gameObject);
@@ -33,6 +42,9 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
 
         private void OnTurnEnd(Unit _)
         {
+            foreach (var player in playerCollection.Players)
+                _salaryDomain.ApplySalary(player.Value);
+
             gameTurn.CurrentTime = gameTurn.CurrentTime.AddMonths(1);
         }
 

@@ -605,6 +605,7 @@ MonoBehaviour:
   autoInjectGameObjects: []
   netCodeHooks: {fileID: 1058224392}
   gameTurn: {fileID: 1058224390}
+  avatarRegistry: {fileID: 11400000, guid: 06184a1f2c9d3834c9a602587ebb25cd, type: 2}
   playerCollection: {fileID: 11400000, guid: 5743e623b30092f429fe135ba4adef66, type: 2}
 --- !u!114 &1058224392
 MonoBehaviour:

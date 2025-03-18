@@ -23,3 +23,16 @@ MonoBehaviour:
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
+  salaryConfig:
+    salaryOps:
+    - rid: 3539522938862043476
+  references:
+    version: 2
+    RefIds:
+    - rid: 3539522938862043476
+      type: {class: SalaryConfig/RandomSalaryOp, ns: SmbcApp.LearnGame.GamePlay.Configuration, asm: SmbcApp.LearnGame.GamePlay.Configuration}
+      data:
+        min: 1000
+        max: 5000
+        minPeriod: 1
+        maxPeriod: 3

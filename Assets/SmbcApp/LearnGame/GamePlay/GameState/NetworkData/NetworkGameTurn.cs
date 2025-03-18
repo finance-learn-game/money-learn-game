@@ -17,6 +17,8 @@ namespace SmbcApp.LearnGame.GamePlay.GameState.NetworkData
 
         public Observable<Unit> OnTurnEnd => _onTurnEnd;
 
+        public DateTime GameStartTime { get; set; }
+
         public DateTime CurrentTime
         {
             get => new(_currentTimeTick.Value);

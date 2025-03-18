@@ -22,3 +22,13 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 1
+  salaryConfig:
+    salaryOps:
+    - rid: 3539522938862043477
+  references:
+    version: 2
+    RefIds:
+    - rid: 3539522938862043477
+      type: {class: SalaryConfig/FixedSalaryOp, ns: SmbcApp.LearnGame.GamePlay.Configuration, asm: SmbcApp.LearnGame.GamePlay.Configuration}
+      data:
+        salary: 2000

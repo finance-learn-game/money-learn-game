@@ -44,6 +44,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
                 })
                 .AddTo(gameObject);
             _gameTurn.OnChangeTime
+                .Prepend(_gameTurn.CurrentTime)
                 .Subscribe(_ => _modalContainer.Push(turnInfoModalPrefab.AssetGUID, true))
                 .AddTo(gameObject);
             openTurnInfoModalButton.OnClick
