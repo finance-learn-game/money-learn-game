@@ -17,6 +17,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
         [SerializeField] [Required] private PlayerListView playerListView;
         [SerializeField] [Required] private AvatarListView avatarListView;
         [SerializeField] [Required] private UIButton readyButton;
+        [SerializeField] [Required] private UIButton leaveButton;
 
         private bool _isReady;
 
@@ -41,6 +42,8 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
                 readyButton.gameObject.SetActive(false);
                 avatarListView.gameObject.SetActive(false);
             }
+
+            leaveButton.OnClick.Subscribe(OnLeave).AddTo(gameObject);
         }
 
         private void OnReady(Unit _)
@@ -56,6 +59,11 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
 
             var clientId = NetworkManager.Singleton.LocalClientId;
             NetworkAvatarSelection.ServerChangeReadyStateRpc(clientId, _isReady);
+        }
+
+        private static void OnLeave(Unit _)
+        {
+            NetworkManager.Singleton.Shutdown();
         }
 
         private void SetReadyButtonColors()

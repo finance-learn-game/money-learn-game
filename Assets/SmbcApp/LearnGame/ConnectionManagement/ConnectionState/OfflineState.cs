@@ -10,11 +10,11 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
         [Inject] internal SceneLoader.SceneLoader SceneLoader;
         [Inject] internal SessionServiceFacade SessionServiceFacade;
 
-        public override UniTask Enter()
+        public override async UniTask Enter()
         {
+            await SessionServiceFacade.LeaveSessionAsync();
             ConnectionManager.NetworkManager.Shutdown();
             SceneLoader.LoadScene(AppScenes.MainMenu);
-            return UniTask.CompletedTask;
         }
 
         public override UniTask Exit()

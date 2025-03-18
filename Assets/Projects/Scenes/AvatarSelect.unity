@@ -638,6 +638,13 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 1
+  enableServerInitialPage: 0
+  serverInitialPage:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   modalContainer: {fileID: 48108408}
   pageContainer: {fileID: 1636794280}
 --- !u!1 &1043574891
@@ -915,18 +922,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 850210720727141759, guid: 219c91dbbca4e614a85b105a5bd1116a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921906523913541585, guid: 219c91dbbca4e614a85b105a5bd1116a, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921906523913541585, guid: 219c91dbbca4e614a85b105a5bd1116a, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921906523913541585, guid: 219c91dbbca4e614a85b105a5bd1116a, type: 3}
-      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5804181028435582404, guid: 219c91dbbca4e614a85b105a5bd1116a, type: 3}

@@ -15,7 +15,7 @@ namespace SmbcApp.LearnGame.UnityService.Session
     /// <summary>
     ///     セッションサービスのファサード
     /// </summary>
-    public sealed class SessionServiceFacade
+    public sealed class SessionServiceFacade : IDisposable
     {
         private readonly IPublisher<UnityServiceErrorMessage> _errMsgPublisher;
         private readonly ProfileManager _profileManager;
@@ -35,6 +35,11 @@ namespace SmbcApp.LearnGame.UnityService.Session
         }
 
         public ISession CurrentSession { get; private set; }
+
+        public void Dispose()
+        {
+            LeaveSessionAsync().Forget();
+        }
 
         public async UniTask<bool> TryCreateSession()
         {

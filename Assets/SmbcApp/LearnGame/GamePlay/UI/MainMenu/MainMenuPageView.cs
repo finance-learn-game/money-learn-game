@@ -1,5 +1,7 @@
-﻿using R3;
+﻿using MessagePipe;
+using R3;
 using Sirenix.OdinInspector;
+using SmbcApp.LearnGame.ApplicationLifecycle.Messages;
 using SmbcApp.LearnGame.Gameplay.UI.MainMenu;
 using SmbcApp.LearnGame.UIWidgets.Button;
 using SmbcApp.LearnGame.UIWidgets.Modal;
@@ -14,10 +16,12 @@ namespace SmbcApp.LearnGame.GamePlay.UI.MainMenu
     {
         [SerializeField] [Required] private UIButton startServerButton;
         [SerializeField] [Required] private UIButton joinSessionButton;
+        [SerializeField] [Required] private UIButton quitButton;
         [SerializeField] [Required] private UIModal.Ref profileModal;
 
         [Inject] internal MainMenuUIMediator MainMenuUIMediator;
         [Inject] internal ModalContainer ModalContainer;
+        [Inject] internal IPublisher<QuitApplicationMessage> QuitApplicationPublisher;
 
         private void Start()
         {
@@ -26,6 +30,9 @@ namespace SmbcApp.LearnGame.GamePlay.UI.MainMenu
                 .AddTo(gameObject);
             startServerButton.OnClick
                 .SubscribeAwait((_, _) => MainMenuUIMediator.CreateSessionRequest())
+                .AddTo(gameObject);
+            quitButton.OnClick
+                .Subscribe(_ => QuitApplicationPublisher.Publish(new QuitApplicationMessage()))
                 .AddTo(gameObject);
         }
     }
