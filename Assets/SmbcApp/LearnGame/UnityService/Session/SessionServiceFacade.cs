@@ -56,7 +56,7 @@ namespace SmbcApp.LearnGame.UnityService.Session
                 {
                     MaxPlayers = GameConfiguration.Instance.MaxPlayers,
                     IsPrivate = true
-                });
+                }.WithRelayNetwork());
                 return true;
             }
             catch (Exception e)
@@ -159,7 +159,7 @@ namespace SmbcApp.LearnGame.UnityService.Session
         public bool TryGetSessionProperty(string key, out SessionProperty prop)
         {
             if (CurrentSession != null) return CurrentSession.Properties.TryGetValue(key, out prop);
-            
+
             prop = null;
             return false;
         }

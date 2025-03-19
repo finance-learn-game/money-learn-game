@@ -28,13 +28,15 @@ namespace SmbcApp.LearnGame.Data
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void InitializeSaveDataPath()
         {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            _saveDataPath = Path.Combine(Application.persistentDataPath, SaveDataFileName);
+#else
             _saveDataPath = Path.Combine(Directory.GetCurrentDirectory(), SaveDataFileName);
+#endif
+
             Debug.Log($"[SaveDataManager] Save data path: {_saveDataPath}");
         }
 
-#if UNITY_WEBGL && !UNITY_EDITOR
-        private readonly string _saveDataPath = Path.Combine(Application.persistentDataPath, SaveDataFileName);
-#endif
         public bool IsDirty { get; private set; }
 
         public ReadOnlyReactiveProperty<GameSaveData> SaveData => _saveData;

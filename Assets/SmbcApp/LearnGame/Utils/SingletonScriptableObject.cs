@@ -9,22 +9,38 @@ namespace SmbcApp.LearnGame.Utils
     {
         private static T _instance;
 
-        public static T Instance => GetInstance();
-
-        private static T GetInstance()
+        public static T Instance
         {
-            if (_instance != null) return _instance;
-
-            var attr = typeof(T).GetCustomAttribute<SingletonScriptableAttribute>();
-            if (attr == null)
+            get
             {
-                Debug.LogError($"{typeof(T).Name} is not marked with SingletonScriptableAttribute");
-                return null;
+#if UNITY_EDITOR
+                if (_instance == null)
+                    _instance = LoadAsset();
+#else
+                if (_instance == null)
+                    _instance = CreateInstance<T>();
+#endif
+                return _instance;
             }
-
-            _instance = Addressables.LoadAssetAsync<T>(attr.Address).WaitForCompletion();
-            return _instance;
         }
+
+        private void OnEnable()
+        {
+#if !UNITY_EDITOR
+            _instance = (T)this;
+#endif
+        }
+
+#if UNITY_EDITOR
+        private static T LoadAsset()
+        {
+            var attr = typeof(T).GetCustomAttribute<SingletonScriptableAttribute>();
+            if (attr != null)
+                return Addressables.LoadAssetAsync<T>(attr.Address).WaitForCompletion();
+
+            throw new Exception($"{typeof(T).Name} is not marked with SingletonScriptableAttribute");
+        }
+#endif
     }
 
     [AttributeUsage(AttributeTargets.Class)]

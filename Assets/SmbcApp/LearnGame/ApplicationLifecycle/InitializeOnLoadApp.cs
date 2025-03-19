@@ -61,9 +61,11 @@ namespace SmbcApp.LearnGame.ApplicationLifecycle
                 $"Logs/dev-{random}",
                 $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log"
             );
+
             return new LoggerConfig()
                 .SyncMode.FatalIsSync()
-                .RedirectUnityLogs()
+                // .RedirectUnityLogs()
+                .WriteTo.UnityDebugLog()
                 .WriteTo.File(
                     path,
                     minLevel: LogLevel.Debug,
