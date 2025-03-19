@@ -24,15 +24,21 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
 
         public override void StartClientSession(string playerName)
         {
-            var connectionMethod =
-                new ConnectionMethodMultiPlaySDK(SessionServiceFacade, ConnectionManager, playerName);
+            var connectionMethod = ConnectionMethodBase.CreateConnectionMethod(
+                SessionServiceFacade,
+                ConnectionManager,
+                playerName
+            );
             ConnectionManager.ChangeState(ConnectionManager.ClientConnecting.Configure(connectionMethod));
         }
 
         public override void StartServerSession(string playerName)
         {
-            var connectionMethod =
-                new ConnectionMethodMultiPlaySDK(SessionServiceFacade, ConnectionManager, playerName);
+            var connectionMethod = ConnectionMethodBase.CreateConnectionMethod(
+                SessionServiceFacade,
+                ConnectionManager,
+                playerName
+            );
             ConnectionManager.ChangeState(ConnectionManager.StartingServer.Configure(connectionMethod));
         }
     }

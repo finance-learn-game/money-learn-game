@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0625c3e53b04eb2aa8694e894331b07, type: 3}
   m_Name: Game Configuration
   m_EditorClassIdentifier: 
+  maxPlayers: 10
+  connectionType: wss
+  connectionMethodType: 1
   initialBalance: 10000

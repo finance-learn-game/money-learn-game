@@ -17,6 +17,7 @@ namespace SmbcApp.LearnGame.UnityService.Session
     /// </summary>
     public sealed class SessionServiceFacade : IDisposable
     {
+        public const string RelayJoinCodeKey = "RelayJoinCode";
         private readonly IPublisher<UnityServiceErrorMessage> _errMsgPublisher;
         private readonly ProfileManager _profileManager;
         private readonly RateLimitCooldown _rateLimitJoin;
@@ -145,6 +146,21 @@ namespace SmbcApp.LearnGame.UnityService.Session
             }
 
             displayName = null;
+            return false;
+        }
+
+        public async UniTask SetSessionProperty(string key, SessionProperty prop)
+        {
+            var hostSession = CurrentSession.AsHost();
+            hostSession.SetProperty(key, prop);
+            await hostSession.SavePropertiesAsync();
+        }
+
+        public bool TryGetSessionProperty(string key, out SessionProperty prop)
+        {
+            if (CurrentSession != null) return CurrentSession.Properties.TryGetValue(key, out prop);
+            
+            prop = null;
             return false;
         }
 
