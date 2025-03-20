@@ -80,10 +80,8 @@ namespace SmbcApp.LearnGame.Data
             try
             {
                 await using var fileStream = new FileStream(_saveDataPath, FileMode.Open);
-                var loadedData =
-                    await MessagePackSerializer.Typeless.DeserializeAsync(fileStream, cancellationToken: cancellation);
-                if (loadedData is not GameSaveData data) throw new Exception("Failed to load save data");
-
+                var data = await MessagePackSerializer.DeserializeAsync<GameSaveData>(fileStream,
+                    cancellationToken: cancellation);
                 _saveData.Value = data;
 #if UNITY_EDITOR
                 Log.Info("Loaded save data: {0}", _saveData.ToString());
@@ -120,7 +118,7 @@ namespace SmbcApp.LearnGame.Data
             }
 
             await using var fileStream = new FileStream(_saveDataPath, FileMode.Create);
-            await MessagePackSerializer.Typeless.SerializeAsync(fileStream, _saveData.Value,
+            await MessagePackSerializer.SerializeAsync(fileStream, _saveData.Value,
                 cancellationToken: cancellation);
             IsDirty = false;
             Log.Info("Save data saved to {0}", _saveDataPath);
