@@ -28,7 +28,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
                 ConnectStatusPublisher.Publish(connectStatus);
             }
 
-            ConnectionManager.ChangeState(ConnectionManager.Offline);
+            ConnectionManager.ChangeState(ConnectionManager.Offline).Forget();
         }
     }
 }

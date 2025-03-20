@@ -1,17 +1,24 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using SmbcApp.LearnGame.UnityService.Session;
 using Unity.Logging;
 using UnityEngine;
+using VContainer;
 
 namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
 {
     internal class ClientConnectingState : OnlineState
     {
         private ConnectionMethodBase _connectionMethod;
+        private UniTask _joinSessionTask;
+        private string _sessionCode;
 
-        public ClientConnectingState Configure(ConnectionMethodBase connectionMethod)
+        [Inject] internal SessionServiceFacade SessionServiceFacade;
+
+        public ClientConnectingState Configure(ConnectionMethodBase connectionMethod, string sessionCode)
         {
             _connectionMethod = connectionMethod;
+            _sessionCode = sessionCode;
             return this;
         }
 
@@ -28,7 +35,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
         public override void OnClientConnected(ulong clientId)
         {
             ConnectStatusPublisher.Publish(ConnectStatus.Success);
-            ConnectionManager.ChangeState(ConnectionManager.ClientConnected);
+            ConnectionManager.ChangeState(ConnectionManager.ClientConnected).Forget();
         }
 
         public override void OnClientDisconnect(ulong clientId)
@@ -50,7 +57,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
                 ConnectStatusPublisher.Publish(connectStatus);
             }
 
-            ConnectionManager.ChangeState(ConnectionManager.Offline);
+            ConnectionManager.ChangeState(ConnectionManager.Offline).Forget();
         }
 
         private async UniTask ConnectClientAsync()
@@ -59,9 +66,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
             {
                 if (_connectionMethod == null)
                     throw new Exception("Connection method is not set");
-                await _connectionMethod.SetupClientConnectionAsync();
-                if (!ConnectionManager.NetworkManager.StartClient())
-                    throw new Exception("Failed to start client");
+                await _connectionMethod.SetupClientConnectionAsync(_sessionCode);
             }
             catch (Exception e)
             {

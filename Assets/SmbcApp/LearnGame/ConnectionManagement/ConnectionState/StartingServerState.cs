@@ -1,12 +1,15 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using SmbcApp.LearnGame.UnityService.Session;
 using Unity.Netcode;
+using VContainer;
 
 namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
 {
     internal sealed class StartingServerState : OnlineState
     {
         private ConnectionMethodBase _connectionMethod;
+        [Inject] internal SessionServiceFacade SessionServiceFacade;
 
         public StartingServerState Configure(ConnectionMethodBase connectionMethod)
         {
@@ -27,7 +30,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
         public override void OnServerStarted()
         {
             ConnectStatusPublisher.Publish(ConnectStatus.Success);
-            ConnectionManager.ChangeState(ConnectionManager.Hosting);
+            ConnectionManager.ChangeState(ConnectionManager.Hosting).Forget();
         }
 
         public override UniTask ApprovalCheck(
@@ -53,8 +56,9 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
         {
             try
             {
+                if (_connectionMethod == null)
+                    throw new Exception("ConnectionMethod is not set.");
                 await _connectionMethod.SetupServerConnectionAsync();
-                if (!ConnectionManager.NetworkManager.StartHost()) StartServerFailed();
             }
             catch (Exception)
             {
@@ -66,7 +70,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
         private void StartServerFailed()
         {
             ConnectStatusPublisher.Publish(ConnectStatus.StartServerFailed);
-            ConnectionManager.ChangeState(ConnectionManager.Offline);
+            ConnectionManager.ChangeState(ConnectionManager.Offline).Forget();
         }
     }
 }

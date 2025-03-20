@@ -4,30 +4,60 @@ using Cysharp.Threading.Tasks;
 using SmbcApp.LearnGame.GamePlay.Configuration;
 using SmbcApp.LearnGame.UnityService.Session;
 using Unity.Logging;
-using Unity.Netcode.Transports.UTP;
 using Unity.Services.Authentication;
 using Unity.Services.Multiplayer;
-using Unity.Services.Relay;
-using Unity.Services.Relay.Models;
 using UnityEngine;
 
 namespace SmbcApp.LearnGame.ConnectionManagement
 {
     internal abstract class ConnectionMethodBase
     {
-        protected readonly ConnectionManager ConnectionManager;
+        private readonly ConnectionManager _connectionManager;
+        private readonly SessionServiceFacade _sessionServiceFacade;
         protected readonly string PlayerName;
 
-        protected ConnectionMethodBase(ConnectionManager connectionManager, string playerName)
+        protected ConnectionMethodBase(
+            ConnectionManager connectionManager,
+            string playerName,
+            SessionServiceFacade sessionServiceFacade
+        )
         {
-            ConnectionManager = connectionManager;
+            _connectionManager = connectionManager;
             PlayerName = playerName;
+            _sessionServiceFacade = sessionServiceFacade;
         }
 
-        public abstract UniTask SetupServerConnectionAsync();
-        public abstract UniTask SetupClientConnectionAsync();
+        public async UniTask SetupServerConnectionAsync()
+        {
+            Log.Info("Setting up server connection");
+            if (!TryGetPlayerId(out var playerId))
+                throw new ConnectionMethodException("Failed to get player id");
 
-        protected void SetConnectionPayload(string playerId, string playerName)
+            // コネクションペイロードを設定
+            SetConnectionPayload(playerId, PlayerName);
+
+            if (await _sessionServiceFacade.TryCreateSession(ServerSessionOptions))
+                return;
+            throw new ConnectionMethodException("Failed to create session");
+        }
+
+        public async UniTask SetupClientConnectionAsync(string sessionCode)
+        {
+            Log.Info("Setting up client connection");
+            if (!TryGetPlayerId(out var playerId))
+                throw new ConnectionMethodException("Failed to get player id");
+
+            // コネクションペイロードを設定
+            SetConnectionPayload(playerId, PlayerName);
+
+            if (!await _sessionServiceFacade.TryJoinSession(sessionCode))
+                throw new ConnectionMethodException($"Failed to join session with code {sessionCode}");
+            Log.Info("Successfully joined session with code {0}", sessionCode);
+        }
+
+        protected abstract SessionOptions ServerSessionOptions(SessionOptions opts);
+
+        private void SetConnectionPayload(string playerId, string playerName)
         {
             var payload = JsonUtility.ToJson(new ConnectionPayload
             {
@@ -37,10 +67,10 @@ namespace SmbcApp.LearnGame.ConnectionManagement
             });
             var bytes = Encoding.UTF8.GetBytes(payload);
 
-            ConnectionManager.NetworkManager.NetworkConfig.ConnectionData = bytes;
+            _connectionManager.NetworkManager.NetworkConfig.ConnectionData = bytes;
         }
 
-        protected static bool TryGetPlayerId(out string playerId)
+        private static bool TryGetPlayerId(out string playerId)
         {
             var isSignedIn = AuthenticationService.Instance.IsSignedIn;
             if (isSignedIn)
@@ -64,10 +94,16 @@ namespace SmbcApp.LearnGame.ConnectionManagement
         {
             return GameConfiguration.Instance.ConnectionMethod switch
             {
-                GameConfiguration.ConnectionMethodType.IP => new ConnectionMethodIP(sessionServiceFacade,
-                    connectionManager, playerName),
-                GameConfiguration.ConnectionMethodType.Relay => new ConnectionMethodRelay(sessionServiceFacade,
-                    connectionManager, playerName),
+                GameConfiguration.ConnectionMethodType.IP => new ConnectionMethodIP(
+                    connectionManager,
+                    playerName,
+                    sessionServiceFacade
+                ),
+                GameConfiguration.ConnectionMethodType.Relay => new ConnectionMethodRelay(
+                    connectionManager,
+                    playerName,
+                    sessionServiceFacade
+                ),
                 _ => throw new ConnectionMethodException("Unknown connection type")
             };
         }
@@ -82,118 +118,33 @@ namespace SmbcApp.LearnGame.ConnectionManagement
 
     internal sealed class ConnectionMethodIP : ConnectionMethodBase
     {
-        private readonly SessionServiceFacade _sessionServiceFacade;
-
         public ConnectionMethodIP(
-            SessionServiceFacade sessionServiceFacade,
             ConnectionManager connectionManager,
-            string playerName
-        ) : base(connectionManager, playerName)
+            string playerName,
+            SessionServiceFacade sessionServiceFacade
+        ) : base(connectionManager, playerName, sessionServiceFacade)
         {
-            _sessionServiceFacade = sessionServiceFacade;
         }
 
-        public override UniTask SetupServerConnectionAsync()
+        protected override SessionOptions ServerSessionOptions(SessionOptions opts)
         {
-            Log.Info("Setting up MultiPlayer SDK server connection");
-            if (!TryGetPlayerId(out var playerId))
-                throw new ConnectionMethodException("Failed to get player id");
-
-            SetConnectionPayload(playerId, PlayerName);
-            return UniTask.CompletedTask;
-        }
-
-        public override UniTask SetupClientConnectionAsync()
-        {
-            Log.Info("Setting up Unity Relay client");
-            if (!TryGetPlayerId(out var playerId))
-                throw new ConnectionMethodException("Failed to get player id");
-
-            // コネクションペイロードを設定
-            SetConnectionPayload(playerId, PlayerName);
-
-            if (_sessionServiceFacade.CurrentSession != null) return UniTask.CompletedTask;
-            throw new ConnectionMethodException("No session to connect to");
+            return opts.WithDirectNetwork();
         }
     }
 
     internal sealed class ConnectionMethodRelay : ConnectionMethodBase
     {
-        private readonly SessionServiceFacade _sessionServiceFacade;
-
         public ConnectionMethodRelay(
-            SessionServiceFacade sessionServiceFacade,
             ConnectionManager connectionManager,
-            string playerName
-        ) : base(connectionManager, playerName)
+            string playerName,
+            SessionServiceFacade sessionServiceFacade
+        ) : base(connectionManager, playerName, sessionServiceFacade)
         {
-            _sessionServiceFacade = sessionServiceFacade;
         }
 
-        public override async UniTask SetupServerConnectionAsync()
+        protected override SessionOptions ServerSessionOptions(SessionOptions opts)
         {
-            Log.Info("Setting up MultiPlayer SDK server connection");
-            if (!TryGetPlayerId(out var playerId))
-                throw new ConnectionMethodException("Failed to get player id");
-
-            SetConnectionPayload(playerId, PlayerName);
-
-            // 割り当てを作成
-            var maxPlayer = GameConfiguration.Instance.MaxPlayers;
-            var hostAllocation = await RelayService.Instance.CreateAllocationAsync(maxPlayer);
-            var joinCode = await RelayService.Instance.GetJoinCodeAsync(hostAllocation.AllocationId);
-
-            Log.Info(
-                "HostAllocation: server: connection data: {0} {1}, allocation id: {2}, region: {3}",
-                hostAllocation.ConnectionData[0], hostAllocation.ConnectionData[1],
-                hostAllocation.AllocationId,
-                hostAllocation.Region
-            );
-
-            await _sessionServiceFacade.SetSessionProperty(
-                SessionServiceFacade.RelayJoinCodeKey,
-                new SessionProperty(joinCode)
-            );
-
-            // UnityTransportの接続データを設定
-            var utp = (UnityTransport)ConnectionManager.NetworkManager.NetworkConfig.NetworkTransport;
-            var connectionType = GameConfiguration.Instance.ConnectionType;
-            utp.SetRelayServerData(hostAllocation.ToRelayServerData(connectionType));
-
-            Log.Info("Created Unity Relay server with join code {0}", joinCode);
-        }
-
-        public override async UniTask SetupClientConnectionAsync()
-        {
-            Log.Info("Setting up Unity Relay client");
-            if (!TryGetPlayerId(out var playerId))
-                throw new ConnectionMethodException("Failed to get player id");
-
-            // コネクションペイロードを設定
-            SetConnectionPayload(playerId, PlayerName);
-
-            // RelayJoinCodeをセッションプロパティから取得
-            if (!_sessionServiceFacade.TryGetSessionProperty(
-                    SessionServiceFacade.RelayJoinCodeKey,
-                    out var relayJoinCode
-                ))
-                throw new ConnectionMethodException("No relay join code found in session properties");
-
-            Log.Info("Setting Unity Relay client with join code {0}", relayJoinCode);
-
-            // クライアント参加割り当てを参加コードから作成
-            var joinAllocation = await RelayService.Instance.JoinAllocationAsync(relayJoinCode.Value);
-            Log.Info(
-                "JoinAllocation: client -> {0} {1} ({2}), server -> {3} {4}",
-                joinAllocation.ConnectionData[0], joinAllocation.ConnectionData[1],
-                joinAllocation.AllocationId,
-                joinAllocation.HostConnectionData[0], joinAllocation.HostConnectionData[1]
-            );
-
-            // UnityTransportの接続データを設定
-            var utp = (UnityTransport)ConnectionManager.NetworkManager.NetworkConfig.NetworkTransport;
-            var connectionType = GameConfiguration.Instance.ConnectionType;
-            utp.SetRelayServerData(joinAllocation.ToRelayServerData(connectionType));
+            return opts.WithRelayNetwork();
         }
     }
 }

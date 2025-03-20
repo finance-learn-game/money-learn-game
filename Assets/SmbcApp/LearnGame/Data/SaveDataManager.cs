@@ -21,31 +21,14 @@ namespace SmbcApp.LearnGame.Data
     {
         private const string SaveDataFileName = "SaveData.bin";
 
-        private readonly ReactiveProperty<GameSaveData> _saveData = new();
-
         private static string _saveDataPath;
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void InitializeSaveDataPath()
-        {
-#if UNITY_WEBGL && !UNITY_EDITOR
-            _saveDataPath = Path.Combine(Application.persistentDataPath, SaveDataFileName);
-#else
-            _saveDataPath = Path.Combine(Directory.GetCurrentDirectory(), SaveDataFileName);
-#endif
-
-            Debug.Log($"[SaveDataManager] Save data path: {_saveDataPath}");
-        }
+        private readonly ReactiveProperty<GameSaveData> _saveData = new();
 
         public bool IsDirty { get; private set; }
 
         public ReadOnlyReactiveProperty<GameSaveData> SaveData => _saveData;
         public bool Initialized { get; private set; }
-
-#if UNITY_WEBGL && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern void syncDB();
-#endif
 
         /// <summary>
         ///     ゲーム終了時にセーブデータを保存する用途で使用する
@@ -63,12 +46,26 @@ namespace SmbcApp.LearnGame.Data
             Initialized = true;
         }
 
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void InitializeSaveDataPath()
+        {
+            _saveDataPath = Path.Combine(Directory.GetCurrentDirectory(), SaveDataFileName);
+
+            Debug.Log($"[SaveDataManager] Save data path: {_saveDataPath}");
+        }
+
         public void ChangeSaveData(Func<GameSaveData, GameSaveData> change)
         {
             _saveData.Value = change(_saveData.Value);
             IsDirty = true;
         }
 
+#if UNITY_WEBGL && !UNITY_EDITOR
+        private UniTask Load(CancellationToken cancellation = new()) {
+            _saveData.Value = GameSaveData.Default;
+            return UniTask.CompletedTask;
+        }
+#else
         private async UniTask Load(CancellationToken cancellation = new())
         {
             if (!File.Exists(_saveDataPath))
@@ -99,11 +96,21 @@ namespace SmbcApp.LearnGame.Data
                 Log.Error("Failed to load save data, deleting save data file");
                 File.Delete(_saveDataPath);
                 _saveData.Value = GameSaveData.Default;
+#else
+                _saveData.Value = GameSaveData.Default;
+                Log.Error("Failed to load save data");
 #endif
                 throw;
             }
         }
+#endif
 
+#if UNITY_WEBGL && !UNITY_EDITOR
+        private UniTask Save(CancellationToken cancellation = new())
+        {
+            return UniTask.CompletedTask;
+        }
+#else
         private async UniTask Save(CancellationToken cancellation = new())
         {
             if (!IsDirty)
@@ -116,10 +123,8 @@ namespace SmbcApp.LearnGame.Data
             await MessagePackSerializer.Typeless.SerializeAsync(fileStream, _saveData.Value,
                 cancellationToken: cancellation);
             IsDirty = false;
-#if UNITY_WEBGL && !UNITY_EDITOR
-            syncDB();
-#endif
             Log.Info("Save data saved to {0}", _saveDataPath);
         }
+#endif
     }
 }

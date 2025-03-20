@@ -22,24 +22,25 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
             return UniTask.CompletedTask;
         }
 
-        public override void StartClientSession(string playerName)
+        public override async UniTask StartClientSession(string playerName, string sessionCode)
         {
             var connectionMethod = ConnectionMethodBase.CreateConnectionMethod(
                 SessionServiceFacade,
                 ConnectionManager,
                 playerName
             );
-            ConnectionManager.ChangeState(ConnectionManager.ClientConnecting.Configure(connectionMethod));
+            await ConnectionManager.ChangeState(
+                ConnectionManager.ClientConnecting.Configure(connectionMethod, sessionCode));
         }
 
-        public override void StartServerSession(string playerName)
+        public override async UniTask StartServerSession(string playerName)
         {
             var connectionMethod = ConnectionMethodBase.CreateConnectionMethod(
                 SessionServiceFacade,
                 ConnectionManager,
                 playerName
             );
-            ConnectionManager.ChangeState(ConnectionManager.StartingServer.Configure(connectionMethod));
+            await ConnectionManager.ChangeState(ConnectionManager.StartingServer.Configure(connectionMethod));
         }
     }
 }

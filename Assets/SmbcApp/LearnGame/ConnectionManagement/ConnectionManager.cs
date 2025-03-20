@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using SmbcApp.LearnGame.ConnectionManagement.ConnectionState;
 using Unity.Logging;
 using Unity.Netcode;
@@ -85,14 +86,14 @@ namespace SmbcApp.LearnGame.ConnectionManagement
             NetworkManager.OnServerStopped -= OnServerStopped;
         }
 
-        internal void ChangeState(ConnectionState.ConnectionState nextState)
+        internal async UniTask ChangeState(ConnectionState.ConnectionState nextState)
         {
             Log.Info("{0}: Changing state from {1} to {2}", name, _currentState.GetType().Name,
                 nextState.GetType().Name);
 
-            _currentState?.Exit();
+            if (_currentState != null) await _currentState.Exit();
             _currentState = nextState;
-            _currentState.Enter();
+            await _currentState.Enter();
         }
 
         #region Event Callbacks
@@ -128,14 +129,14 @@ namespace SmbcApp.LearnGame.ConnectionManagement
             _currentState.OnServerStopped();
         }
 
-        public void StartClientSession(string playerName)
+        public async UniTask StartClientSession(string playerName, string sessionCode)
         {
-            _currentState.StartClientSession(playerName);
+            await _currentState.StartClientSession(playerName, sessionCode);
         }
 
-        public void StartServerSession(string playerName)
+        public async UniTask StartServerSession(string playerName)
         {
-            _currentState.StartServerSession(playerName);
+            await _currentState.StartServerSession(playerName);
         }
 
         public void RequestShutdown()

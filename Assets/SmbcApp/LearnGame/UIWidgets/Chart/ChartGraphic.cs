@@ -75,6 +75,12 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
             }
 
             var scene = new Scene { Root = new SceneNode { Shapes = shapes } };
+
+            // TODO: 何故かWebGLで動かない (グラフが描画されない)
+#if UNITY_WEBGL && !UNITY_EDITOR
+            VectorUtils.TessellateScene(scene, GetTessellationOptions());
+            SetAllDirty();
+#else
             UniTask.Void(async () =>
             {
                 _geomList = await UniTask.RunOnThreadPool(() =>
@@ -82,6 +88,7 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
                 );
                 SetAllDirty();
             });
+#endif
         }
 
         /// <summary>

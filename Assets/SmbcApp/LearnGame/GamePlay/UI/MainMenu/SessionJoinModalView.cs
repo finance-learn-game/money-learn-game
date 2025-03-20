@@ -41,8 +41,7 @@ namespace SmbcApp.LearnGame.Gameplay.UI.MainMenu
             var joinCode = SanitizeJoinCode(sessionCodeInputField.text);
             try
             {
-                if (!await MainMenuUIMediator.JoinSessionWithCode(joinCode))
-                    throw new Exception("Failed to join session.");
+                await MainMenuUIMediator.JoinSessionWithCode(joinCode);
             }
             catch (Exception)
             {

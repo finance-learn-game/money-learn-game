@@ -42,7 +42,7 @@ namespace SmbcApp.LearnGame.UnityService.Session
             LeaveSessionAsync().Forget();
         }
 
-        public async UniTask<bool> TryCreateSession()
+        public async UniTask<bool> TryCreateSession(Func<SessionOptions, SessionOptions> optionFunc)
         {
             if (!_rateLimitServer.Call())
             {
@@ -52,11 +52,11 @@ namespace SmbcApp.LearnGame.UnityService.Session
 
             try
             {
-                CurrentSession = await MultiplayerService.Instance.CreateSessionAsync(new SessionOptions
+                CurrentSession = await MultiplayerService.Instance.CreateSessionAsync(optionFunc(new SessionOptions
                 {
                     MaxPlayers = GameConfiguration.Instance.MaxPlayers,
                     IsPrivate = true
-                }.WithRelayNetwork());
+                }));
                 return true;
             }
             catch (Exception e)

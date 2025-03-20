@@ -86,13 +86,13 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
                     ConnectionManager.NetworkManager.DisconnectClient(id, reason);
             }
 
-            ConnectionManager.ChangeState(ConnectionManager.Offline);
+            ConnectionManager.ChangeState(ConnectionManager.Offline).Forget();
         }
 
         public override void OnServerStopped()
         {
             ConnectStatusPublisher.Publish(ConnectStatus.GenericDisconnect);
-            ConnectionManager.ChangeState(ConnectionManager.Offline);
+            ConnectionManager.ChangeState(ConnectionManager.Offline).Forget();
         }
 
         public override async UniTask ApprovalCheck(

@@ -20,16 +20,10 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
         [SerializeField] [Required] private UIButton leaveButton;
 
         private bool _isReady;
-
-        [Inject] internal NetworkAvatarSelection NetworkAvatarSelection;
-        [Inject] internal IObjectResolver Resolver;
+        private NetworkAvatarSelection _networkAvatarSelection;
 
         private void Start()
         {
-            Resolver.Inject(sessionCodeView);
-            Resolver.Inject(playerListView);
-            Resolver.Inject(avatarListView);
-
             var networkManager = NetworkManager.Singleton;
             if (!networkManager.IsServer)
             {
@@ -46,9 +40,19 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
             leaveButton.OnClick.Subscribe(OnLeave).AddTo(gameObject);
         }
 
+        [Inject]
+        internal void Construct(IObjectResolver resolver, NetworkAvatarSelection avatarSelection)
+        {
+            resolver.Inject(sessionCodeView);
+            resolver.Inject(playerListView);
+            resolver.Inject(avatarListView);
+
+            _networkAvatarSelection = avatarSelection;
+        }
+
         private void OnReady(Unit _)
         {
-            if (NetworkAvatarSelection.IsAvatarSelectFinished.Value)
+            if (_networkAvatarSelection.IsAvatarSelectFinished.Value)
             {
                 Log.Warning("Avatar select is already finished.");
                 return;
@@ -58,7 +62,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
             SetReadyButtonColors();
 
             var clientId = NetworkManager.Singleton.LocalClientId;
-            NetworkAvatarSelection.ServerChangeReadyStateRpc(clientId, _isReady);
+            _networkAvatarSelection.ServerChangeReadyStateRpc(clientId, _isReady);
         }
 
         private static void OnLeave(Unit _)

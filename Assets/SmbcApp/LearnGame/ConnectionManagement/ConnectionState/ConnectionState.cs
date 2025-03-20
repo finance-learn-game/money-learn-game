@@ -25,12 +25,14 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
         {
         }
 
-        public virtual void StartClientSession(string playerName)
+        public virtual UniTask StartClientSession(string playerName, string sessionCode)
         {
+            return UniTask.CompletedTask;
         }
 
-        public virtual void StartServerSession(string playerName)
+        public virtual UniTask StartServerSession(string playerName)
         {
+            return UniTask.CompletedTask;
         }
 
         public virtual void OnUserRequestedShutdown()
