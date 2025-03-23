@@ -17,6 +17,12 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
 
         public Observable<Unit> OnBuyButtonClicked => buyButton.OnClick;
 
+        public bool IsBuyButtonInteractable
+        {
+            get => buyButton.IsInteractable;
+            set => buyButton.IsInteractable = value;
+        }
+
         public void Configure(string title, int price, int point, string description, Sprite thumbnail)
         {
             titleText.text = $"{title} ￥{price} ({point} pt)";

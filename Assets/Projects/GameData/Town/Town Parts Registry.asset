@@ -21,7 +21,7 @@ MonoBehaviour:
       m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 1
-    price: 1500000
+    price: 150
     point: 20
   - name: "\u30BF\u30EF\u30FC"
     description: "\u4E2D\u304F\u3089\u3044\u306E\u30BF\u30EF\u30FC"
@@ -31,5 +31,5 @@ MonoBehaviour:
       m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 1
-    price: 800000
+    price: 300
     point: 8
