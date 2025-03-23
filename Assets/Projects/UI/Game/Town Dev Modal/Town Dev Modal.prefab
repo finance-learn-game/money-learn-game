@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 3772575743357883233}
   - component: {fileID: 3798522209458261817}
   - component: {fileID: 1550812258317832002}
-  - component: {fileID: 5088592882913826665}
+  - component: {fileID: 3746957628832062745}
   m_Layer: 5
   m_Name: Point Text
   m_TagString: Untagged
@@ -319,7 +319,7 @@ MonoBehaviour:
   _entryId:
     _value: 8dc34384-cf61-4d47-87cb-d3c37d826acc
   _component: {fileID: 3798522209458261817}
---- !u!114 &5088592882913826665
+--- !u!114 &3746957628832062745
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -328,10 +328,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6801748914350397251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0100b4b9d234422ea288116f3b8a96f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9768109cb65e4b2596d1236fa15b4e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  balanceText: {fileID: 3798522209458261817}
+  pointText: {fileID: 3798522209458261817}
 --- !u!1001 &5062080687153389999
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -426,7 +426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6415402885563159651, guid: 5c63fff76286f3740b741e0a8482407c, type: 3}
       propertyPath: m_Name
-      value: TownDevList
+      value: Town Parts List
       objectReference: {fileID: 0}
     - target: {fileID: 7193991010339098898, guid: 5c63fff76286f3740b741e0a8482407c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -441,6 +441,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c63fff76286f3740b741e0a8482407c, type: 3}
+--- !u!114 &5451038553053924856 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1001458548717759575, guid: 5c63fff76286f3740b741e0a8482407c, type: 3}
+  m_PrefabInstance: {fileID: 5062080687153389999}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c98427f6a54f6e867d28d06548bad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8647712718962237494 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4486367492251025817, guid: 5c63fff76286f3740b741e0a8482407c, type: 3}
@@ -542,7 +553,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Town Dev Modal
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4770470663575623644, guid: 88544ce089243154a841796cc4f2f414, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8572416776895370350, guid: 88544ce089243154a841796cc4f2f414, type: 3}
@@ -554,10 +566,50 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8572416776895370350, guid: 88544ce089243154a841796cc4f2f414, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8647712718962237494}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7322354996573372666, guid: 88544ce089243154a841796cc4f2f414, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4147158852561576328}
   m_SourcePrefab: {fileID: 100100000, guid: 88544ce089243154a841796cc4f2f414, type: 3}
+--- !u!1 &384492111107649957 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7322354996573372666, guid: 88544ce089243154a841796cc4f2f414, type: 3}
+  m_PrefabInstance: {fileID: 6974886818539041119}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4147158852561576328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384492111107649957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 492f83bc58274825ac49a003b16f28fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _usePrefabNameAsIdentifier: 1
+  _identifier: 
+  _animationContainer:
+    _enterAnimations: []
+    _exitAnimations: []
+  closeButton: {fileID: 6230344666368081826}
+  townPartsListView: {fileID: 5451038553053924856}
+  townPartsPointView: {fileID: 3746957628832062745}
+  balanceTextView: {fileID: 4138505853634546968}
 --- !u!224 &1602315239471211825 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8572416776895370350, guid: 88544ce089243154a841796cc4f2f414, type: 3}
   m_PrefabInstance: {fileID: 6974886818539041119}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6230344666368081826 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3944423118475136765, guid: 88544ce089243154a841796cc4f2f414, type: 3}
+  m_PrefabInstance: {fileID: 6974886818539041119}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c77cd9c219f41e58a2868bca1586e2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

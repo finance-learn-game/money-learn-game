@@ -18,8 +18,10 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
         [SerializeField] [Required] private UIButton openStockModalButton;
         [SerializeField] [Required] private UIButton turnEndButton;
         [SerializeField] [Required] private UIButton openTurnInfoModalButton;
+        [SerializeField] [Required] private UIButton openTownPartsModalButton;
         [SerializeField] [Required] private UIModal.Ref stockModalPrefab;
         [SerializeField] [Required] private UIModal.Ref turnInfoModalPrefab;
+        [SerializeField] [Required] private UIModal.Ref townPartsModalPrefab;
 
         private NetworkGameTurn _gameTurn;
         private ModalContainer _modalContainer;
@@ -33,6 +35,9 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
                 .AddTo(gameObject);
             turnEndButton.OnClick
                 .Subscribe(_ => _gameTurn.ToggleTurnEndRpc(clientId))
+                .AddTo(gameObject);
+            openTownPartsModalButton.OnClick
+                .Subscribe(_ => _modalContainer.Push(townPartsModalPrefab.AssetGUID, true))
                 .AddTo(gameObject);
             _gameTurn.ObserveChangeTurnEnd(clientId)
                 .Prepend(false)

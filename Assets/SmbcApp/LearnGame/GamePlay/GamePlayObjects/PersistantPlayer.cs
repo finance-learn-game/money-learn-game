@@ -21,10 +21,12 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects
         [SerializeField] [Required] private NetworkAvatarGuidState networkAvatarGuidState;
         [SerializeField] [Required] private NetworkBalanceState networkBalanceState;
         [SerializeField] [Required] private NetworkStockState networkStockState;
+        [SerializeField] [Required] private NetworkTownPartsState networkTownPartsState;
         public NetworkVariable<FixedPlayerName> Name { get; } = new();
         public NetworkAvatarGuidState AvatarGuidState => networkAvatarGuidState;
         public NetworkBalanceState BalanceState => networkBalanceState;
         public NetworkStockState StockState => networkStockState;
+        public NetworkTownPartsState TownPartsState => networkTownPartsState;
 
         public override void OnDestroy()
         {
@@ -55,17 +57,20 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects
                 networkAvatarGuidState.AvatarGuid.Value = playerData.AvatarNetworkGuid;
                 networkBalanceState.CurrentBalance = playerData.CurrentBalance;
                 networkStockState.SetStockAmount(playerData.StockAmounts);
+                networkTownPartsState.SetTownParts(playerData.TownPartsAmounts);
             }
             else
             {
                 networkAvatarGuidState.SetRandomAvatar();
                 networkBalanceState.InitializeBalance();
                 networkStockState.SetStockAmount(Array.Empty<int>());
+                networkTownPartsState.SetTownParts(Array.Empty<TownPartData>());
 
                 playerData.AvatarNetworkGuid = networkAvatarGuidState.AvatarGuid.Value;
                 playerData.CurrentBalance = networkBalanceState.CurrentBalance;
                 // 一旦空の配列を入れておいて、ゲーム開始時に初期化する
                 playerData.StockAmounts = Array.Empty<int>();
+                playerData.TownPartsAmounts = Array.Empty<TownPartData>();
 
                 SessionManager<SessionPlayerData>.Instance.SetPlayerData(OwnerClientId, playerData);
             }
@@ -89,6 +94,7 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects
             playerData.AvatarNetworkGuid = networkAvatarGuidState.AvatarGuid.Value;
             playerData.CurrentBalance = networkBalanceState.CurrentBalance;
             playerData.StockAmounts = networkStockState.ToArray();
+            playerData.TownPartsAmounts = networkTownPartsState.ToArray();
             SessionManager<SessionPlayerData>.Instance.SetPlayerData(OwnerClientId, playerData);
         }
     }

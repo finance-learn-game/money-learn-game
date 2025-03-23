@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49b2c0225143f044fa17d92440a7a39c
+    m_Address: Town Parts Registry
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5743e623b30092f429fe135ba4adef66
     m_Address: PersistantPlayerRuntimeCollection
     m_ReadOnly: 0

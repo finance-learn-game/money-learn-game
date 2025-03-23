@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: UI Sprites
   m_GUID: b4970cc959858af4aaf46d68196c8039
   m_SerializeEntries:
+  - m_GUID: 20a821e9ce8c17845bf4316ae25b7279
+    m_Address: building-svgrepo-com
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 50589ca51d51cf54eaf8e1ef87135a8d
     m_Address: copy_icon
     m_ReadOnly: 0
@@ -47,6 +52,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f402fb44752aaf440a49b1edf99e5d6a
     m_Address: artist_icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f79538298f7a12f439dc3a32a1b1b7ef
+    m_Address: tower-building-light-svgrepo-com
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

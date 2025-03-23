@@ -142,6 +142,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
                             new NetworkGuid(),
                             0,
                             Array.Empty<int>(),
+                            Array.Empty<TownPartData>(),
                             true
                         )
                     );

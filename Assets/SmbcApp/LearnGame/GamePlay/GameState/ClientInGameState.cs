@@ -12,6 +12,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
     {
         [SerializeField] [Required] private NetworkGameTurn gameTurn;
         [SerializeField] [Required] private StockDomain stockDomain;
+        [SerializeField] [Required] private TownPartsDomain townPartsDomain;
         [SerializeField] [Required] private PersistantPlayerRuntimeCollection playerCollection;
 
         public override GameState ActiveState => GameState.Game;
@@ -20,6 +21,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
         {
             builder.RegisterComponent(gameTurn);
             builder.RegisterComponent(stockDomain);
+            builder.RegisterComponent(townPartsDomain);
             builder.RegisterInstance(playerCollection);
         }
     }

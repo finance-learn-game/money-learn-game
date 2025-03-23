@@ -19,6 +19,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
         [SerializeField] [Required] private NetworkGameTurn gameTurn;
         [SerializeField] [Required] private AvatarRegistry avatarRegistry;
         [SerializeField] [Required] private PersistantPlayerRuntimeCollection playerCollection;
+        [SerializeField] [Required] private TownPartsRegistry townPartsRegistry;
 
         private SalaryDomain _salaryDomain;
 

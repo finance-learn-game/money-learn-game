@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7048834328317243559}
   - component: {fileID: 738439780426861149}
   - component: {fileID: -2241803322224610558}
+  - component: {fileID: -4533365613986767140}
   m_Layer: 0
   m_Name: Persistant Player
   m_TagString: Untagged
@@ -78,6 +79,7 @@ MonoBehaviour:
   networkAvatarGuidState: {fileID: 7048834328317243559}
   networkBalanceState: {fileID: 738439780426861149}
   networkStockState: {fileID: -2241803322224610558}
+  networkTownPartsState: {fileID: -4533365613986767140}
 --- !u!114 &7048834328317243559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,3 +120,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &-4533365613986767140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2483656595537399850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b8987444dd42e88167459cd33a6290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  townPartsRegistry: {fileID: 11400000, guid: 49b2c0225143f044fa17d92440a7a39c, type: 2}

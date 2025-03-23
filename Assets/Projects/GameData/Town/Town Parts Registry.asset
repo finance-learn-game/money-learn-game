@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7746f5bdc874a3fa283fdf9eac64435, type: 3}
+  m_Name: Town Parts Registry
+  m_EditorClassIdentifier: 
+  townParts:
+  - name: "\u5927\u304D\u3044\u30D3\u30EB"
+    description: "\u3069\u3053\u306B\u3067\u3082\u3042\u308B\u5927\u304D\u306A\u30D3\u30EB"
+    thumbnail:
+      m_AssetGUID: 20a821e9ce8c17845bf4316ae25b7279
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    price: 1500000
+    point: 20
+  - name: "\u30BF\u30EF\u30FC"
+    description: "\u4E2D\u304F\u3089\u3044\u306E\u30BF\u30EF\u30FC"
+    thumbnail:
+      m_AssetGUID: f79538298f7a12f439dc3a32a1b1b7ef
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    price: 800000
+    point: 8
