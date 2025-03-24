@@ -2,7 +2,6 @@
 using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.GamePlay.GameState.NetworkData;
 using SmbcApp.LearnGame.UIWidgets.Button;
-using Unity.Logging;
 using Unity.Netcode;
 using UnityEngine;
 using UnityScreenNavigator.Runtime.Core.Page;
@@ -24,18 +23,8 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
 
         private void Start()
         {
-            var networkManager = NetworkManager.Singleton;
-            if (!networkManager.IsServer)
-            {
-                readyButton.OnClick.Subscribe(OnReady).AddTo(gameObject);
-                SetReadyButtonColors();
-            }
-            else
-            {
-                // サーバー側では不必要なものを表示しない
-                readyButton.gameObject.SetActive(false);
-                avatarListView.gameObject.SetActive(false);
-            }
+            readyButton.OnClick.Subscribe(OnReady).AddTo(gameObject);
+            SetReadyButtonColors();
 
             leaveButton.OnClick.Subscribe(OnLeave).AddTo(gameObject);
         }
@@ -52,12 +41,6 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
 
         private void OnReady(Unit _)
         {
-            if (_networkAvatarSelection.IsAvatarSelectFinished.Value)
-            {
-                Log.Warning("Avatar select is already finished.");
-                return;
-            }
-
             _isReady = !_isReady;
             SetReadyButtonColors();
 

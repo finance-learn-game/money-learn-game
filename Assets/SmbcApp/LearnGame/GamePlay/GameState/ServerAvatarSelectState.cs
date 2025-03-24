@@ -38,21 +38,21 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
         }
 
         /// <summary>
-        ///     全員が選択完了しているか確認し、完了していたら結果を保存してゲームシーンに遷移
+        ///     全員が選択完了しているか確認し、IsAvatarSelectFinishedを更新する
         /// </summary>
-        private void CloseAvatarSelectIfReady()
+        private void CheckIfReady()
         {
             foreach (var playerInfo in _networkAvatarSelection.SessionPlayers)
             {
                 // サーバーは除外
                 if (playerInfo.ClientId == NetworkManager.ServerClientId) continue;
-                if (!playerInfo.IsReady)
-                    return;
+                if (playerInfo.IsReady) continue;
+
+                _networkAvatarSelection.IsAvatarSelectFinished.Value = false;
+                return;
             }
 
             _networkAvatarSelection.IsAvatarSelectFinished.Value = true;
-            SaveAvatarSelectResult();
-            SceneLoader.LoadScene(AppScenes.GameScene, true);
         }
 
         private bool IsPlayerNumberAvailable(int playerNumber)
@@ -108,6 +108,12 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
             }
         }
 
+        private void OnStartGame(Unit _)
+        {
+            SaveAvatarSelectResult();
+            SceneLoader.LoadScene(AppScenes.GameScene, true);
+        }
+
         #region Callbacks
 
         /// <summary>
@@ -122,7 +128,6 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
 
             var idx = FindSessionPlayerIdx(state.ClientId);
             if (idx == -1) throw new InvalidOperationException("Client not found in session players");
-            if (_networkAvatarSelection.IsAvatarSelectFinished.Value) return;
             if (state.Avatar != null && state.Avatar.Value.ToGuid() == Guid.Empty)
                 state = state with { IsReady = false };
 
@@ -132,12 +137,13 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
             prev.IsReady = state.IsReady ?? prev.IsReady;
             _networkAvatarSelection.SessionPlayers[idx] = prev;
 
-            CloseAvatarSelectIfReady();
+            CheckIfReady();
         }
 
         protected override void OnServerNetworkSpawn()
         {
             _networkAvatarSelection.OnStateChange.Subscribe(OnClientChangeState).AddTo(gameObject);
+            _networkAvatarSelection.OnStartGame.Subscribe(OnStartGame).AddTo(gameObject);
         }
 
         protected override void OnClientDisconnect(ulong clientId)
@@ -151,7 +157,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
 
             // 抜けたことにより、全員が選択完了しているか確認
             if (!_networkAvatarSelection.IsAvatarSelectFinished.Value)
-                CloseAvatarSelectIfReady();
+                CheckIfReady();
         }
 
         protected override void OnSceneEvent(SceneEvent sceneEvent)

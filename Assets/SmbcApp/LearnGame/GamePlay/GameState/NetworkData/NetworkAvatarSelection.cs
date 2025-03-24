@@ -11,6 +11,7 @@ namespace SmbcApp.LearnGame.GamePlay.GameState.NetworkData
     /// </summary>
     internal sealed class NetworkAvatarSelection : NetworkBehaviour
     {
+        private readonly Subject<Unit> _onStartGame = new();
         private readonly Subject<ChangeStateParams> _onStateChange = new();
         public NetworkList<SessionPlayerState> SessionPlayers { get; private set; }
 
@@ -23,6 +24,11 @@ namespace SmbcApp.LearnGame.GamePlay.GameState.NetworkData
         ///     準備が完了したクライアントを通知する
         /// </summary>
         public Observable<ChangeStateParams> OnStateChange => _onStateChange;
+
+        /// <summary>
+        ///     ゲームを開始したことを通知する
+        /// </summary>
+        public Observable<Unit> OnStartGame => _onStartGame;
 
         private void Awake()
         {
@@ -49,6 +55,13 @@ namespace SmbcApp.LearnGame.GamePlay.GameState.NetworkData
                 IsReady = isReady,
                 Avatar = null
             });
+        }
+
+        public void StartGameIfReady()
+        {
+            if (!IsAvatarSelectFinished.Value) return;
+
+            _onStartGame.OnNext(Unit.Default);
         }
 
         public record ChangeStateParams

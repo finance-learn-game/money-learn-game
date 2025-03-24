@@ -138,6 +138,7 @@ namespace SmbcApp.LearnGame.SceneLoader
 
         private void SetCanvasVisibility(bool visible)
         {
+            if (!Application.isPlaying) return;
             canvasGroup.alpha = visible ? 1 : 0;
             canvasGroup.blocksRaycasts = visible;
         }

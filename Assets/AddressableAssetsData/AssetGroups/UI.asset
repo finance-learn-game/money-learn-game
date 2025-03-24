@@ -185,6 +185,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f131a1b8ee20c1146b783e79b89ec560
+    m_Address: Server Avatar Select Page
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f42fab85328390c4a8461100ac0a55e0
     m_Address: News List Item
     m_ReadOnly: 0
