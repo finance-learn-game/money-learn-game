@@ -46,6 +46,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
                     turnEndButton.Text = turnEnd ? "待機中" : "次のターンへ";
                     openStockModalButton.IsInteractable = !turnEnd;
                     openTurnInfoModalButton.IsInteractable = !turnEnd;
+                    openTownPartsModalButton.IsInteractable = !turnEnd;
                 })
                 .AddTo(gameObject);
             _gameTurn.OnChangeTime

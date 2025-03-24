@@ -133,7 +133,8 @@ namespace SmbcApp.LearnGame.SceneLoader
             if (!_loadingScreenRunning) return;
 
             sceneNameText.text = sceneName;
-            if (_fadeOutCoroutine != null) StopCoroutine(_fadeOutCoroutine);
+            if (_fadeOutCoroutine != null && Application.isPlaying)
+                StopCoroutine(_fadeOutCoroutine);
         }
 
         private void SetCanvasVisibility(bool visible)
