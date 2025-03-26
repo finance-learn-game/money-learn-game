@@ -274,8 +274,8 @@ MonoBehaviour:
   profileModal:
     m_AssetGUID: 29fec5da709dcb642b42670fc86984a5
     m_SubObjectName: 
-    m_SubObjectGUID: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
 --- !u!1001 &1467649401513988963
 PrefabInstance:

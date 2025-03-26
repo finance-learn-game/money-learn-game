@@ -321,15 +321,15 @@ MonoBehaviour:
   initialPage:
     m_AssetGUID: b6282d3d312506643921dbce5444217e
     m_SubObjectName: 
-    m_SubObjectGUID: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   enableServerInitialPage: 0
   serverInitialPage:
     m_AssetGUID: 
     m_SubObjectName: 
-    m_SubObjectGUID: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   modalContainer: {fileID: 475527501}
   pageContainer: {fileID: 467503518}
