@@ -90,10 +90,12 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
             StockListItemView item
         )
         {
-            if (StockDomain.TryGetStockDataByDate(org.Id, date, out var stockData))
+            if (StockDomain.TryGetStockDataByDate(org.Id, date, out var stockData) &&
+                StockDomain.TryGetStockDataByDate(org.Id, date.AddMonths(-1), out var prev))
             {
                 var stockAmount = stockState.StockAmounts[org.Id];
-                item.Configure(org.Name, stockData.StockPrice, stockAmount);
+                var fluctuation = stockData.StockPrice - prev.StockPrice;
+                item.Configure(org.Name, stockData.StockPrice, stockAmount, fluctuation);
             }
             else
             {

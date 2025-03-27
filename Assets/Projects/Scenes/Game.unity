@@ -476,15 +476,15 @@ MonoBehaviour:
   initialPage:
     m_AssetGUID: fb4ab00af8e67d441869f0cc343e0abd
     m_SubObjectName: 
-    m_SubObjectGUID: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   enableServerInitialPage: 1
   serverInitialPage:
     m_AssetGUID: dedd387cf0bd25f45b01430fdf27edcc
     m_SubObjectName: 
-    m_SubObjectGUID: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   modalContainer: {fileID: 782095438}
   pageContainer: {fileID: 2118550369}

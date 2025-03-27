@@ -444,8 +444,8 @@ MonoBehaviour:
   stockListItemPrefab:
     m_AssetGUID: 2b6fa5e4b9fabc4469be82fafb84cb53
     m_SubObjectName: 
-    m_SubObjectGUID: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
 --- !u!1001 &8682890351270365794
 PrefabInstance:
@@ -595,9 +595,10 @@ MonoBehaviour:
   stockChartModal:
     m_AssetGUID: 217ba7fd84467234397e24a58ae807b1
     m_SubObjectName: 
-    m_SubObjectGUID: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
+  titleText: {fileID: 7270556526587200033}
 --- !u!114 &5675297667193734303 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3944423118475136765, guid: 88544ce089243154a841796cc4f2f414, type: 3}
@@ -607,5 +608,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c77cd9c219f41e58a2868bca1586e2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7270556526587200033 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2060931632633989187, guid: 88544ce089243154a841796cc4f2f414, type: 3}
+  m_PrefabInstance: {fileID: 8682890351270365794}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
