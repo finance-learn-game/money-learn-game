@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Game Configuration
   m_EditorClassIdentifier: 
   maxPlayers: 10
-  connectionType: dtls
-  connectionMethodType: 0
+  connectionType: wss
+  connectionMethodType: 1
   initialBalance: 10000
   stockChartOptions:
   - label: "\u904E\u53BB\u534A\u5E74"
