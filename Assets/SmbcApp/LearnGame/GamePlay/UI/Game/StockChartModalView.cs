@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using R3;
 using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.Data;
+using SmbcApp.LearnGame.GamePlay.Configuration;
 using SmbcApp.LearnGame.GamePlay.Domain;
 using SmbcApp.LearnGame.GamePlay.GameState.NetworkData;
 using SmbcApp.LearnGame.UIWidgets.Chart;
@@ -31,27 +32,17 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
         {
             base.Start();
 
-            _rangeOptions = new[]
-            {
-                new RangeOptionData("過去6月", () =>
-                {
-                    var now = GameTurn.CurrentTime;
-                    var min = now.AddMonths(-6);
-                    return (min, now);
-                }),
-                new RangeOptionData("過去10月", () =>
-                {
-                    var now = GameTurn.CurrentTime;
-                    var min = now.AddMonths(-10);
-                    return (min, now);
-                }),
-                new RangeOptionData("過去14月", () =>
-                {
-                    var now = GameTurn.CurrentTime;
-                    var min = now.AddMonths(-14);
-                    return (min, now);
-                })
-            };
+            _rangeOptions = GameConfiguration.Instance.StockChartOptions
+                .Select(op => new RangeOptionData(
+                    op.Label,
+                    () =>
+                    {
+                        var now = GameTurn.CurrentTime;
+                        var min = now.AddMonths(op.Months);
+                        return (min, now);
+                    }
+                ))
+                .ToArray();
 
             rangeDropdown.Options.Clear();
             rangeDropdown.Options.AddRange(_rangeOptions.Select(op => new TMP_Dropdown.OptionData(op.Label)));

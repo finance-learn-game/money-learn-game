@@ -86,6 +86,7 @@ namespace SmbcApp.LearnGame.ApplicationLifecycle
             builder.RegisterMessageBroker<UnityServiceErrorMessage>(option);
             builder.RegisterMessageBroker<ConnectStatus>(option);
             builder.RegisterMessageBroker<ConnectionEventMessage>(option);
+            builder.RegisterMessageBroker<OnInGameStartMessage>(option);
 
             builder.Register<SessionServiceFacade>(Lifetime.Singleton);
             builder.UseEntryPoints(c =>

@@ -1,5 +1,8 @@
-﻿using R3;
+﻿using System.Linq;
+using MessagePipe;
+using R3;
 using Sirenix.OdinInspector;
+using SmbcApp.LearnGame.ApplicationLifecycle.Messages;
 using SmbcApp.LearnGame.GamePlay.GameState.NetworkData;
 using SmbcApp.LearnGame.UIWidgets.Button;
 using SmbcApp.LearnGame.Utils;
@@ -14,19 +17,26 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
     {
         [SerializeField] [Required] private SessionCodeView sessionCodeView;
         [SerializeField] [Required] private PlayerListView playerListView;
+        [SerializeField] [Required] private GameDateInputView gameDateInputView;
         [SerializeField] [Required] private UIButton startButton;
         [SerializeField] [Required] private UIButton leaveButton;
 
         private NetworkAvatarSelection _avatarSelection;
+
+        [Inject] internal IBufferedPublisher<OnInGameStartMessage> GameStartMessagePublisher;
 
         private void Start()
         {
             leaveButton.OnClick.Subscribe(OnLeave).AddTo(gameObject);
             startButton.OnClick.Subscribe(OnGameStart).AddTo(gameObject);
 
-            _avatarSelection.IsAvatarSelectFinished.OnChangedAsObservable()
+            Observable.CombineLatest(
+                    _avatarSelection.IsAvatarSelectFinished.OnChangedAsObservable(),
+                    gameDateInputView.IsValid
+                )
+                .Select(list => list.All(b => b))
                 .Prepend(false)
-                .Subscribe(finished => startButton.IsInteractable = finished)
+                .Subscribe(ok => startButton.IsInteractable = ok)
                 .AddTo(gameObject);
         }
 
@@ -37,6 +47,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
 
             resolver.Inject(sessionCodeView);
             resolver.Inject(playerListView);
+            resolver.Inject(gameDateInputView);
         }
 
         private static void OnLeave(Unit _)
@@ -47,6 +58,10 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
         private void OnGameStart(Unit _)
         {
             _avatarSelection.StartGameIfReady();
+            GameStartMessagePublisher.Publish(new OnInGameStartMessage(
+                gameDateInputView.MinDate.ToDateTime,
+                gameDateInputView.MaxDate.ToDateTime
+            ));
         }
     }
 }

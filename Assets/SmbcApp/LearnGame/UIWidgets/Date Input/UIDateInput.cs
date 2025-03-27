@@ -10,7 +10,7 @@ namespace SmbcApp.LearnGame.UIWidgets.Date_Input
     /// <summary>
     ///     日付入力用のウェジット
     /// </summary>
-    internal sealed class UIDateInput : MonoBehaviour
+    public sealed class UIDateInput : MonoBehaviour
     {
         [SerializeField] [Required] private TMP_Text labelText;
         [SerializeField] [Required] private TMP_InputField yearInput;
@@ -23,6 +23,19 @@ namespace SmbcApp.LearnGame.UIWidgets.Date_Input
 
         [ShowIf(nameof(enableMaxDate))] [SerializeField]
         private YearMonthDate maxDate;
+
+        private readonly ReactiveProperty<YearMonthDate> _value = new();
+        public ReadOnlyReactiveProperty<YearMonthDate> Value => _value;
+
+        public bool Interactable
+        {
+            get => yearInput.interactable && monthInput.interactable;
+            set
+            {
+                yearInput.interactable = value;
+                monthInput.interactable = value;
+            }
+        }
 
         public YearMonthDate? MinDate
         {
@@ -65,16 +78,16 @@ namespace SmbcApp.LearnGame.UIWidgets.Date_Input
 
         private void ValidateInput()
         {
-            var year = math.max(0, int.Parse(yearInput.text));
-            var month = math.clamp(int.Parse(monthInput.text), 1, 12);
+            var year = int.TryParse(yearInput.text, out var result) ? math.max(0, result) : 0;
+            var month = int.TryParse(monthInput.text, out result) ? math.clamp(result, 1, 12) : 1;
             var date = new YearMonthDate(year, month);
-            if (enableMinDate && date.CompareTo(minDate) < 0)
+            if (enableMinDate && date < minDate)
             {
                 year = minDate.year;
                 month = minDate.month;
             }
 
-            if (enableMaxDate && date.CompareTo(maxDate) > 0)
+            if (enableMaxDate && date > maxDate)
             {
                 year = maxDate.year;
                 month = maxDate.month;
@@ -82,10 +95,11 @@ namespace SmbcApp.LearnGame.UIWidgets.Date_Input
 
             yearInput.text = year.ToString();
             monthInput.text = month.ToString();
+            _value.Value = new YearMonthDate(year, month);
         }
 
         [Serializable]
-        public struct YearMonthDate : IComparable<YearMonthDate>
+        public struct YearMonthDate : IComparable<YearMonthDate>, IEquatable<YearMonthDate>
         {
             [ValidateInput(nameof(Validate))] public int year, month;
 
@@ -93,6 +107,8 @@ namespace SmbcApp.LearnGame.UIWidgets.Date_Input
             {
                 return year > 0 && month is > 0 and <= 12;
             }
+
+            public DateTime ToDateTime => new(year, month, 1);
 
             public YearMonthDate(int year, int month)
             {
@@ -104,6 +120,41 @@ namespace SmbcApp.LearnGame.UIWidgets.Date_Input
             {
                 var yearComparison = year.CompareTo(other.year);
                 return yearComparison != 0 ? yearComparison : month.CompareTo(other.month);
+            }
+
+            public static bool operator <(YearMonthDate left, YearMonthDate right)
+            {
+                return left.CompareTo(right) < 0;
+            }
+
+            public static bool operator >(YearMonthDate left, YearMonthDate right)
+            {
+                return left.CompareTo(right) > 0;
+            }
+
+            public static bool operator <=(YearMonthDate left, YearMonthDate right)
+            {
+                return left.CompareTo(right) <= 0;
+            }
+
+            public static bool operator >=(YearMonthDate left, YearMonthDate right)
+            {
+                return left.CompareTo(right) >= 0;
+            }
+
+            public bool Equals(YearMonthDate other)
+            {
+                return year == other.year && month == other.month;
+            }
+
+            public override bool Equals(object obj)
+            {
+                return obj is YearMonthDate other && Equals(other);
+            }
+
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(year, month);
             }
         }
     }

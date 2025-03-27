@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.Utils;
 using UnityEngine;
@@ -24,6 +26,7 @@ namespace SmbcApp.LearnGame.GamePlay.Configuration
         private ConnectionMethodType connectionMethodType = ConnectionMethodType.IP;
 
         [SerializeField] private int initialBalance = 10000;
+        [SerializeField] private StockChartOption[] stockChartOptions;
 
         private IEnumerable _connectionTypes = new ValueDropdownList<string> { "udp", "dtls", "ws", "wss" };
 
@@ -31,5 +34,16 @@ namespace SmbcApp.LearnGame.GamePlay.Configuration
         public int InitialBalance => initialBalance;
         public string ConnectionType => connectionType;
         public ConnectionMethodType ConnectionMethod => connectionMethodType;
+        public IReadOnlyList<StockChartOption> StockChartOptions => stockChartOptions;
+
+        [Serializable]
+        public struct StockChartOption
+        {
+            [SerializeField] private string label;
+            [SerializeField] private int months;
+
+            public string Label => label;
+            public int Months => months;
+        }
     }
 }

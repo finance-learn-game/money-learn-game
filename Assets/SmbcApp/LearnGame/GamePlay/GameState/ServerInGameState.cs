@@ -1,6 +1,7 @@
-﻿using System;
+﻿using MessagePipe;
 using R3;
 using Sirenix.OdinInspector;
+using SmbcApp.LearnGame.ApplicationLifecycle.Messages;
 using SmbcApp.LearnGame.Data;
 using SmbcApp.LearnGame.GamePlay.Configuration;
 using SmbcApp.LearnGame.GamePlay.Domain;
@@ -23,16 +24,17 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
 
         private SalaryDomain _salaryDomain;
 
+        [Inject] internal IBufferedSubscriber<OnInGameStartMessage> GameStartMessageSubscriber;
         [Inject] internal MasterData MasterData;
         public override GameState ActiveState => GameState.Game;
 
         protected override void OnServerNetworkSpawn()
         {
             // ゲーム開始時間を設定
-            var db = MasterData.DB;
-            var minDate = db.StockDataTable.SortByDate.First.Date.AddMonths(14);
-            gameTurn.CurrentTime = new DateTime(minDate.Year, minDate.Month, 1);
-            gameTurn.GameStartTime = gameTurn.CurrentTime;
+            GameStartMessageSubscriber
+                .Subscribe(msg => gameTurn.GameRange = (msg.StartDate, msg.EndDate))
+                .Dispose();
+            gameTurn.CurrentTime = gameTurn.GameRange.Start;
 
             // 給料ドメインを初期化
             _salaryDomain = new SalaryDomain(avatarRegistry, gameTurn);

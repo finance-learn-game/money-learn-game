@@ -12,12 +12,20 @@ namespace SmbcApp.LearnGame.GamePlay.GameState.NetworkData
     internal sealed class NetworkGameTurn : NetworkBehaviour
     {
         private readonly NetworkVariable<long> _currentTimeTick = new();
+        private readonly NetworkVariable<GameDateRange> _gameDateRange = new();
         private readonly Subject<Unit> _onTurnEnd = new();
         private NetworkList<ClientTurn> _isTurnEndList;
 
         public Observable<Unit> OnTurnEnd => _onTurnEnd;
 
-        public DateTime GameStartTime { get; set; }
+        public (DateTime Start, DateTime End) GameRange
+        {
+            get => (_gameDateRange.Value.Start, _gameDateRange.Value.End);
+            set
+            {
+                if (IsServer) _gameDateRange.Value = new GameDateRange(value.Start, value.End);
+            }
+        }
 
         public DateTime CurrentTime
         {
@@ -83,6 +91,27 @@ namespace SmbcApp.LearnGame.GamePlay.GameState.NetworkData
             // ターン終了フラグをリセット
             for (var i = 0; i < _isTurnEndList.Count; i++)
                 _isTurnEndList[i] = new ClientTurn(_isTurnEndList[i].ClientId, false);
+        }
+
+        private struct GameDateRange : INetworkSerializable
+        {
+            private long _start;
+            private long _end;
+
+            public GameDateRange(DateTime start, DateTime end)
+            {
+                _start = start.Ticks;
+                _end = end.Ticks;
+            }
+
+            public DateTime Start => new(_start);
+            public DateTime End => new(_end);
+
+            public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+            {
+                serializer.SerializeValue(ref _start);
+                serializer.SerializeValue(ref _end);
+            }
         }
 
         private struct ClientTurn : INetworkSerializable, IEquatable<ClientTurn>, IDataWithClientId

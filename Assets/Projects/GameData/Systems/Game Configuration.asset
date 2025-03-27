@@ -16,3 +16,8 @@ MonoBehaviour:
   connectionType: dtls
   connectionMethodType: 0
   initialBalance: 10000
+  stockChartOptions:
+  - label: "\u904E\u53BB\u534A\u5E74"
+    months: 6
+  - label: "\u904E\u53BB\u4E00\u5E74"
+    months: 12

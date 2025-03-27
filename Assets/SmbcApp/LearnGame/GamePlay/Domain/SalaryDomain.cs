@@ -24,7 +24,7 @@ namespace SmbcApp.LearnGame.GamePlay.Domain
             var avatarGuid = player.AvatarGuidState.AvatarGuid.Value.ToGuid();
             if (!_avatarRegistry.TryGetAvatar(avatarGuid, out var avatar)) return;
 
-            var salary = avatar.SalaryConfig.CalculateSalary(_gameTurn.GameStartTime, _gameTurn.CurrentTime);
+            var salary = avatar.SalaryConfig.CalculateSalary(_gameTurn.GameRange.Start, _gameTurn.CurrentTime);
             player.BalanceState.CurrentBalance += salary;
             player.BalanceState.GiveSalaryRpc(salary);
         }
