@@ -7,6 +7,7 @@ using SmbcApp.LearnGame.GamePlay.Configuration;
 using SmbcApp.LearnGame.GamePlay.Domain;
 using SmbcApp.LearnGame.GamePlay.GamePlayObjects.RuntimeDataContainers;
 using SmbcApp.LearnGame.GamePlay.GameState.NetworkData;
+using SmbcApp.LearnGame.SceneLoader;
 using SmbcApp.LearnGame.Utils;
 using Unity.Netcode;
 using UnityEngine;
@@ -26,6 +27,7 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
 
         [Inject] internal IBufferedSubscriber<OnInGameStartMessage> GameStartMessageSubscriber;
         [Inject] internal MasterData MasterData;
+        [Inject] internal SceneLoader.SceneLoader SceneLoader;
         public override GameState ActiveState => GameState.Game;
 
         protected override void OnServerNetworkSpawn()
@@ -47,6 +49,13 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
         {
             foreach (var player in playerCollection.Players)
                 _salaryDomain.ApplySalary(player.Value);
+
+            // 今回でゲームが終了する場合はリザルトシーンへ遷移
+            if (gameTurn.CurrentTime == gameTurn.GameRange.End)
+            {
+                SceneLoader.LoadScene(AppScenes.Result, true);
+                return;
+            }
 
             gameTurn.CurrentTime = gameTurn.CurrentTime.AddMonths(1);
         }
