@@ -803,18 +803,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1398400676}
     m_Modifications:
-    - target: {fileID: 1779285890650887577, guid: 4835be727fca0ac49a4ac44c666621e0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1779285890650887577, guid: 4835be727fca0ac49a4ac44c666621e0, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1779285890650887577, guid: 4835be727fca0ac49a4ac44c666621e0, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2466512450979990536, guid: 4835be727fca0ac49a4ac44c666621e0, type: 3}
       propertyPath: m_Name
       value: Result Page
