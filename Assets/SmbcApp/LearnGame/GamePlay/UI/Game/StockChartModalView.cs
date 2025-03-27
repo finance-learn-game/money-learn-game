@@ -38,7 +38,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
                     () =>
                     {
                         var now = GameTurn.CurrentTime;
-                        var min = now.AddMonths(op.Months);
+                        var min = now.AddMonths(-op.Months);
                         return (min, now);
                     }
                 ))

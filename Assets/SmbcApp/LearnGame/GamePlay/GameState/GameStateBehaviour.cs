@@ -7,7 +7,8 @@ namespace SmbcApp.LearnGame.Gameplay.GameState
     {
         MainMenu,
         AvatarSelect,
-        Game
+        Game,
+        Result
     }
 
     internal abstract class GameStateBehaviour : LifetimeScope

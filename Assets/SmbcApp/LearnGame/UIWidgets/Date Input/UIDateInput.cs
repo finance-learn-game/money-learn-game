@@ -44,6 +44,7 @@ namespace SmbcApp.LearnGame.UIWidgets.Date_Input
             {
                 enableMinDate = value.HasValue;
                 minDate = value ?? default;
+                ValidateInput();
             }
         }
 
@@ -54,6 +55,7 @@ namespace SmbcApp.LearnGame.UIWidgets.Date_Input
             {
                 enableMaxDate = value.HasValue;
                 maxDate = value ?? default;
+                ValidateInput();
             }
         }
 

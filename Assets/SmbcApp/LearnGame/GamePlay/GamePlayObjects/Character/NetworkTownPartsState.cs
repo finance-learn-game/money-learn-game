@@ -32,6 +32,8 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects.Character
             .DistinctUntilChanged()
             .Prepend(CalcCurrentPoint);
 
+        public int CurrentPoint => CalcCurrentPoint();
+
         private void Awake()
         {
             TownPartDataList = new NetworkList<TownPartData>();
