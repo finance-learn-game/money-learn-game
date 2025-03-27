@@ -21,6 +21,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
     {
         [SerializeField] [Required] private UIChart uiChart;
         [SerializeField] [Required] private UIDropdown rangeDropdown;
+        [SerializeField] [Required] private TMP_Text titleText;
 
         private RangeOptionData[] _rangeOptions;
 
@@ -79,6 +80,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
                     .ToArray()
             );
             uiChart.SetXLabels(XLabels()).Forget();
+            titleText.text = $"株価の変動 ({range.Min:yyyy/MM} ~ {range.Max:yyyy/MM})";
 
             return;
 
@@ -92,8 +94,17 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
 
             IEnumerable<string> XLabels()
             {
+                var year = -1;
                 for (var date = range.Min; date <= range.Max; date = date.AddMonths(1))
-                    yield return date.ToString("MM/dd");
+                    if (date.Year != year)
+                    {
+                        year = date.Year;
+                        yield return date.ToString("yyyy/MM");
+                    }
+                    else
+                    {
+                        yield return date.ToString("MM月");
+                    }
             }
         }
 

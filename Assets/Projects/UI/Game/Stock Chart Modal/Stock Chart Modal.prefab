@@ -107,8 +107,8 @@ MonoBehaviour:
   valueLabelPrefab:
     m_AssetGUID: e9728178ddff13949abbd7f1a1c57c30
     m_SubObjectName: 
-    m_SubObjectGUID: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
 --- !u!1001 &2335202049752390277
 PrefabInstance:
@@ -235,6 +235,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c77cd9c219f41e58a2868bca1586e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4391479689781351110 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2060931632633989187, guid: 88544ce089243154a841796cc4f2f414, type: 3}
+  m_PrefabInstance: {fileID: 2335202049752390277}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5041347634578676351 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7322354996573372666, guid: 88544ce089243154a841796cc4f2f414, type: 3}
@@ -260,6 +271,7 @@ MonoBehaviour:
   closeButton: {fileID: 1645267460419343480}
   uiChart: {fileID: 1790424242402902295}
   rangeDropdown: {fileID: 1032332273904105547}
+  titleText: {fileID: 4391479689781351110}
 --- !u!224 &6241736503407660779 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8572416776895370350, guid: 88544ce089243154a841796cc4f2f414, type: 3}
@@ -292,6 +304,10 @@ PrefabInstance:
     - target: {fileID: 837325746754867012, guid: 68f51d786e3a2124c914ecf5f308b00a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888629996144966486, guid: 68f51d786e3a2124c914ecf5f308b00a, type: 3}
+      propertyPath: m_text
+      value: "\u4F1A\u793E\u4E00\u89A7"
       objectReference: {fileID: 0}
     - target: {fileID: 3841528999123993045, guid: 68f51d786e3a2124c914ecf5f308b00a, type: 3}
       propertyPath: m_AnchorMax.y
