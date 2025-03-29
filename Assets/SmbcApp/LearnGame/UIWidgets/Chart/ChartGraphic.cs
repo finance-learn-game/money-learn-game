@@ -4,6 +4,7 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using R3;
 using Sirenix.OdinInspector;
+using Unity.Logging;
 using Unity.Mathematics;
 using Unity.VectorGraphics;
 using UnityEngine;
@@ -76,9 +77,8 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
 
             var scene = new Scene { Root = new SceneNode { Shapes = shapes } };
 
-            // TODO: 何故かWebGLで動かない (グラフが描画されない)
 #if UNITY_WEBGL && !UNITY_EDITOR
-            VectorUtils.TessellateScene(scene, GetTessellationOptions());
+            _geomList = VectorUtils.TessellateScene(scene, GetTessellationOptions());
             SetAllDirty();
 #else
             UniTask.Void(async () =>
@@ -133,14 +133,28 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
             {
                 var indexOffset = verts.Count;
 
-                verts.AddRange(geometry.Vertices
+                var geomVerts = geometry.Vertices;
+                var geomIndices = geometry.Indices;
+                if (geomVerts == null || geomVerts.Length == 0)
+                {
+                    Log.Error("TessellateScene failed: no vertices");
+                    continue;
+                }
+
+                if (geomIndices == null || geomIndices.Length == 0)
+                {
+                    Log.Error("TessellateScene failed: no indices");
+                    continue;
+                }
+
+                verts.AddRange(geomVerts
                     .Select(vert => new UIVertex
                     {
                         position = new float3(geometry.WorldTransform * vert / svgPixelsPerUnit, 0),
                         color = geometry.Color
                     })
                 );
-                indices.AddRange(geometry.Indices.Select(idx => idx + indexOffset));
+                indices.AddRange(geomIndices.Select(idx => idx + indexOffset));
             }
 
             vh.AddUIVertexStream(verts, indices);

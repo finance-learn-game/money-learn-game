@@ -50,6 +50,9 @@ namespace SmbcApp.LearnGame.GamePlay.UI.AvatarSelect
             minDateInput.MinDate = maxDateInput.MinDate = _dbStartDate;
             minDateInput.MaxDate = maxDateInput.MaxDate = _dbEndDate;
 
+            minDateInput.SetDate(minDateInput.MinDate.Value.ToDateTime);
+            maxDateInput.SetDate(maxDateInput.MaxDate.Value.ToDateTime);
+
             minDateInput.Value.Subscribe(OnDateChanged).AddTo(gameObject);
             maxDateInput.Value.Subscribe(OnDateChanged).AddTo(gameObject);
         }

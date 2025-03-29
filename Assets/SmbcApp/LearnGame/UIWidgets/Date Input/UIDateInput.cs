@@ -78,6 +78,13 @@ namespace SmbcApp.LearnGame.UIWidgets.Date_Input
                 .AddTo(gameObject);
         }
 
+        public void SetDate(DateTime date)
+        {
+            yearInput.text = date.Year.ToString();
+            monthInput.text = date.Month.ToString();
+            ValidateInput();
+        }
+
         private void ValidateInput()
         {
             var year = int.TryParse(yearInput.text, out var result) ? math.max(0, result) : 0;
