@@ -82,7 +82,8 @@ namespace SmbcApp.LearnGame.GamePlay.Domain
         /// <returns>取得できたか</returns>
         public bool TryGetStockDataByDate(int orgId, DateTime date, out StockData stockData)
         {
-            var view = MasterData.DB.StockDataTable.FindClosestByDate(date, false);
+            var stockDate = new DateTime(date.Year, date.Month, 1);
+            var view = MasterData.DB.StockDataTable.FindClosestByDate(stockDate, false);
             stockData = view.FirstOrDefault(s => s.OrganizationId == orgId);
             return stockData != null;
         }

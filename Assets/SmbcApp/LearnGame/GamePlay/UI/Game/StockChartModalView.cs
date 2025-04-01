@@ -88,8 +88,11 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
             {
                 var stockDataTable = MasterData.DB.StockDataTable;
                 for (var date = range.Min; date <= range.Max; date = date.AddMonths(1))
-                    foreach (var stockData in stockDataTable.FindClosestByDate(date, false))
+                {
+                    var stockDate = new DateTime(date.Year, date.Month, 1);
+                    foreach (var stockData in stockDataTable.FindClosestByDate(stockDate, false))
                         yield return stockData;
+                }
             }
 
             IEnumerable<string> XLabels()

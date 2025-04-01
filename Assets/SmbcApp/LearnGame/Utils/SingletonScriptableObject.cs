@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -14,8 +16,10 @@ namespace SmbcApp.LearnGame.Utils
             get
             {
 #if UNITY_EDITOR
-                if (_instance == null)
-                    _instance = LoadAsset();
+                if (_instance != null) return _instance;
+
+                _instance = PlayerSettings.GetPreloadedAssets().OfType<T>().FirstOrDefault();
+                Debug.Assert(_instance != null, $"{typeof(T).Name} is not preloaded");
 #else
                 if (_instance == null)
                     _instance = CreateInstance<T>();
