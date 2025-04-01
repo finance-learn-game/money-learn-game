@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.Utils;
@@ -13,26 +12,20 @@ namespace SmbcApp.LearnGame.GamePlay.Configuration
     {
         public enum ConnectionMethodType
         {
-            IP,
+            Direct,
             Relay
         }
 
         [BoxGroup("Network")] [SerializeField] private int maxPlayers = 10;
 
-        [ValueDropdown(nameof(_connectionTypes))] [BoxGroup("Network")] [SerializeField]
-        private string connectionType = "dtls";
-
         [BoxGroup("Network")] [SerializeField]
-        private ConnectionMethodType connectionMethodType = ConnectionMethodType.IP;
+        private ConnectionMethodType connectionMethodType = ConnectionMethodType.Direct;
 
         [SerializeField] private int initialBalance = 10000;
         [SerializeField] private StockChartOption[] stockChartOptions;
 
-        private IEnumerable _connectionTypes = new ValueDropdownList<string> { "udp", "dtls", "ws", "wss" };
-
         public int MaxPlayers => maxPlayers;
         public int InitialBalance => initialBalance;
-        public string ConnectionType => connectionType;
         public ConnectionMethodType ConnectionMethod => connectionMethodType;
         public IReadOnlyList<StockChartOption> StockChartOptions => stockChartOptions;
 

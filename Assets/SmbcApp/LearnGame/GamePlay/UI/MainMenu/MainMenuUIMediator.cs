@@ -47,22 +47,32 @@ namespace SmbcApp.LearnGame.Gameplay.UI.MainMenu
 
         public async UniTask JoinSessionWithCode(string sessionCode)
         {
-            BlockUIWhileLoadingIsInProgress();
+            try
+            {
+                BlockUIWhileLoadingIsInProgress();
 
-            await Signin();
-            await ConnectionManager.StartClientSession(ProfileManager.CurrentProfile.CurrentValue, sessionCode);
-
-            UnblockUIAfterLoadingIsComplete();
+                await Signin();
+                await ConnectionManager.StartClientSession(ProfileManager.CurrentProfile.CurrentValue, sessionCode);
+            }
+            finally
+            {
+                UnblockUIAfterLoadingIsComplete();
+            }
         }
 
         public async UniTask CreateSessionRequest()
         {
-            BlockUIWhileLoadingIsInProgress();
+            try
+            {
+                BlockUIWhileLoadingIsInProgress();
 
-            await Signin("Server");
-            await ConnectionManager.StartServerSession("Server");
-
-            UnblockUIAfterLoadingIsComplete();
+                await Signin("Server");
+                await ConnectionManager.StartServerSession("Server");
+            }
+            finally
+            {
+                UnblockUIAfterLoadingIsComplete();
+            }
         }
 
         private void BlockUIWhileLoadingIsInProgress()

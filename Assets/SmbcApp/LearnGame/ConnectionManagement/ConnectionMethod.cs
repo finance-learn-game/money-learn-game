@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using SmbcApp.LearnGame.GamePlay.Configuration;
 using SmbcApp.LearnGame.UnityService.Session;
 using Unity.Logging;
+using Unity.Netcode.Transports.UTP;
 using Unity.Services.Authentication;
 using Unity.Services.Multiplayer;
 using UnityEngine;
@@ -13,8 +14,8 @@ namespace SmbcApp.LearnGame.ConnectionManagement
     internal abstract class ConnectionMethodBase
     {
         private readonly ConnectionManager _connectionManager;
+        private readonly string _playerName;
         private readonly SessionServiceFacade _sessionServiceFacade;
-        protected readonly string PlayerName;
 
         protected ConnectionMethodBase(
             ConnectionManager connectionManager,
@@ -23,8 +24,18 @@ namespace SmbcApp.LearnGame.ConnectionManagement
         )
         {
             _connectionManager = connectionManager;
-            PlayerName = playerName;
+            _playerName = playerName;
             _sessionServiceFacade = sessionServiceFacade;
+
+            var networkManager = connectionManager.NetworkManager;
+            if (networkManager.NetworkConfig.NetworkTransport is not UnityTransport transport) return;
+
+            transport.UseEncryption = true;
+#if UNITY_WEBGL
+            transport.UseWebSockets = true;
+#else
+            transport.UseWebSockets = false;
+#endif
         }
 
         public async UniTask SetupServerConnectionAsync()
@@ -34,7 +45,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement
                 throw new ConnectionMethodException("Failed to get player id");
 
             // コネクションペイロードを設定
-            SetConnectionPayload(playerId, PlayerName);
+            SetConnectionPayload(playerId, _playerName);
 
             if (await _sessionServiceFacade.TryCreateSession(ServerSessionOptions))
                 return;
@@ -48,7 +59,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement
                 throw new ConnectionMethodException("Failed to get player id");
 
             // コネクションペイロードを設定
-            SetConnectionPayload(playerId, PlayerName);
+            SetConnectionPayload(playerId, _playerName);
 
             if (!await _sessionServiceFacade.TryJoinSession(sessionCode))
                 throw new ConnectionMethodException($"Failed to join session with code {sessionCode}");
@@ -94,7 +105,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement
         {
             return GameConfiguration.Instance.ConnectionMethod switch
             {
-                GameConfiguration.ConnectionMethodType.IP => new ConnectionMethodIP(
+                GameConfiguration.ConnectionMethodType.Direct => new ConnectionMethodDirect(
                     connectionManager,
                     playerName,
                     sessionServiceFacade
@@ -116,9 +127,9 @@ namespace SmbcApp.LearnGame.ConnectionManagement
         }
     }
 
-    internal sealed class ConnectionMethodIP : ConnectionMethodBase
+    internal sealed class ConnectionMethodDirect : ConnectionMethodBase
     {
-        public ConnectionMethodIP(
+        public ConnectionMethodDirect(
             ConnectionManager connectionManager,
             string playerName,
             SessionServiceFacade sessionServiceFacade
