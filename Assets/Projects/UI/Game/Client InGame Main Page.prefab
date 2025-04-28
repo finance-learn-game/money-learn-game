@@ -237,20 +237,20 @@ MonoBehaviour:
   stockModalPrefab:
     m_AssetGUID: d2cb6bf4ecea39943a50060bcc75e048
     m_SubObjectName: 
-    m_SubObjectGUID: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   turnInfoModalPrefab:
     m_AssetGUID: 652dd97f5a624db4c9b18c7794b5cc59
     m_SubObjectName: 
-    m_SubObjectGUID: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   townPartsModalPrefab:
     m_AssetGUID: 77d97182f23851a47b43d94faaf098f8
     m_SubObjectName: 
-    m_SubObjectGUID: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
 --- !u!1 &6381068126595805803
 GameObject:
@@ -524,7 +524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6356780459406322873, guid: cd3775c13bb2a324b9b20f477faf1937, type: 3}
       propertyPath: m_text
-      value: "\u30BF\u30FC\u30F3\u60C5\u5831"
+      value: "\u60C5\u5831\u306E\u78BA\u8A8D"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

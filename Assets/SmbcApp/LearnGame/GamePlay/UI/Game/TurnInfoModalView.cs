@@ -14,6 +14,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
     {
         [SerializeField] [Required] private TMP_Text dateText;
         [SerializeField] [Required] private TMP_Text salaryText;
+        [SerializeField] [Required] private TMP_Text titleText;
         [SerializeField] [Required] private NewsListView newsListView;
 
         private NetworkGameTurn _gameTurn;
@@ -24,8 +25,9 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
             base.Start();
 
             var date = _gameTurn.CurrentTime;
-            dateText.text = $"{date:yyyy/MM/dd} になりました";
+            dateText.text = $"{date:yyyy/MM} になりました";
             salaryText.text = $"{_player.BalanceState.GaveSalary} 円の給料を受け取りました";
+            titleText.text = $"{date:yyyy/MM} に起きるニュース情報";
         }
 
         [Inject]

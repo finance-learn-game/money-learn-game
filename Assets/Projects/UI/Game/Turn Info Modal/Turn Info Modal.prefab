@@ -394,7 +394,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2060931632633989187, guid: 88544ce089243154a841796cc4f2f414, type: 3}
       propertyPath: m_text
-      value: "\u60C5\u5831\u306E\u78BA\u8A8D"
+      value: "2020/01\u306B\u8D77\u304D\u308B\u60C5\u5831\u306E\u78BA\u8A8D"
       objectReference: {fileID: 0}
     - target: {fileID: 7322354996573372666, guid: 88544ce089243154a841796cc4f2f414, type: 3}
       propertyPath: m_Name
@@ -429,6 +429,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c77cd9c219f41e58a2868bca1586e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3890949770485855251 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2060931632633989187, guid: 88544ce089243154a841796cc4f2f414, type: 3}
+  m_PrefabInstance: {fileID: 2983221705879698512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5546380059086011562 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7322354996573372666, guid: 88544ce089243154a841796cc4f2f414, type: 3}
@@ -454,6 +465,7 @@ MonoBehaviour:
   closeButton: {fileID: 2295692010603754157}
   dateText: {fileID: 8888214286885795650}
   salaryText: {fileID: 2706052226375161351}
+  titleText: {fileID: 3890949770485855251}
   newsListView: {fileID: 1160451843611387101}
 --- !u!224 &6886531553489528894 stripped
 RectTransform:
@@ -578,6 +590,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4961778842983080097, guid: 960c7432476f61a4aabaaa0d0feae8a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6246621285083983931, guid: 960c7432476f61a4aabaaa0d0feae8a8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6246621285083983931, guid: 960c7432476f61a4aabaaa0d0feae8a8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6246621285083983931, guid: 960c7432476f61a4aabaaa0d0feae8a8, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7715110259137702549, guid: 960c7432476f61a4aabaaa0d0feae8a8, type: 3}

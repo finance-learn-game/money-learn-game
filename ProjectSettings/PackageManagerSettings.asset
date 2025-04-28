@@ -35,6 +35,7 @@ MonoBehaviour:
     - com.cysharp.messagepipe.vcontainer
     - com.cysharp.unitask
     - com.github-glitchenzo.nugetforunity
+    - com.unify.unified-universal-blur
     - jp.co.cyberagent.smartaddresser
     - jp.hadashikick.vcontainer
     m_IsDefault: 0

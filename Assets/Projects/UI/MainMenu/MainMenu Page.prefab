@@ -75,8 +75,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279704857
-  m_fontColor: {r: 0.09803922, g: 0.11372549, b: 0.09019608, a: 1}
+    rgba: 4294048759
+  m_fontColor: {r: 0.96862745, g: 0.9843137, b: 0.94509804, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entryId:
-    _value: 8dc34384-cf61-4d47-87cb-d3c37d826acc
+    _value: a1b48c57-aae7-4786-a597-eefbdf4f326f
   _component: {fileID: 6344092202527931443}
 --- !u!1 &6665816527285035604
 GameObject:
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6665816527285035604}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
