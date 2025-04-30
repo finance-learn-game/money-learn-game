@@ -1,92 +1,107 @@
-﻿using Sirenix.OdinInspector;
-using SmbcApp.LearnGame.Input;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Sirenix.OdinInspector;
+using SmbcApp.LearnGame.Utils;
+using Unity.Logging;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace SmbcApp.LearnGame.GamePlay.TownBuilding
 {
-    /// <summary>
-    ///     グリッド上に建物を配置するためのスクリプト
-    /// </summary>
-    internal class BuildingPlacer : MonoBehaviour
+    public class BuildingPlacer : MonoBehaviour
     {
-        [SerializeField] private float maxDistance = 100f;
-        [SerializeField] private LayerMask ablePlaceLayer;
+        [SerializeField] private LayerMask buildingLayer;
+        [SerializeField] private LayerMask groundLayer;
 
-        private Camera _camera;
-        private BoxCollider _holdInstance;
-        private GameInput _input;
-        private bool _isHolding;
+        private readonly List<GameObject> _locations = new();
 
         private void Start()
         {
-            _camera = Camera.main;
-
-            _input = new GameInput();
-            _input.Player.Enable();
-            _input.Player.Place.performed += OnPlace;
+            CollectLocationsCanBePlaced();
         }
 
-        private void Update()
+        private void CollectLocationsCanBePlaced()
         {
-            if (_isHolding) OnHolding();
-        }
-
-        private void OnDestroy()
-        {
-            _input.Player.Place.performed -= OnPlace;
-            _input.Player.Disable();
+            GameObject.FindGameObjectsWithTag("CanBePlaceBuilding", _locations);
         }
 
         [Button]
-        private void Putting(GameObject prefab)
+        private void Place(GameObject prefab)
         {
-            Instantiate(prefab).TryGetComponent(out _holdInstance);
-            _holdInstance.enabled = false;
-            _isHolding = true;
-        }
-
-        private void OnHolding()
-        {
-            var mousePos = Mouse.current.position.ReadValue();
-            var ray = _camera.ScreenPointToRay(mousePos);
-
-            if (Physics.Raycast(ray, out var hit, maxDistance, ablePlaceLayer))
+            try
             {
-                _holdInstance.gameObject.SetActive(true);
+                if (_locations.Count == 0)
+                {
+                    Log.Warning("No locations available for placing buildings.");
+                    return;
+                }
 
-                // 重なるオブジェクトがあるか確認
-                var overlaps = Physics.CheckBox(_holdInstance.center + hit.collider.transform.position,
-                    _holdInstance.size / 2, Quaternion.identity, ~ablePlaceLayer);
-                if (!overlaps) return;
+                // Randomly select a location from the list
+                var randomIndexes = Enumerable.Range(0, _locations.Count).ToArray();
+                randomIndexes.Shuffle();
 
-                // 建物の四隅に設置可能オブジェクトがあるか確認
-                // var corners = new Vector3[4];
-                // var size = _holdInstance.size;
-                // corners[0] = _holdInstance.center + new Vector3(-size.x / 2, 0, -size.z / 2);
-                // corners[1] = _holdInstance.center + new Vector3(size.x / 2, 0, -size.z / 2);
-                // corners[2] = _holdInstance.center + new Vector3(-size.x / 2, 0, size.z / 2);
-                // corners[3] = _holdInstance.center + new Vector3(size.x / 2, 0, size.z / 2);
-                // if (corners
-                //     .Select(corner => hit.collider.transform.position + corner)
-                //     .Any(cornerPos => !Physics.Linecast(cornerPos, Vector3.down * size.y, ablePlaceLayer))
-                //    ) return;
+                var bounds = prefab.GetComponent<Renderer>().bounds;
+                var selectedIndex = randomIndexes
+                    .Select(i => (int?)i)
+                    .FirstOrDefault(index =>
+                    {
+                        var location = _locations[index.Value].transform.position;
+                        var corners = new Vector3[]
+                        {
+                            new(-bounds.extents.x, 0, -bounds.extents.z),
+                            new(bounds.extents.x, 0, -bounds.extents.z),
+                            new(-bounds.extents.x, 0, bounds.extents.z),
+                            new(bounds.extents.x, 0, bounds.extents.z)
+                        };
+                        return corners.All(corner =>
+                            Physics.Raycast(
+                                corner + location + bounds.center,
+                                Vector3.down,
+                                out var hit,
+                                bounds.extents.y + 1,
+                                groundLayer
+                            ) && _locations.Contains(hit.collider.gameObject)
+                        );
+                        // return !Physics.CheckBox(
+                        //     location + bounds.center,
+                        //     bounds.size,
+                        //     Quaternion.identity,
+                        //     buildingLayer
+                        // );
+                    });
 
-                _holdInstance.transform.position = hit.collider.transform.position;
+                if (selectedIndex == null)
+                {
+                    Log.Warning("[Building Placer] No valid location found for placement.");
+                    return;
+                }
+
+                var location = _locations[selectedIndex.Value].transform.position;
+                Instantiate(prefab, location, Quaternion.identity, transform);
+
+                var overlapColliders = new Collider[20];
+                var overlapColliderCnt = Physics.OverlapBoxNonAlloc(
+                    location + new Vector3(bounds.center.x, 1, bounds.center.z),
+                    new Vector3(bounds.extents.x * 0.95f, 2, bounds.extents.z * 0.95f),
+                    overlapColliders,
+                    Quaternion.identity,
+                    groundLayer
+                );
+                if (overlapColliderCnt <= 1)
+                {
+                    Log.Warning("[Building Placer] No colliders found in the area.");
+                    return;
+                }
+
+                Log.Info("Cnt: {0}", overlapColliderCnt);
+
+                foreach (var overlapCollider in overlapColliders[..overlapColliderCnt])
+                    _locations.Remove(overlapCollider.gameObject);
             }
-            else
+            catch (Exception e)
             {
-                _holdInstance.gameObject.SetActive(false);
+                Log.Error($"[Building Placer] Error placing building: {e.Message}");
             }
-        }
-
-        private void OnPlace(InputAction.CallbackContext ctx)
-        {
-            if (!_isHolding || !_holdInstance.gameObject.activeSelf) return;
-
-            _isHolding = false;
-            _holdInstance.enabled = true;
-            _holdInstance = null;
         }
     }
 }
