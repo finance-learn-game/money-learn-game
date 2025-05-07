@@ -38,12 +38,14 @@ namespace SmbcApp.LearnGame.GamePlay.Configuration
             [SerializeField] [Required] private string name;
             [SerializeField] [Required] private string description;
             [SerializeField] [Required] private AssetReferenceSprite thumbnail;
+            [SerializeField] [Required] private AssetReferenceGameObject prefab;
             [SerializeField] private int price;
             [SerializeField] private int point;
 
             public string Name => name;
             public string Description => description;
             public AssetReferenceSprite Thumbnail => thumbnail;
+            public AssetReferenceGameObject Prefab => prefab;
             public int Price => price;
             public int Point => point;
         }

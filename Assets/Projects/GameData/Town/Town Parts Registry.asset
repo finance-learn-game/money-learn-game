@@ -18,8 +18,14 @@ MonoBehaviour:
     thumbnail:
       m_AssetGUID: 20a821e9ce8c17845bf4316ae25b7279
       m_SubObjectName: 
-      m_SubObjectGUID: 
       m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 1
+    prefab:
+      m_AssetGUID: 6e38f521c7bbf8b42b393d75d9fbe66b
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
       m_EditorAssetChanged: 1
     price: 150
     point: 20
@@ -28,8 +34,14 @@ MonoBehaviour:
     thumbnail:
       m_AssetGUID: f79538298f7a12f439dc3a32a1b1b7ef
       m_SubObjectName: 
-      m_SubObjectGUID: 
       m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 1
+    prefab:
+      m_AssetGUID: 6e38f521c7bbf8b42b393d75d9fbe66b
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
       m_EditorAssetChanged: 1
     price: 300
     point: 8

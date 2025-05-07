@@ -1,11 +1,14 @@
-﻿using Sirenix.OdinInspector;
+﻿using Cysharp.Threading.Tasks;
+using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.ConnectionManagement;
 using SmbcApp.LearnGame.GamePlay.Configuration;
 using SmbcApp.LearnGame.GamePlay.GamePlayObjects.RuntimeDataContainers;
+using SmbcApp.LearnGame.GamePlay.TownBuilding;
 using SmbcApp.LearnGame.Infrastructure;
 using Unity.Logging;
 using Unity.Netcode;
 using UnityEngine;
+using VContainer;
 
 namespace SmbcApp.LearnGame.GamePlay.Domain
 {
@@ -13,6 +16,8 @@ namespace SmbcApp.LearnGame.GamePlay.Domain
     {
         [SerializeField] [Required] private TownPartsRegistry townPartsRegistry;
         [SerializeField] [Required] private PersistantPlayerRuntimeCollection playerCollection;
+
+        [Inject] internal GridBuildingPlacer BuildingPlacer;
 
         [Rpc(SendTo.Server)]
         public void PurchaseTownPartRpc(int partId, RpcParams rpcParams = default)
@@ -37,17 +42,22 @@ namespace SmbcApp.LearnGame.GamePlay.Domain
                 return;
             }
 
-            player.BalanceState.CurrentBalance -= townPart.Price;
-            player.TownPartsState.TownPartDataList.Add(new TownPartData(
+            var partData = new TownPartData(
                 partId,
                 Vector3.zero,
                 Quaternion.identity,
                 false
-            ));
+            );
+            player.BalanceState.CurrentBalance -= townPart.Price;
+            player.TownPartsState.TownPartDataList.Add(partData);
+
+            // 建物を購入したことをクライアントに通知する
+            OnTownPartPurchasedRpc(partId, partData.DataId, RpcTarget.Single(clientId, RpcTargetUse.Temp));
         }
 
         [Rpc(SendTo.Server)]
-        public void PlaceTownPartRpc(NetworkGuid partDataId, Vector3 pos, Quaternion rot, RpcParams rpcParams = default)
+        private void PlaceTownPartRpc(NetworkGuid partDataId, Vector3 pos, Quaternion rot,
+            RpcParams rpcParams = default)
         {
             var clientId = rpcParams.Receive.SenderClientId;
             if (!playerCollection.TryGetPlayer(clientId, out var player))
@@ -63,6 +73,26 @@ namespace SmbcApp.LearnGame.GamePlay.Domain
             }
 
             player.TownPartsState.TownPartDataList[index] = townPartData.CopyWith(pos, rot, true);
+        }
+
+        [Rpc(SendTo.ClientsAndHost)]
+        private void OnTownPartPurchasedRpc(int partId, NetworkGuid partDataGuid, RpcParams rpcParams = default)
+        {
+            UniTask.Void(async () =>
+            {
+                var townPart = townPartsRegistry.TownParts[partId];
+
+                // 配置
+                var placedPos = await BuildingPlacer.Place(townPart.Prefab);
+                if (placedPos == null)
+                {
+                    Log.Error("[TownPartsDomain] Failed to place building");
+                    return;
+                }
+
+                // プレイヤーのデータに配置情報を追加
+                PlaceTownPartRpc(partDataGuid, placedPos.Value, Quaternion.identity);
+            });
         }
     }
 }

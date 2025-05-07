@@ -1,16 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Sirenix.OdinInspector;
+using Cysharp.Threading.Tasks;
 using Unity.Logging;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using Random = UnityEngine.Random;
 
 namespace SmbcApp.LearnGame.GamePlay.TownBuilding
 {
     internal sealed class GridBuildingPlacer : MonoBehaviour
     {
-        private readonly Queue<(GameObject Obj, int2 Pos, int2 Size)> _buildingsQueue = new();
+        private readonly Queue<(AsyncOperationHandle<GameObject> Handle, int2 Pos, int2 Size)> _buildingsQueue = new();
         private bool[][] _grid;
         private Vector3 _gridOffset;
         private Bounds _tileBounds;
@@ -38,20 +40,51 @@ namespace SmbcApp.LearnGame.GamePlay.TownBuilding
                     );
         }
 
-        [Button]
-        private void Place(Renderer building)
+        public async UniTask<Vector3?> Place(AssetReferenceGameObject prefab)
         {
+            if (_grid == null)
+            {
+                Log.Error("[GridBuildingPlacer] Grid is not initialized.");
+                return null;
+            }
+
+            if (!prefab.IsValid())
+            {
+                Log.Error("[GridBuildingPlacer] Invalid prefab reference.");
+                return null;
+            }
+
+            // プレハブをロード
+            var buildingHandle = prefab.InstantiateAsync();
+            if (!(await buildingHandle).TryGetComponent(out Renderer building))
+            {
+                Log.Error("[GridBuildingPlacer] Prefab does not have a Renderer component.");
+                buildingHandle.Release();
+                return null;
+            }
+
             while (true)
             {
                 var gridSize = CalcBuildingGridSize(building);
                 var groups = CalcGroup(gridSize)
                     .GroupBy(group => CalcGroupScore(group, gridSize));
+
+                // スコアが最小のグループを取得
                 var minScoreGroup = groups.FirstOrDefault()?.ToArray();
+                // スコアが最小のグループがない場合は、既存の建物を削除して再試行
                 if (minScoreGroup == null)
                 {
                     Log.Info("[GridBuildingPlacer] No valid position found for the building.");
-                    if (!_buildingsQueue.TryDequeue(out var queuedData)) return;
-                    Destroy(queuedData.Obj);
+                    if (!_buildingsQueue.TryDequeue(out var queuedData))
+                    {
+                        // キューが空の場合は終了
+                        Log.Info("[GridBuildingPlacer] No queued buildings to destroy.");
+                        buildingHandle.Release(); // プレハブのハンドルを解放
+                        return null;
+                    }
+
+                    // 既存の建物を削除
+                    queuedData.Handle.Release();
                     for (var i = 0; i < queuedData.Size.y; i++)
                     for (var j = 0; j < queuedData.Size.x; j++)
                         _grid[queuedData.Pos.y + i][queuedData.Pos.x + j] = true;
@@ -62,13 +95,16 @@ namespace SmbcApp.LearnGame.GamePlay.TownBuilding
                 var selectedGroup = minScoreGroup[Random.Range(0, minScoreGroup.Length)];
                 var pos = new Vector3((selectedGroup.x + gridSize.x - 1) * _tileBounds.size.x, 0,
                     (selectedGroup.y + gridSize.y - 1) * _tileBounds.size.x);
-                var obj = Instantiate(building.gameObject, pos + _gridOffset, Quaternion.identity, transform);
-                _buildingsQueue.Enqueue((obj, selectedGroup, gridSize));
+
+                building.transform.SetParent(transform);
+                building.transform.position = pos + _gridOffset;
+
+                _buildingsQueue.Enqueue((buildingHandle, selectedGroup, gridSize));
 
                 for (var i = 0; i < gridSize.y; i++)
                 for (var j = 0; j < gridSize.x; j++)
                     _grid[selectedGroup.y + i][selectedGroup.x + j] = false;
-                break;
+                return pos + _gridOffset;
             }
         }
 
