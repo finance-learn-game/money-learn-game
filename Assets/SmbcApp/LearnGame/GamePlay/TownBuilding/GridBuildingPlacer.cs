@@ -12,7 +12,7 @@ namespace SmbcApp.LearnGame.GamePlay.TownBuilding
 {
     internal sealed class GridBuildingPlacer : MonoBehaviour
     {
-        private readonly Queue<(AsyncOperationHandle<GameObject> Handle, int2 Pos, int2 Size)> _buildingsQueue = new();
+        private readonly Queue<BuildingData> _buildingsQueue = new();
         private bool[][] _grid;
         private Vector3 _gridOffset;
         private Bounds _tileBounds;
@@ -42,6 +42,7 @@ namespace SmbcApp.LearnGame.GamePlay.TownBuilding
 
         public async UniTask<Vector3?> Place(AssetReferenceGameObject prefab)
         {
+            // TODO: 破棄されたプレハブを呼び出し元に通知する
             if (_grid == null)
             {
                 Log.Error("[GridBuildingPlacer] Grid is not initialized.");
@@ -78,7 +79,7 @@ namespace SmbcApp.LearnGame.GamePlay.TownBuilding
                     }
 
                     // 既存の建物を削除
-                    queuedData.Handle.Release();
+                    queuedData.Release();
                     for (var i = 0; i < queuedData.Size.y; i++)
                     for (var j = 0; j < queuedData.Size.x; j++)
                         _grid[queuedData.Pos.y + i][queuedData.Pos.x + j] = true;
@@ -93,7 +94,7 @@ namespace SmbcApp.LearnGame.GamePlay.TownBuilding
                 building.transform.SetParent(transform);
                 building.transform.position = pos + _gridOffset;
 
-                _buildingsQueue.Enqueue((buildingHandle, selectedGroup, gridSize));
+                _buildingsQueue.Enqueue(new BuildingData(buildingHandle, selectedGroup, gridSize));
 
                 for (var i = 0; i < gridSize.y; i++)
                 for (var j = 0; j < gridSize.x; j++)
@@ -177,6 +178,29 @@ namespace SmbcApp.LearnGame.GamePlay.TownBuilding
                 var x = (int)((pos.x - minPos.x) / tileBounds.size.x);
                 var z = (int)((pos.z - minPos.z) / tileBounds.size.z);
                 grid[z][x] = true;
+            }
+        }
+
+        private readonly struct BuildingData
+        {
+            public readonly AsyncOperationHandle<GameObject> Handle;
+            public readonly int2 Pos;
+            public readonly int2 Size;
+
+            public BuildingData(AsyncOperationHandle<GameObject> handle, int2 pos, int2 size)
+            {
+                Handle = handle;
+                Pos = pos;
+                Size = size;
+            }
+
+            public void Release()
+            {
+                var handle = Handle;
+                if (handle.IsValid())
+                    Addressables.Release(Handle);
+                else
+                    Log.Error("[GridBuildingPlacer] Handle is not valid.");
             }
         }
     }

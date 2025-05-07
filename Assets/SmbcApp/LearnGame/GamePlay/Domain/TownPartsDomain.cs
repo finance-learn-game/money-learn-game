@@ -48,7 +48,6 @@ namespace SmbcApp.LearnGame.GamePlay.Domain
                 var partData = new TownPartData(
                     partId,
                     Vector3.zero,
-                    Quaternion.identity,
                     false
                 );
                 player.BalanceState.CurrentBalance -= townPart.Price;
@@ -66,8 +65,7 @@ namespace SmbcApp.LearnGame.GamePlay.Domain
         }
 
         [Rpc(SendTo.Server)]
-        private void PlaceTownPartRpc(NetworkGuid partDataId, Vector3 pos, Quaternion rot,
-            RpcParams rpcParams = default)
+        private void PlaceTownPartRpc(NetworkGuid partDataId, Vector3 pos, bool isPlaced, RpcParams rpcParams = default)
         {
             var clientId = rpcParams.Receive.SenderClientId;
             if (!playerCollection.TryGetPlayer(clientId, out var player))
@@ -82,7 +80,7 @@ namespace SmbcApp.LearnGame.GamePlay.Domain
                 return;
             }
 
-            player.TownPartsState.TownPartDataList[index] = townPartData.CopyWith(pos, rot, true);
+            player.TownPartsState.TownPartDataList[index] = townPartData.CopyWith(pos, isPlaced);
         }
 
         [Rpc(SendTo.SpecifiedInParams)]
@@ -101,7 +99,7 @@ namespace SmbcApp.LearnGame.GamePlay.Domain
                 }
 
                 // プレイヤーのデータに配置情報を追加
-                PlaceTownPartRpc(partDataGuid, placedPos.Value, Quaternion.identity);
+                PlaceTownPartRpc(partDataGuid, placedPos.Value, true);
             });
         }
     }

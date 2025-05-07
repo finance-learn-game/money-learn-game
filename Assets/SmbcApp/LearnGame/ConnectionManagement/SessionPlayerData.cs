@@ -52,22 +52,19 @@ namespace SmbcApp.LearnGame.ConnectionManagement
         // PartsRegistry上でのパーツのインデックスをIDとして扱う
         private int _partId;
         private Vector3 _position;
-        private Quaternion _rotation;
         private bool _isPlaced;
         private NetworkGuid _dataId;
 
-        public TownPartData(int partId, Vector3 position, Quaternion rotation, bool isPlaced)
+        public TownPartData(int partId, Vector3 position, bool isPlaced)
         {
             _partId = partId;
             _position = position;
-            _rotation = rotation;
             _isPlaced = isPlaced;
             _dataId = Guid.NewGuid().ToNetworkGuid();
         }
 
         public int PartId => _partId;
         public Vector3 Position => _position;
-        public Quaternion Rotation => _rotation;
         public bool IsPlaced => _isPlaced;
         public NetworkGuid DataId => _dataId;
 
@@ -75,14 +72,13 @@ namespace SmbcApp.LearnGame.ConnectionManagement
         {
             serializer.SerializeValue(ref _partId);
             serializer.SerializeValue(ref _position);
-            serializer.SerializeValue(ref _rotation);
             serializer.SerializeValue(ref _isPlaced);
             serializer.SerializeValue(ref _dataId);
         }
 
-        public TownPartData CopyWith(in Vector3 position, in Quaternion rotation, bool isPlaced)
+        public TownPartData CopyWith(in Vector3 position, bool isPlaced)
         {
-            return new TownPartData(PartId, position, rotation, isPlaced)
+            return new TownPartData(PartId, position, isPlaced)
             {
                 _dataId = _dataId
             };
@@ -92,7 +88,6 @@ namespace SmbcApp.LearnGame.ConnectionManagement
         {
             return _partId == other._partId &&
                    _position.Equals(other._position) &&
-                   _rotation.Equals(other._rotation) &&
                    _isPlaced == other._isPlaced &&
                    _dataId.Equals(other._dataId);
         }
@@ -104,7 +99,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(_partId, _position, _rotation, _isPlaced, _dataId);
+            return HashCode.Combine(_partId, _position, _isPlaced, _dataId);
         }
     }
 }
