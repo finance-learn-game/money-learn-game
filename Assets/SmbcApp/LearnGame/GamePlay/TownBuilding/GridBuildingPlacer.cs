@@ -48,12 +48,6 @@ namespace SmbcApp.LearnGame.GamePlay.TownBuilding
                 return null;
             }
 
-            if (!prefab.IsValid())
-            {
-                Log.Error("[GridBuildingPlacer] Invalid prefab reference.");
-                return null;
-            }
-
             // プレハブをロード
             var buildingHandle = prefab.InstantiateAsync();
             if (!(await buildingHandle).TryGetComponent(out Renderer building))

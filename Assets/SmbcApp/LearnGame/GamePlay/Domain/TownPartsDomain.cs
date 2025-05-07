@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.ConnectionManagement;
 using SmbcApp.LearnGame.GamePlay.Configuration;
@@ -22,37 +23,46 @@ namespace SmbcApp.LearnGame.GamePlay.Domain
         [Rpc(SendTo.Server)]
         public void PurchaseTownPartRpc(int partId, RpcParams rpcParams = default)
         {
-            var clientId = rpcParams.Receive.SenderClientId;
-            if (partId < 0 || townPartsRegistry.TownParts.Count < partId)
+            try
             {
-                Log.Error("Invalid part id (clientId: {0}, partId: {1})", clientId, partId);
-                return;
-            }
+                var clientId = rpcParams.Receive.SenderClientId;
+                if (partId < 0 || townPartsRegistry.TownParts.Count < partId)
+                {
+                    Log.Error("Invalid part id (clientId: {0}, partId: {1})", clientId, partId);
+                    return;
+                }
 
-            if (!playerCollection.TryGetPlayer(clientId, out var player))
+                if (!playerCollection.TryGetPlayer(clientId, out var player))
+                {
+                    Log.Error("Player not found (clientId: {0})", clientId);
+                    return;
+                }
+
+                var townPart = townPartsRegistry.TownParts[partId];
+                if (player.BalanceState.CurrentBalance < townPart.Price)
+                {
+                    Log.Info("Insufficient balance (clientId: {0}, partId: {1})", clientId, partId);
+                    return;
+                }
+
+                var partData = new TownPartData(
+                    partId,
+                    Vector3.zero,
+                    Quaternion.identity,
+                    false
+                );
+                player.BalanceState.CurrentBalance -= townPart.Price;
+                player.TownPartsState.TownPartDataList.Add(partData);
+
+                // 建物を購入したことをクライアントに通知する
+                OnTownPartPurchasedRpc(partId, partData.DataId, RpcTarget.Single(clientId, RpcTargetUse.Temp));
+            }
+            catch (Exception e)
             {
-                Log.Error("Player not found (clientId: {0})", clientId);
-                return;
+                Log.Error(e, "Error occurred while purchasing town part (partId: {0}, clientId: {1})", partId,
+                    rpcParams.Receive.SenderClientId);
+                throw;
             }
-
-            var townPart = townPartsRegistry.TownParts[partId];
-            if (player.BalanceState.CurrentBalance < townPart.Price)
-            {
-                Log.Info("Insufficient balance (clientId: {0}, partId: {1})", clientId, partId);
-                return;
-            }
-
-            var partData = new TownPartData(
-                partId,
-                Vector3.zero,
-                Quaternion.identity,
-                false
-            );
-            player.BalanceState.CurrentBalance -= townPart.Price;
-            player.TownPartsState.TownPartDataList.Add(partData);
-
-            // 建物を購入したことをクライアントに通知する
-            OnTownPartPurchasedRpc(partId, partData.DataId, RpcTarget.Single(clientId, RpcTargetUse.Temp));
         }
 
         [Rpc(SendTo.Server)]
@@ -75,7 +85,7 @@ namespace SmbcApp.LearnGame.GamePlay.Domain
             player.TownPartsState.TownPartDataList[index] = townPartData.CopyWith(pos, rot, true);
         }
 
-        [Rpc(SendTo.ClientsAndHost)]
+        [Rpc(SendTo.SpecifiedInParams)]
         private void OnTownPartPurchasedRpc(int partId, NetworkGuid partDataGuid, RpcParams rpcParams = default)
         {
             UniTask.Void(async () =>
