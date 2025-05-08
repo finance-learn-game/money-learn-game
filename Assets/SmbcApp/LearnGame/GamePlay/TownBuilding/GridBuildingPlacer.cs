@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using SmbcApp.LearnGame.Infrastructure;
 using Unity.Logging;
 using Unity.Mathematics;
 using UnityEngine;
@@ -40,9 +42,12 @@ namespace SmbcApp.LearnGame.GamePlay.TownBuilding
                     );
         }
 
-        public async UniTask<Vector3?> Place(AssetReferenceGameObject prefab)
+        public async UniTask<Vector3?> Place(
+            AssetReferenceGameObject prefab,
+            NetworkGuid townPartDataId,
+            Action<NetworkGuid> onRemoveBuilding
+        )
         {
-            // TODO: 破棄されたプレハブを呼び出し元に通知する
             if (_grid == null)
             {
                 Log.Error("[GridBuildingPlacer] Grid is not initialized.");
@@ -80,6 +85,8 @@ namespace SmbcApp.LearnGame.GamePlay.TownBuilding
 
                     // 既存の建物を削除
                     queuedData.Release();
+                    onRemoveBuilding(queuedData.TownPartDataId);
+
                     for (var i = 0; i < queuedData.Size.y; i++)
                     for (var j = 0; j < queuedData.Size.x; j++)
                         _grid[queuedData.Pos.y + i][queuedData.Pos.x + j] = true;
@@ -94,7 +101,7 @@ namespace SmbcApp.LearnGame.GamePlay.TownBuilding
                 building.transform.SetParent(transform);
                 building.transform.position = pos + _gridOffset;
 
-                _buildingsQueue.Enqueue(new BuildingData(buildingHandle, selectedGroup, gridSize));
+                _buildingsQueue.Enqueue(new BuildingData(buildingHandle, selectedGroup, gridSize, townPartDataId));
 
                 for (var i = 0; i < gridSize.y; i++)
                 for (var j = 0; j < gridSize.x; j++)
@@ -183,22 +190,25 @@ namespace SmbcApp.LearnGame.GamePlay.TownBuilding
 
         private readonly struct BuildingData
         {
-            public readonly AsyncOperationHandle<GameObject> Handle;
+            private readonly AsyncOperationHandle<GameObject> _handle;
             public readonly int2 Pos;
             public readonly int2 Size;
+            public readonly NetworkGuid TownPartDataId;
 
-            public BuildingData(AsyncOperationHandle<GameObject> handle, int2 pos, int2 size)
+            public BuildingData(AsyncOperationHandle<GameObject> handle, int2 pos, int2 size,
+                NetworkGuid townPartDataId)
             {
-                Handle = handle;
+                _handle = handle;
                 Pos = pos;
                 Size = size;
+                TownPartDataId = townPartDataId;
             }
 
             public void Release()
             {
-                var handle = Handle;
+                var handle = _handle;
                 if (handle.IsValid())
-                    Addressables.Release(Handle);
+                    Addressables.Release(_handle);
                 else
                     Log.Error("[GridBuildingPlacer] Handle is not valid.");
             }

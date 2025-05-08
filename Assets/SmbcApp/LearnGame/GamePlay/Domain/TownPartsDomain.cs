@@ -91,7 +91,11 @@ namespace SmbcApp.LearnGame.GamePlay.Domain
                 var townPart = townPartsRegistry.TownParts[partId];
 
                 // 配置
-                var placedPos = await BuildingPlacer.Place(townPart.Prefab);
+                var placedPos = await BuildingPlacer.Place(
+                    townPart.Prefab,
+                    partDataGuid,
+                    removedPartId => PlaceTownPartRpc(removedPartId, Vector3.zero, false)
+                );
                 if (placedPos == null)
                 {
                     Log.Error("[TownPartsDomain] Failed to place building");
