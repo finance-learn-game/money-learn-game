@@ -47,7 +47,11 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Result
                 item.OnViewTownButtonClick.Subscribe(_ =>
                     {
                         ResultTownBuilder.BuildTown(player.TownPartsState.ToEnumerable()).Forget();
-                        PageContainer.Push<ResultTownViewPageView>(resultTownViewPage.AssetGUID, true);
+                        PageContainer.Push<ResultTownViewPageView>(
+                            resultTownViewPage.AssetGUID,
+                            true,
+                            onLoad: tuple => tuple.page.Configure(player.Name.Value)
+                        );
                     }
                 ).AddTo(item);
                 scrollView.AddItem(item.transform, true);

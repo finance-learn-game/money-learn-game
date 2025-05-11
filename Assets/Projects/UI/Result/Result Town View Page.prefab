@@ -59,6 +59,7 @@ MonoBehaviour:
     _popEnterAnimations: []
     _popExitAnimations: []
   returnButton: {fileID: 6749103243964745008}
+  userNameText: {fileID: 2834412069941934832}
 --- !u!1 &2491191070325843982
 GameObject:
   m_ObjectHideFlags: 0
