@@ -1,11 +1,14 @@
 ﻿using Addler.Runtime.Core.LifetimeBinding;
 using Cysharp.Threading.Tasks;
+using R3;
 using Sirenix.OdinInspector;
 using SmbcApp.LearnGame.GamePlay.Configuration;
 using SmbcApp.LearnGame.GamePlay.GamePlayObjects.RuntimeDataContainers;
+using SmbcApp.LearnGame.GamePlay.TownBuilding;
 using SmbcApp.LearnGame.Infrastructure;
 using SmbcApp.LearnGame.UIWidgets.ScrollView;
 using UnityEngine;
+using UnityScreenNavigator.Runtime.Core.Page;
 using VContainer;
 
 namespace SmbcApp.LearnGame.GamePlay.UI.Result
@@ -15,8 +18,11 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Result
         [SerializeField] [Required] private UIScrollView scrollView;
         [SerializeField] [Required] private ResultListItemView.Ref resultListItemPrefab;
         [SerializeField] [Required] private AvatarRegistry avatarRegistry;
+        [SerializeField] [Required] private ResultTownViewPageView.Ref resultTownViewPage;
 
+        [Inject] internal PageContainer PageContainer;
         [Inject] internal PersistantPlayerRuntimeCollection PlayerCollection;
+        [Inject] internal ResultTownBuilder ResultTownBuilder;
 
         private void Start()
         {
@@ -38,6 +44,12 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Result
                     player.TownPartsState.CurrentPoint,
                     player.BalanceState.CurrentBalance
                 );
+                item.OnViewTownButtonClick.Subscribe(_ =>
+                    {
+                        ResultTownBuilder.BuildTown(player.TownPartsState.ToEnumerable()).Forget();
+                        PageContainer.Push<ResultTownViewPageView>(resultTownViewPage.AssetGUID, true);
+                    }
+                ).AddTo(item);
                 scrollView.AddItem(item.transform, true);
                 return item;
             }));

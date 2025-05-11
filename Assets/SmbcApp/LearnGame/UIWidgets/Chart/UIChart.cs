@@ -34,6 +34,11 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
             chartGraphic.OnDataChanged.Subscribe(OnDataChanged).AddTo(gameObject);
         }
 
+        private void OnDestroy()
+        {
+            _valueLabelPool.Dispose();
+        }
+
         private void OnDataChanged(ChartGraphic.ChartData[] _)
         {
             SetYValueLabel().Forget();

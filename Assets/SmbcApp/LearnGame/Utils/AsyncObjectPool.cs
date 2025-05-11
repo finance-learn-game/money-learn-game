@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 
 namespace SmbcApp.LearnGame.Utils
 {
-    public sealed class AsyncObjectPool<T>
+    public sealed class AsyncObjectPool<T> : IDisposable
     {
         private readonly int _capacity;
         private readonly Func<UniTask<T>> _createFunc;
@@ -28,6 +28,15 @@ namespace SmbcApp.LearnGame.Utils
 
             _capacity = initialCapacity;
             _pool = new Stack<T>(_capacity);
+        }
+
+        public void Dispose()
+        {
+            while (_pool.Count > 0)
+            {
+                var item = _pool.Pop();
+                _destroyAction(item);
+            }
         }
 
         public async UniTask<T> Rent()

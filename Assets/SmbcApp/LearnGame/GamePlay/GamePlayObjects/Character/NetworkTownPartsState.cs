@@ -39,7 +39,7 @@ namespace SmbcApp.LearnGame.GamePlay.GamePlayObjects.Character
             TownPartDataList = new NetworkList<TownPartData>();
         }
 
-        private IEnumerable<TownPartData> ToEnumerable()
+        public IEnumerable<TownPartData> ToEnumerable()
         {
             foreach (var townPartData in TownPartDataList) yield return townPartData;
         }

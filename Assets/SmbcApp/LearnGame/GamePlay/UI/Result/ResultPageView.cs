@@ -15,6 +15,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Result
 
         private void Start()
         {
+            exitButton.IsInteractable = true;
             exitButton.OnClick.Subscribe(_ =>
             {
                 var networkManager = NetworkManager.Singleton;

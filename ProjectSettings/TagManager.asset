@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - CanBePlaceBuilding
+  - Buildings Root
   layers:
   - Default
   - TransparentFX

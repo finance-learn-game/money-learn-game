@@ -1,7 +1,9 @@
 ﻿using System;
 using Addler.Runtime.Core.LifetimeBinding;
 using Cysharp.Threading.Tasks;
+using R3;
 using Sirenix.OdinInspector;
+using SmbcApp.LearnGame.UIWidgets.Button;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -14,6 +16,9 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Result
         [SerializeField] [Required] private Image thumbnailImage;
         [SerializeField] [Required] private TMP_Text playerNameText;
         [SerializeField] [Required] private TMP_Text scoreText;
+        [SerializeField] [Required] private UIButton viewTownButton;
+
+        public Observable<Unit> OnViewTownButtonClick => viewTownButton.OnClick;
 
         public async UniTask Configure(
             AssetReferenceSprite thumbnailRef,
@@ -26,9 +31,9 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Result
                 ? await thumbnailRef.OperationHandle.Task as Sprite
                 : await thumbnailRef.LoadAssetAsync().BindTo(gameObject);
         }
-        
+
         [Serializable]
-        public class Ref: ComponentReference<ResultListItemView>
+        public class Ref : ComponentReference<ResultListItemView>
         {
             public Ref(string guid) : base(guid)
             {

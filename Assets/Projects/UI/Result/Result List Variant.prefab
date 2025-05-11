@@ -192,3 +192,9 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   avatarRegistry: {fileID: 11400000, guid: 06184a1f2c9d3834c9a602587ebb25cd, type: 2}
+  resultTownViewPage:
+    m_AssetGUID: 61422ef2e1dab5a478ab465d738b70ff
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 1

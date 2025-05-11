@@ -57,7 +57,7 @@ namespace SmbcApp.LearnGame.UIWidgets.Chart
                         .AddTo(item);
                     _items.Push(item);
                 }
-            }).AddTo(gameObject);
+            }, _ => pool.Dispose()).AddTo(gameObject);
         }
 
         private void HandleMinimizeButton()
