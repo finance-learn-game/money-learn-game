@@ -52,14 +52,14 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
                     new StockDomain.TradeRequest(
                         clientId,
                         org.Id,
-                        1
+                        100
                     )
                 )).AddTo(item.gameObject);
                 item.OnSellButtonClicked.Subscribe(_ => StockDomain.ServerTradeRpc(
                     new StockDomain.TradeRequest(
                         clientId,
                         org.Id,
-                        -1
+                        -100
                     )
                 )).AddTo(item.gameObject);
             }));

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -39,7 +40,9 @@ namespace SmbcApp.LearnGame.GamePlay.Configuration
         [Serializable]
         private class RandomSalaryOp : ISalaryOp
         {
-            [SerializeField] private int min;
+            [InfoBox("minPeriodとmaxPeriodの間の期間でランダムに給料(min ~ max)を支給します")] [SerializeField]
+            private int min;
+
             [SerializeField] private int max;
             [SerializeField] private int minPeriod = 1;
             [SerializeField] private int maxPeriod = 1;

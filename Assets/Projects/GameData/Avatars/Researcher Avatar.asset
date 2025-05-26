@@ -19,8 +19,8 @@ MonoBehaviour:
   avatarImage:
     m_AssetGUID: 9d7c03d6a7012ae4b9bbe4e646ea95c7
     m_SubObjectName: 
-    m_SubObjectGUID: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   salaryConfig:
     salaryOps:
@@ -31,4 +31,4 @@ MonoBehaviour:
     - rid: 3539522938862043477
       type: {class: SalaryConfig/FixedSalaryOp, ns: SmbcApp.LearnGame.GamePlay.Configuration, asm: SmbcApp.LearnGame.GamePlay.Configuration}
       data:
-        salary: 2000
+        salary: 200000
