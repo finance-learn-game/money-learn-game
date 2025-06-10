@@ -175,7 +175,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
             if (ConnectionManager.NetworkManager.ConnectedClientsIds.Count >= maxConnectionPlayers)
                 return ConnectStatus.ServerFull;
 
-            if (payload.isDebug != Debug.isDebugBuild) return ConnectStatus.IncompatibleBuildType;
+            // if (payload.isDebug != Debug.isDebugBuild) return ConnectStatus.IncompatibleBuildType;
             return SessionManager<SessionPlayerData>.Instance.IsDuplicateConnection(payload.playerId)
                 ? ConnectStatus.LoggedInAgain
                 : ConnectStatus.Success;

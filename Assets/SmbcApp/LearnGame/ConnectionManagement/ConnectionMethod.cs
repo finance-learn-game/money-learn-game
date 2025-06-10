@@ -30,10 +30,12 @@ namespace SmbcApp.LearnGame.ConnectionManagement
             var networkManager = connectionManager.NetworkManager;
             if (networkManager.NetworkConfig.NetworkTransport is not UnityTransport transport) return;
 
-            transport.UseEncryption = true;
 #if UNITY_WEBGL
+            transport.UseEncryption = true;
             transport.UseWebSockets = true;
 #else
+            transport.UseEncryption = GameConfiguration.Instance.ConnectionMethod ==
+                                      GameConfiguration.ConnectionMethodType.Relay;
             transport.UseWebSockets = false;
 #endif
         }
