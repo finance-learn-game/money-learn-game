@@ -37,7 +37,7 @@ namespace SmbcApp.LearnGame.ApplicationLifecycle
 #elif DEBUG
                 DevelopmentConfiguration()
 #else
-                DevelopmentConfiguration()
+                ReleaseConfiguration()
 #endif
             );
         }
@@ -64,13 +64,32 @@ namespace SmbcApp.LearnGame.ApplicationLifecycle
 
             return new LoggerConfig()
                 .SyncMode.FatalIsSync()
-                // .RedirectUnityLogs()
-                .WriteTo.UnityDebugLog()
+                .RedirectUnityLogs()
                 .WriteTo.File(
                     path,
                     minLevel: LogLevel.Debug,
                     captureStackTrace: true,
                     outputTemplate: "{Timestamp} [{Level}] {Message}{NewLine}{Stacktrace}"
+                );
+        }
+
+        private static LoggerConfig ReleaseConfiguration()
+        {
+            var random = Guid.NewGuid().ToString()[..8];
+            var path = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                $"Logs/dev-{random}",
+                $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log"
+            );
+
+            return new LoggerConfig()
+                .SyncMode.FatalIsSync()
+                .RedirectUnityLogs()
+                .WriteTo.File(
+                    path,
+                    minLevel: LogLevel.Info,
+                    captureStackTrace: false,
+                    outputTemplate: "{Timestamp} [{Level}] {Message}{NewLine}"
                 );
         }
 

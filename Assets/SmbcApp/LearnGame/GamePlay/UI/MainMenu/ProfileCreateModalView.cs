@@ -21,6 +21,7 @@ namespace SmbcApp.LearnGame.Gameplay.UI.MainMenu
         {
             base.Start();
 
+            createButton.IsInteractable = false;
             createButton.OnClick.Subscribe(_ =>
             {
                 var profileName = profileNameInput.text;
@@ -34,6 +35,7 @@ namespace SmbcApp.LearnGame.Gameplay.UI.MainMenu
                     const int maxLength = 30;
                     var sanitized = Regex.Replace(dirty, "[^a-zA-Z0-9]", "");
                     profileNameInput.text = sanitized.Length > maxLength ? sanitized[..maxLength] : sanitized;
+                    createButton.IsInteractable = !string.IsNullOrEmpty(profileNameInput.text);
                 })
                 .AddTo(gameObject);
         }

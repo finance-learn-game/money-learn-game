@@ -12,7 +12,7 @@ namespace SmbcApp.LearnGame.UIWidgets.Button
     public sealed class UIButton : MonoBehaviour
     {
         [SerializeField] [Required] private UnityEngine.UI.Button button;
-        [SerializeField] [Required] private GraphicColorSynchronizer colorSynchronizer;
+        [SerializeField] private GraphicColorSynchronizer colorSynchronizer;
         [SerializeField] private GraphicColorSynchronizer textColorSynchronizer;
         [SerializeField] private TMP_Text buttonText;
 
@@ -45,7 +45,7 @@ namespace SmbcApp.LearnGame.UIWidgets.Button
 
         public void SetColor(ColorEntry entry)
         {
-            colorSynchronizer.SetEntryId(entry.ToEntryId());
+            colorSynchronizer?.SetEntryId(entry.ToEntryId());
         }
 
         public void SetTextColor(ColorEntry entry)
