@@ -40,13 +40,13 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
 
         public override void OnClientDisconnect(ulong clientId)
         {
-            StartingClientFailed();
+            StartingClientFailed().Forget();
         }
 
-        private void StartingClientFailed()
+        private async UniTask StartingClientFailed()
         {
             var reason = ConnectionManager.NetworkManager.DisconnectReason;
-            Log.Error("Failed to start client: {0}", reason);
+            Log.Error("Failed to start client: {0}", reason ?? "Unknown reason");
             if (string.IsNullOrEmpty(reason))
             {
                 ConnectStatusPublisher.Publish(ConnectStatus.StartClientFailed);
@@ -57,7 +57,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
                 ConnectStatusPublisher.Publish(connectStatus);
             }
 
-            ConnectionManager.ChangeState(ConnectionManager.Offline).Forget();
+            await ConnectionManager.ChangeState(ConnectionManager.Offline);
         }
 
         private async UniTask ConnectClientAsync()
@@ -71,7 +71,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
             catch (Exception e)
             {
                 Log.Error(e, "Error connecting client, see following exception");
-                StartingClientFailed();
+                await StartingClientFailed();
             }
         }
     }

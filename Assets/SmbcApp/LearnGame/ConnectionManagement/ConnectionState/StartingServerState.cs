@@ -49,7 +49,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
 
         public override void OnServerStopped()
         {
-            StartServerFailed();
+            StartServerFailed().Forget();
         }
 
         private async UniTask StartHost()
@@ -62,15 +62,15 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
             }
             catch (Exception)
             {
-                StartServerFailed();
+                await StartServerFailed();
                 throw;
             }
         }
 
-        private void StartServerFailed()
+        private async UniTask StartServerFailed()
         {
             ConnectStatusPublisher.Publish(ConnectStatus.StartServerFailed);
-            ConnectionManager.ChangeState(ConnectionManager.Offline).Forget();
+            await ConnectionManager.ChangeState(ConnectionManager.Offline);
         }
     }
 }
