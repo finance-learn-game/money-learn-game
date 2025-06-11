@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a2a166b4c2c548b991995a3cb1b2885, type: 3}
+  m_Name: Main Menu Cue Sheet
+  m_EditorClassIdentifier: 
+  cueSheet:
+    id: d1a2d8c4-de8b-450c-88a4-ab8880e29234
+    name: Game Cue
+    throttleType: 0
+    throttleLimit: 0
+    volume: 1
+    pitch: 1
+    pitchInvert: 0
+    cueList:
+    - id: 6d285d4e-0cb7-48ca-99ea-51dda77d8dac
+      colorId: 
+      name: SE
+      categoryId: 456555367
+      throttleType: 1
+      throttleLimit: 10
+      volume: 1
+      volumeRange: 0
+      pitch: 1
+      pitchRange: 0
+      pitchInvert: 0
+      playType: 0
+      trackList:
+      - id: 1d367f02-4a22-48e5-9c30-06948d12a482
+        colorId: 
+        name: ButtonHover
+        audioClip: {fileID: 8300000, guid: c0e189cd78947cf42b2cfcd01028c3b5, type: 3}
+        volume: 1
+        volumeRange: 0
+        pitch: 1
+        pitchRange: 0
+        pitchInvert: 0
+        startSample: 0
+        endSample: 12000
+        loopStartSample: 0
+        isLoop: 0
+        randomWeight: 0
+        priority: 0
+        fadeTime: 0
+      - id: 566aff69-d740-465d-8c0c-d3abc64d1e09
+        colorId: 
+        name: ButtonClick
+        audioClip: {fileID: 8300000, guid: bcb480afee083064ba276b19b401e52d, type: 3}
+        volume: 1
+        volumeRange: 0
+        pitch: 1
+        pitchRange: 0
+        pitchInvert: 0
+        startSample: 0
+        endSample: 12000
+        loopStartSample: 0
+        isLoop: 0
+        randomWeight: 0
+        priority: 0
+        fadeTime: 0
+    - id: 91ee90b0-3fe8-4c3f-b69f-2530b8932303
+      colorId: 
+      name: BGM
+      categoryId: 1888120880
+      throttleType: 0
+      throttleLimit: 1
+      volume: 1
+      volumeRange: 0
+      pitch: 1
+      pitchRange: 0
+      pitchInvert: 0
+      playType: 0
+      trackList:
+      - id: db37e7f6-d3a3-434f-9cba-509ac96e8792
+        colorId: 
+        name: MainMenu
+        audioClip: {fileID: 8300000, guid: 828d0145cf650e14188e4f0b1ddaac93, type: 3}
+        volume: 1
+        volumeRange: 0
+        pitch: 1
+        pitchRange: 0
+        pitchInvert: 0
+        startSample: 0
+        endSample: 8600832
+        loopStartSample: 0
+        isLoop: 1
+        randomWeight: 0
+        priority: 0
+        fadeTime: 0.5

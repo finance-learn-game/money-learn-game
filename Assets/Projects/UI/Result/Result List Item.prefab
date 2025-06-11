@@ -719,6 +719,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1343580975196240102}
     m_Modifications:
+    - target: {fileID: -3094707475227678728, guid: cd3775c13bb2a324b9b20f477faf1937, type: 3}
+      propertyPath: baseTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: fbe053358dbeb2c4298dd8d6be82adaa, type: 3}
+    - target: {fileID: -3094707475227678728, guid: cd3775c13bb2a324b9b20f477faf1937, type: 3}
+      propertyPath: clickTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 408bbf19c11feef489694355d21c0369, type: 3}
+    - target: {fileID: -3094707475227678728, guid: cd3775c13bb2a324b9b20f477faf1937, type: 3}
+      propertyPath: hoverTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 3a284a36b8bde5d4fb3529adea2f39fa, type: 3}
     - target: {fileID: 1005736052289607254, guid: cd3775c13bb2a324b9b20f477faf1937, type: 3}
       propertyPath: m_Name
       value: View Town Button

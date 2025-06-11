@@ -26,23 +26,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4150790561774238564, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
       propertyPath: m_Padding.m_Top
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4150790561774238564, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
       propertyPath: m_Padding.m_Left
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4150790561774238564, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
       propertyPath: m_Padding.m_Right
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 4150790561774238564, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
+      propertyPath: m_Padding.m_Bottom
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5958337536803256454, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6286037311947285320, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286037311947285320, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286037311947285320, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -50
+      objectReference: {fileID: 0}
     - target: {fileID: 7648355497144689732, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
       propertyPath: m_Horizontal
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8003357760484041256, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
       propertyPath: m_AnchorMax.x
@@ -57,16 +73,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8135903285420894371, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ef7c3a19cd5ee1642b3671cf653b6d39, type: 3}
+    - target: {fileID: 8135903285420894371, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
       propertyPath: m_Color.b
-      value: 0.9019608
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8135903285420894371, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
       propertyPath: m_Color.g
-      value: 0.9372549
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8135903285420894371, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
       propertyPath: m_Color.r
-      value: 0.9254902
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135903285420894371, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9041556919140577970, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
       propertyPath: m_Pivot.x
@@ -94,7 +118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9041556919140577970, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 600
+      value: 650
       objectReference: {fileID: 0}
     - target: {fileID: 9041556919140577970, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
       propertyPath: m_SizeDelta.y
@@ -152,7 +176,8 @@ PrefabInstance:
       propertyPath: _entryId._value
       value: 17446685-4cca-4e5d-a681-26b5389afaa9
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9199862503787229778, guid: 4bb9c9867291e484883170884b1c67f2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -192,8 +217,7 @@ MonoBehaviour:
   playerListItemViewPrefab:
     m_AssetGUID: d0c943020678941478ec5dfcdfa573b5
     m_SubObjectName: 
-    m_SubObjectGUID: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   avatarRegistry: {fileID: 11400000, guid: 06184a1f2c9d3834c9a602587ebb25cd, type: 2}
-  playerRuntimeCollection: {fileID: 11400000, guid: 5743e623b30092f429fe135ba4adef66, type: 2}
