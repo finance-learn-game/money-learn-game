@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a2a166b4c2c548b991995a3cb1b2885, type: 3}
-  m_Name: Main Menu Cue Sheet
+  m_Name: Game Cue Sheet
   m_EditorClassIdentifier: 
   cueSheet:
     id: d1a2d8c4-de8b-450c-88a4-ab8880e29234

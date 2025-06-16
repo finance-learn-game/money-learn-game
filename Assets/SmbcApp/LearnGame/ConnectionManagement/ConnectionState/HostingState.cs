@@ -73,6 +73,9 @@ namespace SmbcApp.LearnGame.ConnectionManagement.ConnectionState
                     PlayerName = sessionData.Value.PlayerName
                 });
             sessionManager.DisconnectClient(clientId);
+
+            if (SessionServiceFacade.CurrentSession != null)
+                SessionServiceFacade.RemovePlayerFromSession(playerId).Forget();
         }
 
         public override void OnUserRequestedShutdown()

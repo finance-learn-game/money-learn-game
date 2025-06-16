@@ -147,6 +147,7 @@ MonoBehaviour:
             _assemblyQualifiedName: UnityEngine.TextAsset, UnityEngine.CoreModule,
               Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         _matchWithDerivedTypes: 1
+        _invertMatch: 0
     - rid: 5166619747940040788
       type: {class: AssetPathBasedAddressProvider, ns: SmartAddresser.Editor.Core.Models.LayoutRules.AddressRules, asm: SmartAddresser.Editor}
       data:
@@ -203,6 +204,7 @@ MonoBehaviour:
           _isListMode: 0
           _values:
           - prefab
+        _invertMatch: 0
     - rid: 6773440406922461276
       type: {class: AssetPathBasedAddressProvider, ns: SmartAddresser.Editor.Core.Models.LayoutRules.AddressRules, asm: SmartAddresser.Editor}
       data:
