@@ -20,6 +20,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e4dc24fe3ecce64d866ef67a4130030
+    m_Address: SM_Bld_OfficeSquare_Base_03 Variant
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a3209b5b21e91ba4ab41b144ae54e5e6
+    m_Address: SM_Bld_Apartment_Stack_01 Variant
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0370e0e2358917c428b40bac092a83f5, type: 2}
   m_SchemaSet:
