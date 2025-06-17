@@ -15,6 +15,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
     {
         [SerializeField] [Required] private GameTimeTextView timeTextView;
         [SerializeField] [Required] private BalanceTextView balanceTextView;
+        [SerializeField] [Required] private PointTextView pointTextView;
         [SerializeField] [Required] private UIButton openStockModalButton;
         [SerializeField] [Required] private UIButton turnEndButton;
         [SerializeField] [Required] private UIButton openTurnInfoModalButton;
@@ -66,6 +67,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
 
             resolver.Inject(timeTextView);
             resolver.Inject(balanceTextView);
+            resolver.Inject(pointTextView);
         }
     }
 }
