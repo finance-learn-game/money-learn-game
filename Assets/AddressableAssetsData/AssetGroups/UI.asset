@@ -100,6 +100,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b2476e6e9e01e24db12c86789f0668f
+    m_Address: SM_Bld_Apartment_Stack_01 Variant
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 88544ce089243154a841796cc4f2f414
     m_Address: UI Modal
     m_ReadOnly: 0
@@ -120,6 +125,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a76a8f9a8f052944e9c53897fca5fe0a
+    m_Address: SM_Bld_OfficeOld_Large_01 Variant
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a9ab8939a391c4b47a0fb835b740b17e
     m_Address: Loading Progress Tracker
     m_ReadOnly: 0
@@ -132,6 +142,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ac18a3ac15dfa2f4ebb024390bc85bef
     m_Address: Join Session Modal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac477d01ad66bfe4abcb78c72f8748f7
+    m_Address: SM_Bld_OfficeSquare_Base_03 Variant
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

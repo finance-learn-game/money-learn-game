@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Game Configuration
   m_EditorClassIdentifier: 
   maxPlayers: 10
-  connectionMethodType: 0
+  connectionMethodType: 1
   initialBalance: 1000000
   stockChartOptions:
   - label: "\u904E\u53BB\u534A\u5E74"

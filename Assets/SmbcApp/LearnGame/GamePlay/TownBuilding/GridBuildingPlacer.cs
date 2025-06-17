@@ -56,7 +56,7 @@ namespace SmbcApp.LearnGame.GamePlay.TownBuilding
 
             // プレハブをロード
             var buildingHandle = prefab.InstantiateAsync();
-            if (!(await buildingHandle).TryGetComponent(out Renderer building))
+            if (!(await buildingHandle).TryGetComponent(out BoxCollider buildingCollider))
             {
                 Log.Error("[GridBuildingPlacer] Prefab does not have a Renderer component.");
                 buildingHandle.Release();
@@ -65,7 +65,7 @@ namespace SmbcApp.LearnGame.GamePlay.TownBuilding
 
             while (true)
             {
-                var gridSize = CalcBuildingGridSize(building);
+                var gridSize = CalcBuildingGridSize(buildingCollider);
                 var groups = CalcGroup(gridSize)
                     .GroupBy(group => CalcGroupScore(group, gridSize));
 
@@ -98,8 +98,8 @@ namespace SmbcApp.LearnGame.GamePlay.TownBuilding
                 var pos = new Vector3((selectedGroup.x + gridSize.x - 1) * _tileBounds.size.x, 0,
                     (selectedGroup.y + gridSize.y - 1) * _tileBounds.size.x);
 
-                building.transform.SetParent(transform);
-                building.transform.position = pos + _gridOffset;
+                buildingCollider.transform.SetParent(transform);
+                buildingCollider.transform.position = pos + _gridOffset;
 
                 _buildingsQueue.Enqueue(new BuildingData(buildingHandle, selectedGroup, gridSize, townPartDataId));
 
@@ -110,10 +110,10 @@ namespace SmbcApp.LearnGame.GamePlay.TownBuilding
             }
         }
 
-        private int2 CalcBuildingGridSize(Renderer building)
+        private int2 CalcBuildingGridSize(BoxCollider buildingCollider)
         {
-            var xSize = (int)(building.bounds.size.x / _tileBounds.size.x);
-            var zSize = (int)(building.bounds.size.z / _tileBounds.size.z);
+            var xSize = (int)(buildingCollider.bounds.size.x / _tileBounds.size.x);
+            var zSize = (int)(buildingCollider.bounds.size.z / _tileBounds.size.z);
             return new int2(xSize, zSize);
         }
 

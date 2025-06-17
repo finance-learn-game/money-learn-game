@@ -16,9 +16,10 @@ MonoBehaviour:
   - name: "\u30AC\u30E9\u30B9\u5F35\u308A\u306E\u30D3\u30EB"
     description: "\u30AC\u30E9\u30B9\u5F35\u308A\u306E\u304D\u308C\u3044\u306A\u30D3\u30EB"
     thumbnail:
-      m_AssetGUID: 20a821e9ce8c17845bf4316ae25b7279
-      m_SubObjectName: 
-      m_SubObjectType: 
+      m_AssetGUID: ac477d01ad66bfe4abcb78c72f8748f7
+      m_SubObjectName: SM_Bld_OfficeSquare_Base_03 Variant
+      m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
       m_SubObjectGUID: 
       m_EditorAssetChanged: 1
     prefab:
@@ -32,9 +33,10 @@ MonoBehaviour:
   - name: "\u666E\u901A\u306E\u30D3\u30EB"
     description: "\u666E\u901A\u306E\u30D3\u30EB"
     thumbnail:
-      m_AssetGUID: f79538298f7a12f439dc3a32a1b1b7ef
-      m_SubObjectName: 
-      m_SubObjectType: 
+      m_AssetGUID: a76a8f9a8f052944e9c53897fca5fe0a
+      m_SubObjectName: SM_Bld_OfficeOld_Large_01 Variant
+      m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
       m_SubObjectGUID: 
       m_EditorAssetChanged: 1
     prefab:
@@ -48,11 +50,12 @@ MonoBehaviour:
   - name: "\u8D64\u3044\u30D3\u30EB"
     description: "\u7149\u74E6\u3067\u4F5C\u3089\u308C\u305F\u30D3\u30EB"
     thumbnail:
-      m_AssetGUID: 
-      m_SubObjectName: 
-      m_SubObjectType: 
+      m_AssetGUID: 7b2476e6e9e01e24db12c86789f0668f
+      m_SubObjectName: SM_Bld_Apartment_Stack_01 Variant
+      m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
       m_SubObjectGUID: 
-      m_EditorAssetChanged: 0
+      m_EditorAssetChanged: 1
     prefab:
       m_AssetGUID: a3209b5b21e91ba4ab41b144ae54e5e6
       m_SubObjectName: 
