@@ -36,7 +36,7 @@ namespace SmbcApp.LearnGame.ConnectionManagement
 #else
             transport.UseEncryption = GameConfiguration.Instance.ConnectionMethod ==
                                       GameConfiguration.ConnectionMethodType.Relay;
-            transport.UseWebSockets = false;
+            transport.UseWebSockets = GameConfiguration.Instance.UseWebsockets;
 #endif
         }
 
