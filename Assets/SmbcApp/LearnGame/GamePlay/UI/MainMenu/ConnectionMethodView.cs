@@ -6,13 +6,16 @@ namespace SmbcApp.LearnGame.GamePlay.UI.MainMenu
 {
     internal sealed class ConnectionMethodView : MonoBehaviour, IPointerClickHandler
     {
+        private static bool _isLeft;
         [SerializeField] private RectTransform knob;
 
         private bool IsLeft
         {
-            get => knob.anchorMin.x < 0.5f && knob.anchorMax.x < 0.5f;
+            get => _isLeft;
             set
             {
+                _isLeft = value;
+
                 knob.anchorMin = new Vector2(value ? 0 : 1, knob.anchorMin.y);
                 knob.anchorMax = new Vector2(value ? 0 : 1, knob.anchorMax.y);
                 knob.pivot = new Vector2(value ? 0 : 1, knob.pivot.y);
@@ -30,6 +33,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.MainMenu
 #if UNITY_WEBGL
             IsLeft = false;
 #endif
+            IsLeft = _isLeft;
         }
 
         public void OnPointerClick(PointerEventData eventData)
