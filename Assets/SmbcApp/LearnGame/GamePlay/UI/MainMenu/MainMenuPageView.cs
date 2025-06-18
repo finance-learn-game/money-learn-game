@@ -25,6 +25,8 @@ namespace SmbcApp.LearnGame.GamePlay.UI.MainMenu
 
         private void Start()
         {
+            startServerButton.IsInteractable = Application.platform != RuntimePlatform.WebGLPlayer;
+
             joinSessionButton.OnClick
                 .Subscribe(_ => ModalContainer.Push(profileModal.AssetGUID, true))
                 .AddTo(gameObject);
