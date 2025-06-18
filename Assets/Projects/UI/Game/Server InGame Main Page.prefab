@@ -332,6 +332,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeText: {fileID: 421883293351585220}
   dateSlider: {fileID: 4646327425641733599}
+  minDateText: {fileID: 1176188097581130470}
+  maxDateText: {fileID: 2728226884334371726}
 --- !u!1 &2836348564837838145
 GameObject:
   m_ObjectHideFlags: 0

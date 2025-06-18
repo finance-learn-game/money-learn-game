@@ -21,7 +21,7 @@ namespace SmbcApp.LearnGame.GamePlay.UI.Game
                 player.TownPartsState.OnChanged
                     .Select(_ => player.TownPartsState.CurrentPoint)
                     .Prepend(0)
-                    .Subscribe(point => pointText.text = $"ポイント：￥{point}")
+                    .Subscribe(point => pointText.text = $"ポイント：{point}pt")
                     .AddTo(gameObject);
         }
     }

@@ -29,6 +29,11 @@ namespace SmbcApp.LearnGame.GamePlay.Configuration
         public ConnectionMethodType ConnectionMethod => connectionMethodType;
         public IReadOnlyList<StockChartOption> StockChartOptions => stockChartOptions;
 
+        public void SetConnectionMethod(ConnectionMethodType method)
+        {
+            connectionMethodType = method;
+        }
+
         [Serializable]
         public struct StockChartOption
         {
